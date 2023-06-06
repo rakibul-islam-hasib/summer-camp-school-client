@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaBars } from 'react-icons/fa';
+import { FcElectricalSensor } from 'react-icons/fc';
 import Swal from 'sweetalert2'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 const navLinks = [
@@ -71,8 +72,8 @@ const NavBar = () => {
                     {/* Logo */}
                     <div className="flex-shrink-0 pl-7 md:p-0 flex items-center">
                         <div className="">
-                            <h1 className='text-2xl font-Cinzel font-bold'>BISTRO BOSS</h1>
-                            <p className='font-bold tracking-[8px]'>Restaurant</p>
+                            <h1 className='text-2xl font-Cinzel inline-flex gap-3  items-center font-bold'>Sound Safari <FcElectricalSensor className='text-4xl' /></h1>
+                            <p className='font-bold text-[13px] tracking-[8px]'>Learn Music</p>
                         </div>
                     </div>
 

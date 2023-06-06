@@ -1,10 +1,14 @@
 import React from 'react';
+import Hero from './Hero/Hero';
+import { useTitle } from '../../hooks/useTitle';
 
 const Home = () => {
+    useTitle('Home | Sound Safari');
     return (
-        <div>
-            <h1 className='text-2xl text-red-400 text-center'>Home</h1>
-        </div>
+        <section>
+            <Hero /> 
+            <h1>Tdbjv  </h1> 
+        </section>
     );
 };
 
