@@ -11,19 +11,15 @@ const Login = () => {
                     Get started today
                 </h1>
 
-                <p className="mx-auto mt-4 max-w-md text-center text-gray-500">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati sunt
-                    dolores deleniti inventore quaerat mollitia?
-                </p>
+                <p className="mx-auto mt-4 max-w-md text-center text-gray-500">Explore our comprehensive library of courses, meticulously crafted to cater to all levels of expertise.</p>
 
                 <form
-                    action=""
                     className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
                 >
-                    <p className="text-center text-lg font-medium">Sign in to your account</p>
+                    <p className="text-center text-red-400 text-lg font-medium">Sign in to your account</p>
 
                     <div>
-                        <label for="email" className="sr-only">Email</label>
+                        <label htmlFor="email" className="sr-only">Email</label>
 
                         <div className="relative">
                             <input
@@ -50,9 +46,9 @@ const Login = () => {
                             </span>
                         </div>
                     </div>
-                {/* Password Field */}
+                    {/* Password Field */}
                     <div>
-                        <label for="password" className="sr-only">Password</label>
+                        <label htmlFor="password" className="sr-only">Password</label>
 
                         <div className="relative">
                             <input
@@ -70,15 +66,15 @@ const Login = () => {
                                     stroke="currentColor"
                                 >
                                     <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
                                         d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                                     />
                                     <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
                                         d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
                                     />
                                 </svg>

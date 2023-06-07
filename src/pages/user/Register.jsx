@@ -3,12 +3,12 @@ import { useForm } from 'react-hook-form';
 import { useTitle } from '../../hooks/useTitle';
 import { AuthContext } from '../../utilities/providers/AuthProvider';
 import axios from 'axios';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Register = () => {
     useTitle('Register | Sound Safari');
     const { signUp, error, setError, updateUser } = useContext(AuthContext);
-    const axiosSecure = useAxiosSecure();
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
@@ -16,7 +16,6 @@ const Register = () => {
     } = useForm();
 
     const onSubmit = (data) => {
-        console.log(data);
         setError('');
         signUp(data.email, data.password)
             .then(userCredential => {
@@ -36,7 +35,8 @@ const Register = () => {
                             if (user.email && user.displayName) {
                                 axios.post('http://localhost:5000/new-user', userImp)
                                     .then(res => {
-                                        console.log(res.data)
+                                        // console.log(res.data)
+                                        navigate('/')
                                     })
                                     .catch(err => {
                                         console.log(err)
@@ -167,7 +167,7 @@ const Register = () => {
                         </button>
                     </div>
                 </form>
-                <p className='text-center mt-4'>Already have an account ? </p>
+                <p className='text-center mt-4'>Already have an account ? <Link to='/login' className='underline text-secondary'>Login</Link> </p>
             </div>
         </div>
     );
