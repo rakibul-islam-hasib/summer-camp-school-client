@@ -4,27 +4,39 @@ import MainLayout from "../layout/MainLayout";
 import Register from "../pages/user/Register";
 import Login from "../pages/user/Login";
 import Instructors from "../pages/Instructors/Instructors";
+import DashboardLayout from "../layout/DashboardLayout";
+import Dashboard from "../pages/Dashboard/Dashboard";
 
-export const router  = createBrowserRouter([
+export const router = createBrowserRouter([
     {
         path: "/",
-        element : <MainLayout />, 
-        children : [
+        element: <MainLayout />,
+        children: [
             {
-                index : true,
-                element : <Home />
-            }, 
-            { 
-                path : "register",
-                element : <Register />
-            }, 
-            {
-                path : "login",
-                element : <Login />
+                index: true,
+                element: <Home />
             },
             {
-                path : "instructors",
-                element : <Instructors />
+                path: "register",
+                element: <Register />
+            },
+            {
+                path: "login",
+                element: <Login />
+            },
+            {
+                path: "instructors",
+                element: <Instructors />
+            }
+        ]
+    },
+    {
+        path: '/dashboard',
+        element: <DashboardLayout />,
+        children: [
+            {
+                index: true,
+                element: <Dashboard />
             }
         ]
     }
