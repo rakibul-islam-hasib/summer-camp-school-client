@@ -16,14 +16,14 @@ const Footer = () => {
                             <label class="sr-only" for="email"> Email </label>
 
                             <input
-                                class="w-full rounded-full border-gray-200 bg-gray-100 p-4 pe-32 text-sm font-medium"
+                                class="w-full rounded-full  focus:outline-secondary border-gray-200 bg-gray-100 p-4 pe-32 text-sm font-medium"
                                 id="email"
                                 type="email"
                                 placeholder="john@doe.com"
                             />
 
                             <button
-                                class="absolute end-1 top-1/2 -translate-y-1/2 rounded-full bg-blue-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-700"
+                                class="absolute end-1 top-1/2 -translate-y-1/2 rounded-full bg-secondary px-5 py-3 text-sm font-medium text-white transition hover:bg-opacity-60"
                             >
                                 Subscribe
                             </button>
@@ -41,7 +41,7 @@ const Footer = () => {
 
                         <div class="mt-6 flex justify-center gap-4 lg:justify-start">
                             <a
-                                class="text-gray-700 transition hover:text-gray-700/75"
+                                class="text-secondary transition hover:text-secondary/75"
                                 href=""
                                 target="_blank"
                                 rel="noreferrer"
@@ -63,7 +63,7 @@ const Footer = () => {
                             </a>
 
                             <a
-                                class="text-gray-700 transition hover:text-gray-700/75"
+                                class="text-secondary transition hover:text-secondary/75"
                                 href=""
                                 target="_blank"
                                 rel="noreferrer"
@@ -85,7 +85,7 @@ const Footer = () => {
                             </a>
 
                             <a
-                                class="text-gray-700 transition hover:text-gray-700/75"
+                                class="text-secondary transition hover:text-secondary/75"
                                 href=""
                                 target="_blank"
                                 rel="noreferrer"
@@ -105,7 +105,7 @@ const Footer = () => {
                             </a>
 
                             <a
-                                class="text-gray-700 transition hover:text-gray-700/75"
+                                class="text-secondary transition hover:text-secondary/75"
                                 href=""
                                 target="_blank"
                                 rel="noreferrer"
@@ -127,7 +127,7 @@ const Footer = () => {
                             </a>
 
                             <a
-                                class="text-gray-700 transition hover:text-gray-700/75"
+                                class="text-secondary transition hover:text-secondary/75"
                                 href=""
                                 target="_blank"
                                 rel="noreferrer"
@@ -160,16 +160,16 @@ const Footer = () => {
                                 aria-label="Footer Services Nav"
                                 class="mt-6 flex flex-col space-y-1"
                             >
-                                <a class="text-gray-700 transition hover:text-gray-700/75" href="/">
+                                <a class="text-secondary transition hover:text-secondary/75" href="/">
                                     Marketing
                                 </a>
-                                <a class="text-gray-700 transition hover:text-gray-700/75" href="/">
+                                <a class="text-secondary transition hover:text-secondary/75" href="/">
                                     Graphic Design
                                 </a>
-                                <a class="text-gray-700 transition hover:text-gray-700/75" href="/">
+                                <a class="text-secondary transition hover:text-secondary/75" href="/">
                                     App Development
                                 </a>
-                                <a class="text-gray-700 transition hover:text-gray-700/75" href="/">
+                                <a class="text-secondary transition hover:text-secondary/75" href="/">
                                     Web Development
                                 </a>
                             </nav>
@@ -182,16 +182,16 @@ const Footer = () => {
                                 aria-label="Footer About Nav"
                                 class="mt-6 flex flex-col space-y-1"
                             >
-                                <a class="text-gray-700 transition hover:text-gray-700/75" href="/">
+                                <a class="text-secondary transition hover:text-secondary/75" href="/">
                                     About
                                 </a>
-                                <a class="text-gray-700 transition hover:text-gray-700/75" href="/">
+                                <a class="text-secondary transition hover:text-secondary/75" href="/">
                                     Careers
                                 </a>
-                                <a class="text-gray-700 transition hover:text-gray-700/75" href="/">
+                                <a class="text-secondary transition hover:text-secondary/75" href="/">
                                     History
                                 </a>
-                                <a class="text-gray-700 transition hover:text-gray-700/75" href="/">
+                                <a class="text-secondary transition hover:text-secondary/75" href="/">
                                     Our Team
                                 </a>
                             </nav>
@@ -204,15 +204,15 @@ const Footer = () => {
                                 aria-label="Footer Support Nav"
                                 class="mt-6 flex flex-col space-y-1"
                             >
-                                <a class="text-gray-700 transition hover:text-gray-700/75" href="/">
+                                <a class="text-secondary transition hover:text-secondary/75" href="/">
                                     FAQs
                                 </a>
 
-                                <a class="text-gray-700 transition hover:text-gray-700/75" href="/">
+                                <a class="text-secondary transition hover:text-secondary/75" href="/">
                                     Contact
                                 </a>
 
-                                <a class="text-gray-700 transition hover:text-gray-700/75" href="/">
+                                <a class="text-secondary transition hover:text-secondary/75" href="/">
                                     Live Chat
                                 </a>
                             </nav>
@@ -226,16 +226,8 @@ const Footer = () => {
 
                         <br />
 
-                        Created with
-                        <a
-                            href=""
-                            class="text-gray-700 underline transition hover:text-gray-700/75"
-                        >Laravel</a>
-                        and
-                        <a
-                            href=""
-                            class="text-gray-700 underline transition hover:text-gray-700/75"
-                        >Laravel Livewire</a>
+                        Created with &nbsp;
+                        <a class="text-secondary underline transition hover:text-secondary/75">HASIB</a>
                     </p>
                 </div>
             </div>

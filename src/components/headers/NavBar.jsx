@@ -61,7 +61,7 @@ const NavBar = () => {
                 setNavBg('bg-white text-black');
             }
         } else {
-            setNavBg('bg-transparent text-secondary');
+            setNavBg('bg-transparent text-white');
         }
     }, [scrollPosition]);
   
@@ -78,8 +78,8 @@ const NavBar = () => {
                     {/* Logo */}
                     <div onClick={()=>navigate('/')} className="flex-shrink-0 cursor-pointer pl-7 md:p-0 flex items-center">
                         <div className="">
-                            <h1 className='text-2xl font-Cinzel text-black inline-flex gap-3  items-center font-bold'>Sound Safari <FcElectricalSensor className='text-4xl' /></h1>
-                            <p className='font-bold text-[13px] text-black tracking-[8px]'>Learn Music</p>
+                            <h1 className='text-2xl font-Cinzel  inline-flex gap-3  items-center font-bold'>Sound Safari <FcElectricalSensor className='text-4xl' /></h1>
+                            <p className='font-bold text-[13px]  tracking-[8px]'>Learn Music</p>
                         </div>
                     </div>
 

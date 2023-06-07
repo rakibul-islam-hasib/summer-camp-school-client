@@ -12,7 +12,7 @@ const Hero = () => {
                             <p className=''>Offered chiefly farther of my no colonel shyness. Such on help ye some door if in. Laughter proposal laughing any son law consider.</p>
                         </div>
                         <div className="flex flex-wrap items-center gap-5">
-                            <button className='px-7 py-3 rounded-lg bg-primary font-bold uppercase'>discover more</button>
+                            <button className='px-7 py-3 rounded-lg bg-secondary font-bold uppercase'>discover more</button>
                             <button className='px-7 py-[10px] bg-opacity-80 hover:bg-white hover:text-black hover:outline-white duration-200  rounded-lg bg-transparent outline  font-bold uppercase'>discover more</button>
                         </div>
                     </div>
