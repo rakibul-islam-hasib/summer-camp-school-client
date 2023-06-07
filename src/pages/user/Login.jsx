@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTitle } from '../../hooks/useTitle';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
     useTitle('Login | Sound Safari');
+    const [showPassword, setShowPassword] = useState(false);
+
+
+    const handelSubmit = e => {
+        e.preventDefault()
+        const data = new FormData(e.target)
+        const formData = Object.fromEntries(data)
+        console.log(formData)
+    }
+
     return (
         <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-lg">
@@ -14,6 +24,7 @@ const Login = () => {
                 <p className="mx-auto mt-4 max-w-md text-center text-gray-500">Explore our comprehensive library of courses, meticulously crafted to cater to all levels of expertise.</p>
 
                 <form
+                    onSubmit={handelSubmit}
                     className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
                 >
                     <p className="text-center text-red-400 text-lg font-medium">Sign in to your account</p>
@@ -24,11 +35,12 @@ const Login = () => {
                         <div className="relative">
                             <input
                                 type="email"
+                                name='email'
                                 className="w-full border outline-none rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                                 placeholder="Enter email"
                             />
 
-                            <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
+                            <span  className="absolute inset-y-0 end-0 grid place-content-center px-4">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     className="h-4 w-4 text-gray-400"
@@ -52,12 +64,13 @@ const Login = () => {
 
                         <div className="relative">
                             <input
-                                type="password"
+                                name='password'
+                                type={showPassword ? 'text' : 'password'}
                                 className="w-full rounded-lg outline-none border border-gray-200 p-4 pe-12 text-sm shadow-sm"
                                 placeholder="Enter password"
                             />
 
-                            <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
+                            <span onClick={() => setShowPassword(!showPassword)} className="absolute inset-y-0 end-0 grid place-content-center px-4">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     className="h-4 w-4 text-gray-400"

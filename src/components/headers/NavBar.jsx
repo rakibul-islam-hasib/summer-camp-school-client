@@ -28,17 +28,18 @@ const NavBar = () => {
     const [isFixed, setIsFixed] = useState(false);
 
 
-    
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
+    const handelLogout  = e => { 
+
+    }
 
     useEffect(() => {
         setIsHome(location.pathname === '/');
         setIsLogin(location.pathname === '/login');
         setIsFixed(location.pathname === '/register' || location.pathname === '/login');
     }, [location]);
-
-    const toggleMobileMenu = () => {
-        setIsMobileMenuOpen(!isMobileMenuOpen);
-    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -121,7 +122,12 @@ const NavBar = () => {
                                             className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' : 'text-black'} hover:text-secondary duration-300`}
                                         >Login</NavLink></li>
                                 }
-
+                                {
+                                    user && <li><NavLink to='/dashboard' className='font-bold hover:text-secondary duration-300'>Dashboard</NavLink></li>
+                                }
+                                {
+                                    user && <li><NavLink className='font-bold px-3 py-2 bg-secondary text-white rounded-xl' onClick={e => e.preventDefault()}>Logout</NavLink></li>
+                                }
                             </ul>
 
                         </div>
