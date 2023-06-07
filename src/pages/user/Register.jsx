@@ -17,7 +17,7 @@ const Register = () => {
     return (
         <div className="flex justify-center items-center pt-14 bg-gray-100">
             <div className="bg-white p-8 rounded-lg shadow-md">
-                <h2 className="text-3xl font-bold mb-6">Registration Form</h2>
+                <h2 className="text-3xl font-bold text-center mb-6">Please Register</h2>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="flex items-center gap-5">
                         <div className="mb-4">
@@ -113,7 +113,8 @@ const Register = () => {
                         <textarea
                             {...register('address', { required: true })}
                             className="w-full border resize-none border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300"
-                            rows="4"
+                            rows="3"
+                            placeholder='Enter your address'
                         ></textarea>
                     </div>
                     <div className="flex justify-end">

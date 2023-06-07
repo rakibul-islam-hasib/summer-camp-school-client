@@ -101,7 +101,7 @@ const NavBar = () => {
                                 {navLinks.map((link) => (
                                     <li key={link.route}>
                                         <NavLink
-                                            className={({ isActive }) => `font-bold ${isActive ? 'text-primary' : 'text-black'} hover:text-primary duration-300`}
+                                            className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' : 'text-black'} hover:text-secondary duration-300`}
                                             to={link.route}
 
                                             style={{ whiteSpace: 'nowrap' }}

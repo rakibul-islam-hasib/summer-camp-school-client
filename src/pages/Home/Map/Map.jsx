@@ -3,7 +3,7 @@ import CountUp from 'react-countup';
 
 const Map = () => {
     return (
-        <div className='h-[300px] bg-secondary' style={{ backgroundImage: `url('https://validthemes.live/themeforest/edukat/assets/img/map.svg')` }}>
+        <div className='h-[300px] my-11 bg-secondary' style={{ backgroundImage: `url('https://validthemes.live/themeforest/edukat/assets/img/map.svg')` }}>
             <div className="h-[300px] text-white bg-black flex justify-center items-center bg-opacity-40">
                 <div className="flex gap-16">
                     <div className="text-center">
