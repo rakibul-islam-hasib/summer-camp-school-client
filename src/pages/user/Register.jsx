@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const Register = () => {
     useTitle('Register | Sound Safari');
-    const { signUp, error, setError } = useContext(AuthContext);
+    const { signUp, error, setError, updateUser } = useContext(AuthContext);
     const {
         register,
         handleSubmit,
@@ -15,26 +15,29 @@ const Register = () => {
 
     const onSubmit = (data) => {
         console.log(data);
+        setError('');
         signUp(data.email, data.password)
             .then(userCredential => {
                 // Signed in 
                 const user = userCredential.user;
                 if (user) {
-                    
-                }
-                if (user) {
-                    axios.post('http://localhost:5000/user/set-token', { email: user.email, name: user.displayName })
-                        .then(data => {
-                            console.log(data.data.token)
-                            localStorage.setItem('token', data.data.token)
+                    updateUser(data.name, data.photoUrl)
+                        .then(() => {
+                            axios.post('http://localhost:5000/api/set-token', { email: user.email, name: user.displayName })
+                                .then(data => {
+                                    console.log(data.data.token)
+                                    localStorage.setItem('token', data.data.token)
+                                })
+                                .catch(err => {
+                                    console.log(err)
+                                })
                         })
-                        .catch(err => { 
+                        .catch(err => {
                             console.log(err)
                         })
                 }
-                // ...
             })
-            .catch(err => { 
+            .catch(err => {
                 setError(err.code)
 
             })
@@ -45,6 +48,7 @@ const Register = () => {
         <div className="flex justify-center items-center pt-14 bg-gray-100">
             <div className="bg-white p-8 rounded-lg shadow-md">
                 <h2 className="text-3xl font-bold text-center mb-6">Please Register</h2>
+                {error && <p className="text-red-500 text-center mb-4">{error}</p>}
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="flex items-center gap-5">
                         <div className="mb-4">

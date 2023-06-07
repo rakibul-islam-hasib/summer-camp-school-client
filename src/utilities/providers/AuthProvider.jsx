@@ -52,7 +52,7 @@ const AuthProvider = ({ children }) => {
             if (user) {
                 setLoader(false); // Move this line here
 
-                axios.post('http://localhost:5000/user/set-token', { email: user.email, name: user.displayName })
+                axios.post('http://localhost:5000/api/set-token', { email: user.email, name: user.displayName })
                     .then(data => {
                         // console.log(data.data.token)
                         localStorage.setItem('token', data.data.token)
