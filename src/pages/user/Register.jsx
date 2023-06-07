@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTitle } from '../../hooks/useTitle';
+import { AuthContext } from '../../utilities/providers/AuthProvider';
+import axios from 'axios';
 
 const Register = () => {
     useTitle('Register | Sound Safari');
+    const { signUp, error, setError } = useContext(AuthContext);
     const {
         register,
         handleSubmit,
@@ -12,8 +15,32 @@ const Register = () => {
 
     const onSubmit = (data) => {
         console.log(data);
+        signUp(data.email, data.password)
+            .then(userCredential => {
+                // Signed in 
+                const user = userCredential.user;
+                if (user) {
+                    
+                }
+                if (user) {
+                    axios.post('http://localhost:5000/user/set-token', { email: user.email, name: user.displayName })
+                        .then(data => {
+                            console.log(data.data.token)
+                            localStorage.setItem('token', data.data.token)
+                        })
+                        .catch(err => { 
+                            console.log(err)
+                        })
+                }
+                // ...
+            })
+            .catch(err => { 
+                setError(err.code)
+
+            })
     };
 
+    console.log(error)
     return (
         <div className="flex justify-center items-center pt-14 bg-gray-100">
             <div className="bg-white p-8 rounded-lg shadow-md">
