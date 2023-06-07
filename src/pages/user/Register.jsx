@@ -3,10 +3,12 @@ import { useForm } from 'react-hook-form';
 import { useTitle } from '../../hooks/useTitle';
 import { AuthContext } from '../../utilities/providers/AuthProvider';
 import axios from 'axios';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const Register = () => {
     useTitle('Register | Sound Safari');
     const { signUp, error, setError, updateUser } = useContext(AuthContext);
+    const axiosSecure = useAxiosSecure();
     const {
         register,
         handleSubmit,
@@ -23,14 +25,23 @@ const Register = () => {
                 if (user) {
                     updateUser(data.name, data.photoUrl)
                         .then(() => {
-                            axios.post('http://localhost:5000/api/set-token', { email: user.email, name: user.displayName })
-                                .then(data => {
-                                    console.log(data.data.token)
-                                    localStorage.setItem('token', data.data.token)
-                                })
-                                .catch(err => {
-                                    console.log(err)
-                                })
+                            const userImp = {
+                                name: user.displayName,
+                                email: user.email,
+                                photoUrl: user.photoURL,
+                                gender: data.gender,
+                                address: data.address,
+                                role: 'user'
+                            }
+                            if (user.email && user.displayName) {
+                                axios.post('http://localhost:5000/new-user', userImp)
+                                    .then(res => {
+                                        console.log(res.data)
+                                    })
+                                    .catch(err => {
+                                        console.log(err)
+                                    })
+                            }
                         })
                         .catch(err => {
                             console.log(err)
@@ -43,7 +54,6 @@ const Register = () => {
             })
     };
 
-    console.log(error)
     return (
         <div className="flex justify-center items-center pt-14 bg-gray-100">
             <div className="bg-white p-8 rounded-lg shadow-md">
@@ -148,7 +158,7 @@ const Register = () => {
                             placeholder='Enter your address'
                         ></textarea>
                     </div>
-                    <div className="flex justify-end">
+                    <div className="text-center">
                         <button
                             type="submit"
                             className="bg-secondary hover:bg-red-500 text-white py-2 px-4 rounded-md"
@@ -157,6 +167,7 @@ const Register = () => {
                         </button>
                     </div>
                 </form>
+                <p className='text-center mt-4'>Already have an account ? </p>
             </div>
         </div>
     );

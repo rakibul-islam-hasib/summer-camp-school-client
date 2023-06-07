@@ -26,13 +26,15 @@ const NavBar = () => {
 
 
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isHome, setIsHome] = useState(false);
     const [isLogin, setIsLogin] = useState(false);
     const [scrollPosition, setScrollPosition] = useState(0);
     const [isFixed, setIsFixed] = useState(false);
     const [navBg, setNavBg] = useState('bg-[#15151580]');
 
     useEffect(() => {
-        setIsLogin(location.pathname === '/');
+        setIsHome(location.pathname === '/');
+        setIsLogin(location.pathname === '/login');
         setIsFixed(location.pathname === '/register' || location.pathname === '/login');
     }, [location]);
 
@@ -54,7 +56,7 @@ const NavBar = () => {
 
     useEffect(() => {
         if (scrollPosition > 0) {
-            if (isLogin) {
+            if (isHome) {
                 setNavBg('bg-white text-black');
             } 
             else {

@@ -12,7 +12,6 @@ const Home = () => {
             <Hero /> 
             <Facilities />
             <Map />
-            <Footer />
         </section>
     );
 };
