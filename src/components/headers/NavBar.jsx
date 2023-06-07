@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaBars } from 'react-icons/fa';
 import { FcElectricalSensor } from 'react-icons/fc';
 import Swal from 'sweetalert2'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../utilities/providers/AuthProvider';
 const navLinks = [
     {
         name: 'Home',
@@ -13,24 +14,21 @@ const navLinks = [
         name: 'Instructors',
         route: '/instructors'
     },
-    {
-        name: 'Register',
-        route: '/register'
-    }
 ];
 
 const NavBar = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    
-
-
+    const { user } = useContext(AuthContext);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isHome, setIsHome] = useState(false);
     const [isLogin, setIsLogin] = useState(false);
     const [scrollPosition, setScrollPosition] = useState(0);
-    const [isFixed, setIsFixed] = useState(false);
     const [navBg, setNavBg] = useState('bg-[#15151580]');
+    const [isFixed, setIsFixed] = useState(false);
+
+
+    
 
     useEffect(() => {
         setIsHome(location.pathname === '/');
@@ -41,7 +39,7 @@ const NavBar = () => {
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
-    
+
     useEffect(() => {
         const handleScroll = () => {
             const currentPosition = window.pageYOffset;
@@ -58,7 +56,7 @@ const NavBar = () => {
         if (scrollPosition > 0) {
             if (isHome) {
                 setNavBg('bg-white text-black');
-            } 
+            }
             else {
                 setNavBg('bg-white text-black');
             }
@@ -66,8 +64,8 @@ const NavBar = () => {
             setNavBg('bg-transparent text-white');
         }
     }, [scrollPosition]);
-  
-    
+
+
     return (
         <motion.nav
             className={`${navBg} ${isFixed ? 'static' : 'fixed'} top-0 transition-colors duration-500 ease-in-out  w-full z-10`}
@@ -78,7 +76,7 @@ const NavBar = () => {
             <div className="lg:w-[95%] mx-auto sm:px-6 lg:px-6">
                 <div className="flex px-4 items-center justify-between py-4">
                     {/* Logo */}
-                    <div onClick={()=>navigate('/')} className="flex-shrink-0 cursor-pointer pl-7 md:p-0 flex items-center">
+                    <div onClick={() => navigate('/')} className="flex-shrink-0 cursor-pointer pl-7 md:p-0 flex items-center">
                         <div className="">
                             <h1 className='text-2xl font-Cinzel  inline-flex gap-3  items-center font-bold'>Sound Safari <FcElectricalSensor className='text-4xl' /></h1>
                             <p className='font-bold text-[13px]  tracking-[8px]'>Learn Music</p>
@@ -112,7 +110,17 @@ const NavBar = () => {
                                         </NavLink>
                                     </li>
                                 ))}
-                             
+                                {
+                                    user ? null : isLogin ? <li>
+                                        <NavLink
+                                            to='/register'
+                                            className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' : 'text-black'} hover:text-secondary duration-300`}
+                                        >Register</NavLink></li> : <li>
+                                        <NavLink
+                                            to='/login'
+                                            className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' : 'text-black'} hover:text-secondary duration-300`}
+                                        >Login</NavLink></li>
+                                }
 
                             </ul>
 

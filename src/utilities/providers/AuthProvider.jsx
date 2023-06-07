@@ -45,6 +45,7 @@ const AuthProvider = ({ children }) => {
             throw error
         }
     }
+    console.log(user)
     // Observe user state (auth)
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
