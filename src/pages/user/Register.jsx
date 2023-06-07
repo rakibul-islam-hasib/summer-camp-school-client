@@ -25,6 +25,7 @@ const Register = () => {
                                 Name
                             </label>
                             <input
+                                placeholder='Enter your name'
                                 type="text"
                                 {...register('name', { required: true })}
                                 className="w-full border-gray-300 border rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300"
@@ -35,91 +36,90 @@ const Register = () => {
                                 Email
                             </label>
                             <input
+                                placeholder='Enter your email'
                                 type="email"
                                 {...register('email', { required: true })}
                                 className="w-full border-gray-300 border rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300"
                             />
                         </div>
                     </div>
-                    <div className="flex gap-5 items-center">
+                    <div className="flex items-center gap-5">
                         <div className="mb-4">
                             <label htmlFor="password" className="block text-gray-700 font-bold mb-2">
                                 Password
                             </label>
                             <input
+                                placeholder='Enter Password'
                                 type="password"
                                 {...register('password', {
                                     required: true,
                                     minLength: 6,
-                                    pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+                                    // pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
                                 })}
                                 className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300"
                             />
                             {errors.password && (
-                                <p className="text-red-500 text-sm mt-1">
-                                    Password must be at least 6 characters long, contain a capital letter, and a special character.
-                                </p>
+                                <div className="text-red-500 text-sm w-full mt-1">
+                                    <p>Password must be at least 6 characters long, <br /> contain a capital letter, <br /> and a special character.</p>
+                                </div>
                             )}
+
                         </div>
                         <div className="mb-4">
-                            <label htmlFor="confirmPassword" className="block text-gray-700 font-bold mb-2">
-                                Confirm Password
+                            <label htmlFor="phoneNumber" className="block text-gray-700 font-bold mb-2">
+                                Phone Number
                             </label>
                             <input
-                                type="password"
-                                {...register('confirmPassword', { required: true })}
+                                placeholder='Phone Number'
+                                type="tel"
+                                {...register('phoneNumber', { required: true })}
                                 className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300"
                             />
                         </div>
                     </div>
-                    <div className="mb-4">
-                        <label htmlFor="photoUrl" className="block text-gray-700 font-bold mb-2">
-                            Photo URL
-                        </label>
-                        <input
-                            type="text"
-                            {...register('photoUrl')}
-                            className="w-full border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300"
-                        />
+                    <div className="flex items-center gap-5">
+                        <div className="mb-4">
+                            <label htmlFor="photoUrl" className="block text-gray-700 font-bold mb-2">
+                                Photo URL
+                            </label>
+                            <input
+                                placeholder='Photo URL'
+                                type="text"
+                                {...register('photoUrl')}
+                                className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300"
+                            />
+                        </div>
+
+                        <div className="mb-4 w-1/2">
+                            <label htmlFor="gender" className="block text-gray-700 font-bold mb-2">
+                                Gender
+                            </label>
+                            <select
+                                {...register('gender', { required: true })}
+                                className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300"
+                            >
+                                <option value="">Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
                     </div>
-                    <div className="mb-4">
-                        <label htmlFor="gender" className="block text-gray-700 font-bold mb-2">
-                            Gender
-                        </label>
-                        <select
-                            {...register('gender', { required: true })}
-                            className="w-full border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300"
-                        >
-                            <option value="">Select Gender</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div className="mb-4">
-                        <label htmlFor="phoneNumber" className="block text-gray-700 font-bold mb-2">
-                            Phone Number
-                        </label>
-                        <input
-                            type="tel"
-                            {...register('phoneNumber', { required: true })}
-                            className="w-full border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300"
-                        />
-                    </div>
+
                     <div className="mb-4">
                         <label htmlFor="address" className="block text-gray-700 font-bold mb-2">
                             Address
                         </label>
                         <textarea
                             {...register('address', { required: true })}
-                            className="w-full border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300"
+                            className="w-full border resize-none border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300"
                             rows="4"
                         ></textarea>
                     </div>
                     <div className="flex justify-end">
                         <button
                             type="submit"
-                            className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md"
+                            className="bg-secondary hover:bg-red-500 text-white py-2 px-4 rounded-md"
                         >
                             Register
                         </button>
