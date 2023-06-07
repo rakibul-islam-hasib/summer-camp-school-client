@@ -4,11 +4,13 @@ import { useTitle } from '../../hooks/useTitle';
 import { AuthContext } from '../../utilities/providers/AuthProvider';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Register = () => {
     useTitle('Register | Sound Safari');
     const { signUp, error, setError, updateUser } = useContext(AuthContext);
     const navigate = useNavigate();
+    const notify = () => toast.success("Wow registration successfully!");
     const {
         register,
         handleSubmit,
@@ -34,8 +36,9 @@ const Register = () => {
                             }
                             if (user.email && user.displayName) {
                                 axios.post('http://localhost:5000/new-user', userImp)
-                                    .then(res => {
+                                    .then(() => {
                                         // console.log(res.data)
+                                        notify()
                                         navigate('/')
                                     })
                                     .catch(err => {
