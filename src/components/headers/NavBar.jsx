@@ -14,8 +14,8 @@ const navLinks = [
         route: '/menu'
     },
     {
-        name: 'Our Shop',
-        route: '/shop'
+        name: 'Register',
+        route: '/register'
     }
 ];
 
@@ -32,7 +32,7 @@ const NavBar = () => {
     const [navBg, setNavBg] = useState('bg-[#15151580]');
 
     useEffect(() => {
-        setIsLogin(location.pathname === '/login');
+        setIsLogin(location.pathname === '/');
     }, [location]);
 
     const toggleMobileMenu = () => {
@@ -53,16 +53,21 @@ const NavBar = () => {
 
     useEffect(() => {
         if (scrollPosition > 0) {
-            setNavBg('bg-black');
+            if (isLogin) {
+                setNavBg('bg-white text-black');
+            } 
+            else {
+                setNavBg('bg-white text-black');
+            }
         } else {
-            setNavBg('bg-transparent');
+            setNavBg('bg-transparent text-secondary');
         }
     }, [scrollPosition]);
   
     
     return (
         <motion.nav
-            className={`${navBg}  fixed top-0 transition-colors duration-500 ease-in-out text-white w-full z-10`}
+            className={`${navBg}  fixed top-0 transition-colors duration-500 ease-in-out  w-full z-10`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
@@ -72,8 +77,8 @@ const NavBar = () => {
                     {/* Logo */}
                     <div className="flex-shrink-0 pl-7 md:p-0 flex items-center">
                         <div className="">
-                            <h1 className='text-2xl font-Cinzel inline-flex gap-3  items-center font-bold'>Sound Safari <FcElectricalSensor className='text-4xl' /></h1>
-                            <p className='font-bold text-[13px] tracking-[8px]'>Learn Music</p>
+                            <h1 className='text-2xl font-Cinzel text-black inline-flex gap-3  items-center font-bold'>Sound Safari <FcElectricalSensor className='text-4xl' /></h1>
+                            <p className='font-bold text-[13px] text-black tracking-[8px]'>Learn Music</p>
                         </div>
                     </div>
 
@@ -84,7 +89,7 @@ const NavBar = () => {
                             type="button"
                             className="text-gray-300 hover:text-white focus:outline-none"
                         >
-                            <FaBars className="h-6 text-white hover:text-primary w-6" />
+                            <FaBars className="h-6  hover:text-primary w-6" />
                         </button>
                     </div>
 
@@ -95,7 +100,7 @@ const NavBar = () => {
                                 {navLinks.map((link) => (
                                     <li key={link.route}>
                                         <NavLink
-                                            className={({ isActive }) => `font-bold ${isActive ? 'text-primary' : 'text-white'} hover:text-primary duration-300`}
+                                            className={({ isActive }) => `font-bold ${isActive ? 'text-primary' : 'text-black'} hover:text-primary duration-300`}
                                             to={link.route}
 
                                             style={{ whiteSpace: 'nowrap' }}
