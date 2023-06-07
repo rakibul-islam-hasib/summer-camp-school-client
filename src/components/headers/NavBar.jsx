@@ -52,10 +52,10 @@ const NavBar = () => {
     }, []);
 
     useEffect(() => {
-        if (scrollPosition > 1000) {
+        if (scrollPosition > 0) {
             setNavBg('bg-black');
         } else {
-            setNavBg('bg-[#15151580]');
+            setNavBg('bg-transparent');
         }
     }, [scrollPosition]);
   
@@ -95,7 +95,7 @@ const NavBar = () => {
                                 {navLinks.map((link) => (
                                     <li key={link.route}>
                                         <NavLink
-                                            className={({ isActive }) => `font-bold ${isActive ? 'text-[#EEFF25]' : 'text-white'} hover:text-primary duration-300`}
+                                            className={({ isActive }) => `font-bold ${isActive ? 'text-primary' : 'text-white'} hover:text-primary duration-300`}
                                             to={link.route}
 
                                             style={{ whiteSpace: 'nowrap' }}
