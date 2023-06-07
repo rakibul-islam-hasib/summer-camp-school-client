@@ -6,3 +6,26 @@
 body { 
     font-family: 'Manrope', sans-serif;
 }
+
+
+/* Scroll bar  */
+::-webkit-scrollbar {
+  width: 6px;
+  /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+  /* Color of the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #b68bdcb1;
+  border-radius: 20px;
+  transition: 1s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b68bdcf1;
+  transition: 1s;
+}
