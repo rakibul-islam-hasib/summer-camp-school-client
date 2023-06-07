@@ -19,7 +19,7 @@ const navLinks = [
 const NavBar = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { user } = useContext(AuthContext);
+    const { user, logout } = useContext(AuthContext);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isHome, setIsHome] = useState(false);
     const [isLogin, setIsLogin] = useState(false);
@@ -31,8 +31,35 @@ const NavBar = () => {
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
-    const handelLogout  = e => { 
-
+    const handelLogout = e => {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Are you sure to logout ?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Logout.!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                logout()
+                    .then(() => {
+                        Swal.fire(
+                            'Logged out!',
+                            'You are logged out successful.',
+                            'success'
+                        )
+                    })
+                    .catch(err => {
+                        Swal.fire(
+                            'Error!',
+                            err.message,
+                            'error'
+                        )
+                    })
+            }
+        })
     }
 
     useEffect(() => {
@@ -126,7 +153,7 @@ const NavBar = () => {
                                     user && <li><NavLink to='/dashboard' className='font-bold hover:text-secondary duration-300'>Dashboard</NavLink></li>
                                 }
                                 {
-                                    user && <li><NavLink className='font-bold px-3 py-2 bg-secondary text-white rounded-xl' onClick={e => e.preventDefault()}>Logout</NavLink></li>
+                                    user && <li><NavLink className='font-bold px-3 py-2 bg-secondary text-white rounded-xl' onClick={handelLogout}>Logout</NavLink></li>
                                 }
                             </ul>
 

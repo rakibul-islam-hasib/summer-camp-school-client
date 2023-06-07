@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
-import logo from '../assets/dashboard/logo.png';
 import { BiHomeAlt } from "react-icons/bi";
 import { MdExplore, MdOfflineBolt } from "react-icons/md";
 import { GiFigurehead } from "react-icons/gi";
 import { NavLink, Outlet } from 'react-router-dom';
+import Scroll from '../hooks/useScroll';
 
 const menuItems = [
     { to: "/", icon: <BiHomeAlt className="text-2xl" />, label: "Home" },
+    { to: "/browse", icon: <MdExplore className="text-2xl" />, label: "Browse" },
+    { to: "/trending", icon: <MdOfflineBolt className="text-2xl" />, label: "Trending" },
+    { to: "/browse", icon: <GiFigurehead className="text-2xl" />, label: "Following" },
+];
+const lastMenuItems = [
+    { to: "/", icon: <BiHomeAlt className="text-2xl" />, label: "Main Home" },
     { to: "/browse", icon: <MdExplore className="text-2xl" />, label: "Browse" },
     { to: "/trending", icon: <MdOfflineBolt className="text-2xl" />, label: "Trending" },
     { to: "/browse", icon: <GiFigurehead className="text-2xl" />, label: "Following" },
@@ -23,7 +29,7 @@ const DashboardLayout = () => {
             >
                 <div className="flex gap-x-4 items-center">
                     <img
-                        src={logo}
+                        src='https://i.ibb.co/26dQJcm/musical-note.png'
                         onClick={() => setOpen(!open)}
                         className={`cursor-pointer h-[40px] duration-500 ${open && "rotate-[360deg]"
                             }`}
@@ -33,7 +39,7 @@ const DashboardLayout = () => {
                             }`}
                         onClick={() => setOpen(!open)}
                     >
-                        FLIXTUBE
+                        SOUND SAFARI
                     </h1>
                 </div>
                 {/* Nav links  */}
@@ -77,7 +83,7 @@ const DashboardLayout = () => {
                 </ul>
                 <ul className="pt-6">
                     <p className={`ml-3 text-light-gray-4 ${!open && "hidden"}`}><small>MENU</small></p>
-                    {menuItems.map((menuItem, index) => (
+                    {lastMenuItems.map((menuItem, index) => (
                         <li key={index} className="mb-2">
                             <NavLink
                                 to={menuItem.to}
@@ -97,6 +103,7 @@ const DashboardLayout = () => {
             </div>
             <div className="h-screen overflow-y-auto px-8 flex-1">
                 {/* <NavBar /> */}
+                <Scroll />
                 <Outlet />
             </div>
         </div>
