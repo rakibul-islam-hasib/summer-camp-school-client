@@ -16,6 +16,10 @@ const navLinks = [
         name: 'Instructors',
         route: '/instructors'
     },
+    {
+        name: 'Classes',
+        route: '/classes'
+    }
 ];
 const theme = createTheme({
     palette: {

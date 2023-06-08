@@ -8,11 +8,14 @@ import DashboardLayout from "../layout/DashboardLayout";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import ManageUsers from "../pages/Dashboard/Admin/users/ManageUsers";
 import UpdateUser from "../pages/Dashboard/Admin/users/UpdateUser";
+import Classes from "../pages/classes/Classes";
+import ErrorPage from "../pages/error/ErrorPage";
 
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 index: true,
@@ -29,12 +32,17 @@ export const router = createBrowserRouter([
             {
                 path: "instructors",
                 element: <Instructors />
+            },
+            {
+                path: "classes",
+                element: <Classes />
             }
         ]
     },
     {
         path: '/dashboard',
         element: <DashboardLayout />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 index: true,
