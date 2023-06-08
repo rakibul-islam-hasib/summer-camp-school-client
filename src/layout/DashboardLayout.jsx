@@ -6,7 +6,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 import Scroll from '../hooks/useScroll';
 
 const menuItems = [
-    { to: "/", icon: <BiHomeAlt className="text-2xl" />, label: "Home" },
+    { to: "/dashboard", icon: <BiHomeAlt className="text-2xl" />, label: "Dashboard Home" },
     { to: "/browse", icon: <MdExplore className="text-2xl" />, label: "Browse" },
     { to: "/trending", icon: <MdOfflineBolt className="text-2xl" />, label: "Trending" },
     { to: "/browse", icon: <GiFigurehead className="text-2xl" />, label: "Following" },
@@ -50,8 +50,8 @@ const DashboardLayout = () => {
                             <NavLink
                                 to={menuItem.to}
                                 className={({ isActive }) =>
-                                    `flex ${isActive ? "bg-dark-primary-3 text-dark-primary" : "text-[#413F44]"
-                                    }  duration-150 rounded-md p-2 cursor-pointer hover:bg-dark-primary-3  font-bold text-sm items-center gap-x-4  `
+                                    `flex ${isActive ? "bg-red-500 text-white " : "text-[#413F44]"
+                                    }  duration-150 rounded-md p-2 cursor-pointer hover:bg-secondary hover:text-white  font-bold text-sm items-center gap-x-4  `
                                 }
                             >
                                 {menuItem.icon}
@@ -82,7 +82,7 @@ const DashboardLayout = () => {
                     ))}
                 </ul>
                 <ul className="pt-6">
-                    <p className={`ml-3 text-light-gray-4 ${!open && "hidden"}`}><small>MENU</small></p>
+                    <p className={`ml-3 uppercase text-light-gray-4 ${!open && "hidden"}`}><small>Useful Links</small></p>
                     {lastMenuItems.map((menuItem, index) => (
                         <li key={index} className="mb-2">
                             <NavLink

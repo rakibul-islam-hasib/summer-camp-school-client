@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaBars } from 'react-icons/fa';
 import { FcElectricalSensor } from 'react-icons/fc';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import Switch from '@mui/material/Switch';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../utilities/providers/AuthProvider';
 const navLinks = [
@@ -15,7 +16,7 @@ const navLinks = [
         route: '/instructors'
     },
 ];
-
+const label = { inputProps: { 'aria-label': 'Switch demo' } };
 const NavBar = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -155,6 +156,12 @@ const NavBar = () => {
                                 {
                                     user && <li><NavLink className='font-bold px-3 py-2 bg-secondary text-white rounded-xl' onClick={handelLogout}>Logout</NavLink></li>
                                 }
+                                <li className='bgwh'>
+                                    <div className="flex flex-col justify-center items-center">
+                                        <Switch defaultChecked />
+                                        <h1 className='text-[8px]'>Light/Dark</h1>
+                                    </div>
+                                </li>
                             </ul>
 
                         </div>

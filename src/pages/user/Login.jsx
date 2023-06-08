@@ -15,8 +15,7 @@ const Login = () => {
         const data = new FormData(e.target)
         const formData = Object.fromEntries(data)
         login(formData.email, formData.password)
-            .then((res) => {
-                console.log(res.user?.DisplayName)
+            .then(() => {
                 navigate('/dashboard')
             })
             .catch(err => {
