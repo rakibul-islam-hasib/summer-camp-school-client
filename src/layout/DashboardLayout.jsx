@@ -5,6 +5,7 @@ import { GiFigurehead } from "react-icons/gi";
 import { FaUsers } from "react-icons/fa";
 import { NavLink, Outlet } from 'react-router-dom';
 import Scroll from '../hooks/useScroll';
+import { ToastContainer } from 'react-toastify';
 
 const navItems = [
     { to: "/dashboard", icon: <BiHomeAlt className="text-2xl" />, label: "Dashboard Home" },
@@ -106,6 +107,7 @@ const DashboardLayout = () => {
                 {/* <NavBar /> */}
                 <Scroll />
                 <Outlet />
+                <ToastContainer />
             </div>
         </div>
     );

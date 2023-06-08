@@ -1,26 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../../../../hooks/useAuth';
 import { useLoaderData } from 'react-router-dom';
 import useAxiosFetch from '../../../../hooks/useAxiosFetch';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
-
+import { toast } from 'react-toastify';
 const UpdateUser = () => {
     const { user } = useAuth();
     const userCredentials = useLoaderData();
+    const [loading, setLoading] = useState(false);
     const axiosFetch = useAxiosFetch();
     const axiosSecure = useAxiosSecure();
-    const handleFormSubmit = e => {
+    const handleFormSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const updatedData = Object.fromEntries(formData);
-        console.log(updatedData);
-        axiosSecure.put(`/update-user/${userCredentials?._id}`, updatedData)
-            .then(res => {
-                console.log(res.data);
-            })
-            .catch(err => console.log(err))
 
+        toast.promise(
+            axiosSecure.put(`/update-user/${userCredentials?._id}`, updatedData)
+                .then((res) => {
+                    console.log(res.data);
+                    return 'Registration successful!';
+                })
+                .catch((err) => {
+                    console.log(err);
+                    throw new Error('Registration failed!');
+                }),
+            {
+                pending: 'Please wait...',
+                success: 'Updated successful!',
+                error: 'Update failed...!',
+            }
+        );
     };
+
+
 
     return (
         <div>
@@ -38,6 +51,7 @@ const UpdateUser = () => {
                                         className="w-full rounded-lg mt-3 border outline-none border-secondary p-3 text-sm"
                                         placeholder="Your Name"
                                         type="text"
+                                        required
                                         defaultValue={userCredentials?.name ? userCredentials?.name : ''}
                                         id="name"
                                         name='name'
@@ -48,6 +62,7 @@ const UpdateUser = () => {
                                     <input
                                         className="w-full mt-3   rounded-lg border outline-none border-secondary p-3 text-sm"
                                         placeholder="Phone Number"
+                                        required
                                         type="tel"
                                         id="phone"
                                         defaultValue={userCredentials?.phone ? userCredentials?.phone : ''}
@@ -63,6 +78,7 @@ const UpdateUser = () => {
                                         className="w-full mt-2 rounded-lg border outline-none border-secondary p-3 text-sm"
                                         placeholder="Email address"
                                         type="email"
+                                        required
                                         defaultValue={userCredentials?.email}
                                         name="email"
                                         id="email"
@@ -86,6 +102,7 @@ const UpdateUser = () => {
                                     <input
                                         className="w-full mt-2 rounded-lg border outline-none border-secondary p-3 text-sm"
                                         placeholder="Address"
+                                        required
                                         defaultValue={userCredentials?.address}
                                         name='address'
                                         type="text"
@@ -97,6 +114,7 @@ const UpdateUser = () => {
                                         className="w-full mt-2 rounded-lg border outline-none border-secondary p-3 text-sm"
                                         placeholder="Photo URL"
                                         name='photoUrl'
+                                        required
                                         defaultValue={userCredentials?.photoUrl}
                                         type="text"
                                     />
@@ -165,6 +183,7 @@ const UpdateUser = () => {
                                     className="w-full resize-none rounded-lg border-secondary border outline-none p-3 text-sm"
                                     placeholder="About user"
                                     rows="4"
+                                    defaultValue={userCredentials?.about ? userCredentials?.about : ''}
                                     name='about'
                                     id="message"
                                 ></textarea>
