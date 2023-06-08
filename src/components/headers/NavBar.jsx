@@ -104,15 +104,15 @@ const NavBar = () => {
     }, []);
 
     useEffect(() => {
-        if (scrollPosition > 0) {
+        if (scrollPosition > 100) {
             if (isHome) {
                 setNavBg('bg-white dark:bg-black dark:text-white text-black');
             }
             else {
-                setNavBg('bg-white text-black');
+                setNavBg('bg-white dark:bg-black dark:text-white text-black');
             }
         } else {
-            setNavBg('bg-transparent text-white');
+            setNavBg(`dark:text-white ${isHome ? 'text-white bg-transparent' : 'text-black dark:text-white dark:bg-black'}`);
         }
     }, [scrollPosition]);
 
@@ -174,6 +174,11 @@ const NavBar = () => {
                                 }
                                 {
                                     user && <li><NavLink to='/dashboard' className='font-bold hover:text-secondary duration-300'>Dashboard</NavLink></li>
+                                }
+                                {
+                                    user && <li>
+                                        <img src={user?.photoURL} className='h-[40px] rounded-full w-[40px]' alt="" />
+                                    </li>
                                 }
                                 {
                                     user && <li><NavLink className='font-bold px-3 py-2 bg-secondary text-white rounded-xl' onClick={handelLogout}>Logout</NavLink></li>
