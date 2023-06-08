@@ -4,8 +4,9 @@ import { GrUpdate } from 'react-icons/gr'
 import { FcDeleteDatabase } from 'react-icons/fc';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
+import { useNavigate } from 'react-router-dom';
 const ManageUsers = () => {
-
+    const navigate = useNavigate();
     const axiosFetch = useAxiosFetch();
     const axiosSecure  = useAxiosSecure();
     const [users, setUsers] = useState([]);
@@ -56,8 +57,8 @@ const ManageUsers = () => {
                                             <th scope="col" className="px-6 py-4">PHOTO</th>
                                             <th scope="col" className="px-6 py-4">NAME</th>
                                             <th scope="col" className="px-6 py-4">ROLE</th>
-                                            <th scope="col" className="px-6 py-4">ROLE</th>
-                                            <th scope="col" className="px-6 py-4">ROLE</th>
+                                            <th scope="col" className="px-6 py-4">UPDATE</th>
+                                            <th scope="col" className="px-6 py-4">DELETE</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -72,7 +73,7 @@ const ManageUsers = () => {
                                                 <td className="whitespace-nowrap px-6 py-4">{user.name}</td>
                                                 <td className="whitespace-nowrap px-6 py-4">{user.role}</td>
                                                 <td className="whitespace-nowrap px-6 py-4">
-                                                    <span className='inline-flex items-center gap-2 cursor-pointer bg-green-500 py-1 rounded-md px-2 text-white'>Update <GrUpdate className='text-white' /></span>
+                                                    <span onClick={()=>navigate(`/dashboard/update-user/${user._id}`)} className='inline-flex items-center gap-2 cursor-pointer bg-green-500 py-1 rounded-md px-2 text-white'>Update <GrUpdate className='text-white' /></span>
                                                 </td>
                                                 <td className="whitespace-nowrap px-6 py-4">
                                                     <span onClick={() => handleDelete(user._id)} className='inline-flex items-center gap-2 cursor-pointer bg-red-600 py-1 rounded-md px-2 text-white'>Delete <FcDeleteDatabase /></span>

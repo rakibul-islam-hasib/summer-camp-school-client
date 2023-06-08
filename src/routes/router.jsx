@@ -7,6 +7,7 @@ import Instructors from "../pages/Instructors/Instructors";
 import DashboardLayout from "../layout/DashboardLayout";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import ManageUsers from "../pages/Dashboard/Admin/users/ManageUsers";
+import UpdateUser from "../pages/Dashboard/Admin/users/UpdateUser";
 
 export const router = createBrowserRouter([
     {
@@ -42,6 +43,10 @@ export const router = createBrowserRouter([
             {
                 path: 'manage-users',
                 element: <ManageUsers />
+            },
+            {
+                path: 'update-user/:id',
+                element: <UpdateUser />
             }
         ]
     }
