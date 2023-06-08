@@ -2,11 +2,11 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <footer aria-label="Site Footer" className="bg-white">
+        <footer aria-label="Site Footer" className="bg-white dark:bg-black">
             <div className="mx-auto max-w-screen-xl px-4 pb-8 pt-16 sm:px-6 lg:px-8">
                 <div className="mx-auto max-w-md">
                     <strong
-                        className="block text-center text-xl font-bold text-gray-900 sm:text-3xl"
+                        className="block dark:text-white text-center text-xl font-bold text-gray-900 sm:text-3xl"
                     >
                         Want us to email you with the latest blockbuster news?
                     </strong>
@@ -16,14 +16,14 @@ const Footer = () => {
                             <label className="sr-only" htmlFor="email"> Email </label>
 
                             <input
-                                className="w-full rounded-full  focus:outline-secondary border-gray-200 bg-gray-100 p-4 pe-32 text-sm font-medium"
+                                className="w-full rounded-full  focus:outline-secondary  border-gray-200 bg-gray-100 p-4 pe-32 text-sm font-medium"
                                 id="email"
                                 type="email"
-                                placeholder="john@doe.com"
+                                placeholder="example@company.com"
                             />
 
                             <button
-                                className="absolute end-1 top-1/2 -translate-y-1/2 rounded-full bg-secondary px-5 py-3 text-sm font-medium text-white transition hover:bg-opacity-60"
+                                className="absolute end-1 top-1/2 -translate-y-1/2 rounded-full bg-secondary dark: px-5 py-3 text-sm font-medium text-white transition hover:bg-opacity-60"
                             >
                                 Subscribe
                             </button>
@@ -33,15 +33,11 @@ const Footer = () => {
 
                 <div className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-32">
                     <div className="mx-auto max-w-sm lg:max-w-none">
-                        <p className="mt-4 text-center text-gray-500 lg:text-left lg:text-lg">
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium
-                            natus quod eveniet aut perferendis distinctio iusto repudiandae,
-                            provident velit earum?
-                        </p>
+                        <p className="mt-4 text-center text-gray-500 lg:text-left lg:text-lg">Our experienced instructors will guide you through structured lessons, helping you develop a solid foundation while nurturing your creativity and musical expression.</p>
 
                         <div className="mt-6 flex justify-center gap-4 lg:justify-start">
                             <a
-                                className="text-secondary transition hover:text-secondary/75"
+                                className="text-secondary dark:text-white dark:hover:text-secondary transition hover:text-secondary dark:/75"
                                 href=""
                                 target="_blank"
                                 rel="noreferrer"
@@ -63,7 +59,7 @@ const Footer = () => {
                             </a>
 
                             <a
-                                className="text-secondary transition hover:text-secondary/75"
+                                className="text-secondary dark:text-white dark:hover:text-secondary transition hover:text-secondary"
                                 href=""
                                 target="_blank"
                                 rel="noreferrer"
@@ -85,7 +81,7 @@ const Footer = () => {
                             </a>
 
                             <a
-                                className="text-secondary transition hover:text-secondary/75"
+                                className="text-secondary dark:text-white dark:hover:text-secondary transition hover:text-secondary dark:/75"
                                 href=""
                                 target="_blank"
                                 rel="noreferrer"
@@ -105,7 +101,7 @@ const Footer = () => {
                             </a>
 
                             <a
-                                className="text-secondary transition hover:text-secondary/75"
+                                className="text-secondary dark:text-white dark:hover:text-secondary transition hover:text-secondary dark:/75"
                                 href=""
                                 target="_blank"
                                 rel="noreferrer"
@@ -127,7 +123,7 @@ const Footer = () => {
                             </a>
 
                             <a
-                                className="text-secondary transition hover:text-secondary/75"
+                                className="text-secondary dark:text-white dark:hover:text-secondary transition hover:text-secondary dark:/75"
                                 href=""
                                 target="_blank"
                                 rel="noreferrer"
@@ -154,65 +150,65 @@ const Footer = () => {
                         className="grid grid-cols-1 gap-8 text-center lg:grid-cols-3 lg:text-left"
                     >
                         <div>
-                            <strong className="font-medium text-gray-900"> Services </strong>
+                            <strong className="font-bold dark:text-white text-gray-900"> Services </strong>
 
                             <nav
                                 aria-label="Footer Services Nav"
                                 className="mt-6 flex flex-col space-y-1"
                             >
-                                <a className="text-secondary transition hover:text-secondary/75" href="/">
+                                <a className="text-secondary dark:text-white dark:hover:text-secondary transition hover:text-secondary dark:/75" href="/">
                                     Marketing
                                 </a>
-                                <a className="text-secondary transition hover:text-secondary/75" href="/">
+                                <a className="text-secondary dark:text-white dark:hover:text-secondary transition hover:text-secondary dark:/75" href="/">
                                     Graphic Design
                                 </a>
-                                <a className="text-secondary transition hover:text-secondary/75" href="/">
+                                <a className="text-secondary dark:text-white dark:hover:text-secondary transition hover:text-secondary dark:/75" href="/">
                                     App Development
                                 </a>
-                                <a className="text-secondary transition hover:text-secondary/75" href="/">
+                                <a className="text-secondary dark:text-white dark:hover:text-secondary transition hover:text-secondary dark:/75" href="/">
                                     Web Development
                                 </a>
                             </nav>
                         </div>
 
                         <div>
-                            <strong className="font-medium text-gray-900"> About </strong>
+                            <strong className="font-bold dark:text-white text-gray-900"> About </strong>
 
                             <nav
                                 aria-label="Footer About Nav"
                                 className="mt-6 flex flex-col space-y-1"
                             >
-                                <a className="text-secondary transition hover:text-secondary/75" href="/">
+                                <a className="text-secondary dark:text-white dark:hover:text-secondary transition hover:text-secondary dark:/75" href="/">
                                     About
                                 </a>
-                                <a className="text-secondary transition hover:text-secondary/75" href="/">
+                                <a className="text-secondary dark:text-white dark:hover:text-secondary transition hover:text-secondary dark:/75" href="/">
                                     Careers
                                 </a>
-                                <a className="text-secondary transition hover:text-secondary/75" href="/">
+                                <a className="text-secondary dark:text-white dark:hover:text-secondary transition hover:text-secondary dark:/75" href="/">
                                     History
                                 </a>
-                                <a className="text-secondary transition hover:text-secondary/75" href="/">
+                                <a className="text-secondary dark:text-white dark:hover:text-secondary transition hover:text-secondary dark:/75" href="/">
                                     Our Team
                                 </a>
                             </nav>
                         </div>
 
                         <div>
-                            <strong className="font-medium text-gray-900"> Support </strong>
+                            <strong className=" dark:text-white font-bold text-gray-900"> Support </strong>
 
                             <nav
                                 aria-label="Footer Support Nav"
                                 className="mt-6 flex flex-col space-y-1"
                             >
-                                <a className="text-secondary transition hover:text-secondary/75" href="/">
+                                <a className="text-secondary dark:text-white dark:hover:text-secondary transition hover:text-secondary dark:/75" href="/">
                                     FAQs
                                 </a>
 
-                                <a className="text-secondary transition hover:text-secondary/75" href="/">
+                                <a className="text-secondary dark:text-white dark:hover:text-secondary transition hover:text-secondary dark:/75" href="/">
                                     Contact
                                 </a>
 
-                                <a className="text-secondary transition hover:text-secondary/75" href="/">
+                                <a className="text-secondary dark:text-white dark:hover:text-secondary transition hover:text-secondary dark:/75" href="/">
                                     Live Chat
                                 </a>
                             </nav>
@@ -227,7 +223,7 @@ const Footer = () => {
                         <br />
 
                         Created with &nbsp;
-                        <a className="text-secondary underline transition hover:text-secondary/75">HASIB</a>
+                        <a className="text-secondary dark: underline transition hover:text-secondary dark:/75">HASIB</a>
                     </p>
                 </div>
             </div>
