@@ -20,7 +20,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #b68bdcb1;
+  background-color: #ff194b92;
   border-radius: 20px;
   transition: 1s;
 }

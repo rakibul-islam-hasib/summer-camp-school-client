@@ -5,6 +5,11 @@ import { RouterProvider } from 'react-router-dom';
 import { router } from './routes/router.jsx';
 import AuthProvider from './utilities/providers/AuthProvider'; 
 import 'react-toastify/dist/ReactToastify.css';
+import Aos from 'aos';
+
+
+
+Aos.init();
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthProvider>

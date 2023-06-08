@@ -30,7 +30,8 @@ const Register = () => {
                                 photoUrl: user.photoURL,
                                 gender: data.gender,
                                 address: data.address,
-                                role: 'user'
+                                role: 'user', 
+                                phone : data.phone,                 
                             };
 
                             if (user.email && user.displayName) {
@@ -119,7 +120,7 @@ const Register = () => {
                             <input
                                 placeholder='Phone Number'
                                 type="tel"
-                                {...register('phoneNumber', { required: true })}
+                                {...register('phone', { required: true })}
                                 className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300"
                             />
                         </div>

@@ -3,7 +3,7 @@ import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, si
 import axios from 'axios';
 import { app } from '../../config/firebase.init';
 
-export const AuthContext = createContext(null)
+export const AuthContext = createContext()
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loader, setLoader] = useState(true);
@@ -13,6 +13,7 @@ const AuthProvider = ({ children }) => {
 
     const signUp = async (email, password) => {
         try {
+            setLoader(true)
             return await createUserWithEmailAndPassword(auth, email, password)
         } catch (error) {
             setError(error.code)
@@ -21,6 +22,7 @@ const AuthProvider = ({ children }) => {
     }
     const login = async (email, password) => {
         try {
+            setLoader(true)
             return await signInWithEmailAndPassword(auth, email, password)
         } catch (error) {
             setError(error.code)
@@ -35,9 +37,9 @@ const AuthProvider = ({ children }) => {
             throw error
         }
     }
-    const updateUser = async (displayName , photo) => {
+    const updateUser = async (displayName, photo) => {
         try {
-            await updateProfile(auth.currentUser, { displayName: displayName , photoURL : photo })
+            await updateProfile(auth.currentUser, { displayName: displayName, photoURL: photo })
             setUser(auth.currentUser)
 
         } catch (error) {
@@ -51,17 +53,17 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
             setUser(user);
             if (user) {
-                setLoader(false); // Move this line here
 
                 axios.post('http://localhost:5000/api/set-token', { email: user.email, name: user.displayName })
                     .then(data => {
                         // console.log(data.data.token)
-                        localStorage.setItem('token', data.data.token)
+                        if (data.data.token) {
+                            localStorage.setItem('token', data.data.token);
+                            setLoader(false);
+                        }
                     })
-                    .catch(error => {
-                        console.log(error);
-                    });
-            } else {
+            }
+            else {
                 localStorage.removeItem('token');
                 setLoader(false);
             }
@@ -70,7 +72,7 @@ const AuthProvider = ({ children }) => {
         return () => unsubscribe();
     }, []);
 
-    const contextVale = { user, loader, setLoader, signUp, login, logout, updateUser  , error , setError}
+    const contextVale = { user, loader, setLoader, signUp, login, logout, updateUser, error, setError }
     return (
         <AuthContext.Provider value={contextVale}>
             {children}

@@ -5,14 +5,14 @@ import { AiOutlineMinus } from 'react-icons/ai';
 import CountUp from 'react-countup';
 const Facilities = () => {
     return (
-        <div className='lg:w-[90%] w-[95%] mx-auto my-20'>
+        <div data-aos="fade-left" className='lg:w-[90%] w-[95%] mx-auto my-20'>
             <div className="md:flex gap-5">
-                <div className="h-[450px] md:h-full">
+                <div data-aos="fade-right" className="h-[450px] md:h-full">
                     <img className='h-[450px] md:h-full w-full' src={girlImg} alt="" />
                 </div>
-                <div className="px-7 py-6 shadow-xl">
+                <div className="px-7 dark:text-white py-6 shadow-xl">
                     <h1 className='text-xl ml-5 text-secondary font-bold'>TOP FACILITIES</h1>
-                    <h1 className='inline-flex items-center gap-2 text-4xl ml-5 font-bold my-4'>Our Facilities <AiOutlineMinus /></h1>
+                    <h1 className='inline-flex items-center dark:text-white gap-2 text-4xl ml-5 font-bold my-4'>Our Facilities <AiOutlineMinus /></h1>
                     <div className="flex items-center gap-4">
                         <div className="relative">
                             <img className='w-[150px] h-[150px] rounded-full' src="https://validthemes.live/themeforest/edukat/assets/img/thumb/1.jpg" alt="" />

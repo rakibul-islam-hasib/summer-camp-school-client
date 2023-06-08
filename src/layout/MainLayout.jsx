@@ -4,10 +4,11 @@ import { Outlet } from 'react-router-dom';
 import Footer from '../components/footer/Footer';
 import { ToastContainer } from 'react-toastify';
 import Scroll from '../hooks/useScroll';
-
+import AOS from 'aos';
 const MainLayout = () => {
+    AOS.init();
     return (
-        <main>
+        <main className='dark:bg-black'>
             <Scroll />
             <NavBar />
             <Outlet />
