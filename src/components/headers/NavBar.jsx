@@ -27,7 +27,7 @@ const NavBar = () => {
     const [scrollPosition, setScrollPosition] = useState(0);
     const [navBg, setNavBg] = useState('bg-[#15151580]');
     const [isFixed, setIsFixed] = useState(false);
-
+    const [isDarkMode, setIsDarkMode] = useState(false);
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -63,6 +63,17 @@ const NavBar = () => {
         })
     }
 
+
+    useEffect(() => {
+        const darkClass = 'dark';
+        const root = window.document.documentElement;
+
+        if (isDarkMode) {
+            root.classList.add(darkClass);
+        } else {
+            root.classList.remove(darkClass);
+        }
+    }, [isDarkMode]);
     useEffect(() => {
         setIsHome(location.pathname === '/');
         setIsLogin(location.pathname === '/login');
@@ -84,7 +95,7 @@ const NavBar = () => {
     useEffect(() => {
         if (scrollPosition > 0) {
             if (isHome) {
-                setNavBg('bg-white text-black');
+                setNavBg('bg-white dark:bg-black dark:text-white text-black');
             }
             else {
                 setNavBg('bg-white text-black');
@@ -124,13 +135,13 @@ const NavBar = () => {
                     </div>
 
                     {/* Navigation Links */}
-                    <div className="hidden  text-black md:block">
+                    <div className="hidden  text-black dark:text-white md:block">
                         <div className="flex">
                             <ul className="ml-10 flex items-center space-x-4 pr-4">
                                 {navLinks.map((link) => (
                                     <li key={link.route}>
                                         <NavLink
-                                            className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' : 'text-black'} hover:text-secondary duration-300`}
+                                            className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' : 'text-black dark:text-white'} hover:text-secondary duration-300`}
                                             to={link.route}
 
                                             style={{ whiteSpace: 'nowrap' }}
@@ -158,7 +169,7 @@ const NavBar = () => {
                                 }
                                 <li className='bgwh'>
                                     <div className="flex flex-col justify-center items-center">
-                                        <Switch defaultChecked />
+                                        <Switch onChange={() => setIsDarkMode(!isDarkMode)} />
                                         <h1 className='text-[8px]'>Light/Dark</h1>
                                     </div>
                                 </li>
