@@ -10,7 +10,6 @@ const Register = () => {
     useTitle('Register | Sound Safari');
     const { signUp, error, setError, updateUser } = useContext(AuthContext);
     const navigate = useNavigate();
-    const notify = () => toast.success("Wow registration successfully!");
     const {
         register,
         handleSubmit,
@@ -19,13 +18,12 @@ const Register = () => {
 
     const onSubmit = (data) => {
         setError('');
-        signUp(data.email, data.password)
-            .then(userCredential => {
-                // Signed in 
-                const user = userCredential.user;
-                if (user) {
-                    updateUser(data.name, data.photoUrl)
-                        .then(() => {
+        toast.promise(
+            signUp(data.email, data.password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    if (user) {
+                        return updateUser(data.name, data.photoUrl).then(() => {
                             const userImp = {
                                 name: user.displayName,
                                 email: user.email,
@@ -33,29 +31,34 @@ const Register = () => {
                                 gender: data.gender,
                                 address: data.address,
                                 role: 'user'
-                            }
-                            if (user.email && user.displayName) {
-                                axios.post('http://localhost:5000/new-user', userImp)
-                                    .then(() => {
-                                        // console.log(res.data)
-                                        notify()
-                                        navigate('/')
-                                    })
-                                    .catch(err => {
-                                        console.log(err)
-                                    })
-                            }
-                        })
-                        .catch(err => {
-                            console.log(err)
-                        })
-                }
-            })
-            .catch(err => {
-                setError(err.code)
+                            };
 
-            })
+                            if (user.email && user.displayName) {
+                                return axios
+                                    .post('http://localhost:5000/new-user', userImp)
+                                    .then(() => {
+                                        navigate('/');
+                                        return 'Registration successful!';
+                                    })
+                                    .catch((err) => {
+                                        throw new Error(err);
+                                    });
+                            }
+                        });
+                    }
+                })
+                .catch((err) => {
+                    setError(err.code);
+                    throw new Error(err);
+                }),
+            {
+                pending: 'Please wait...', 
+                success: 'Registration successful!',
+                error: 'Registration failed!',
+            }
+        );
     };
+
 
     return (
         <div className="flex justify-center items-center pt-14 bg-gray-100">

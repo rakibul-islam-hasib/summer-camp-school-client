@@ -128,7 +128,7 @@ const NavBar = () => {
                 <div className="flex px-4 items-center justify-between py-4">
                     {/* Logo */}
                     <div onClick={() => navigate('/')} className="flex-shrink-0 cursor-pointer pl-7 md:p-0 flex items-center">
-                        <div className={`${isFixed && 'text-black'}`}>
+                        <div className={`${isHome ? 'text-white' : 'text-black'}`}>
                             <h1 className='text-2xl font-Cinzel  inline-flex gap-3  items-center font-bold'>Sound Safari <FcElectricalSensor className='text-4xl' /></h1>
                             <p className='font-bold text-[13px]  tracking-[8px]'>Learn Music</p>
                         </div>

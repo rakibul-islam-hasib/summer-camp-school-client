@@ -1,12 +1,13 @@
 import React from 'react';
 import { useTitle } from '../../hooks/useTitle';
+import ShowInstructors from './All/ShowInstructors';
 
 const Instructors = () => {
     useTitle('Instructors | Sound Safari');
     return (
-        <div>
-            <h1>Instructors</h1>
-        </div>
+        <section>
+            <ShowInstructors />
+        </section>
     );
 };
 

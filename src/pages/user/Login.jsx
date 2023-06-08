@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { useTitle } from '../../hooks/useTitle';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
-
+import { FadeLoader } from 'react-spinners';
 const Login = () => {
     useTitle('Login | Sound Safari');
     const [showPassword, setShowPassword] = useState(false);
-    const { login, error, setError } = useAuth();
+    const { login, error, setError, loader } = useAuth();
     const navigate = useNavigate();
 
     const handelSubmit = e => {
@@ -33,6 +33,7 @@ const Login = () => {
                 >
                     <p className="text-center text-red-400 text-lg font-medium">Sign in to your account</p>
                     {error && <p className="text-center text-red-400 text-sm font-medium">{error}</p>}
+                    {loader && <div className='flex justify-center'><FadeLoader color="#FF1949" /></div>}
 
                     <div>
                         <label htmlFor="email" className="sr-only">Email</label>
