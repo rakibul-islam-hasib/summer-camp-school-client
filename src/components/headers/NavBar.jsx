@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import Switch from '@mui/material/Switch';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../utilities/providers/AuthProvider';
+import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 const navLinks = [
     {
         name: 'Home',
@@ -16,7 +17,17 @@ const navLinks = [
         route: '/instructors'
     },
 ];
-const label = { inputProps: { 'aria-label': 'Switch demo' } };
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#ff0000', // Set the primary color
+        },
+        secondary: {
+            main: '#00ff00', // Set the secondary color
+        },
+    },
+});
+
 const NavBar = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -167,11 +178,13 @@ const NavBar = () => {
                                 {
                                     user && <li><NavLink className='font-bold px-3 py-2 bg-secondary text-white rounded-xl' onClick={handelLogout}>Logout</NavLink></li>
                                 }
-                                <li className='bgwh'>
-                                    <div className="flex flex-col justify-center items-center">
-                                        <Switch onChange={() => setIsDarkMode(!isDarkMode)} />
-                                        <h1 className='text-[8px]'>Light/Dark</h1>
-                                    </div>
+                                <li>
+                                    <ThemeProvider theme={theme}>
+                                        <div className="flex flex-col justify-center items-center">
+                                            <Switch onChange={() => setIsDarkMode(!isDarkMode)} />
+                                            <h1 className='text-[8px]'>Light/Dark</h1>
+                                        </div>
+                                    </ThemeProvider>
                                 </li>
                             </ul>
 
