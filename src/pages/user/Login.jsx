@@ -1,33 +1,39 @@
 import React, { useState } from 'react';
 import { useTitle } from '../../hooks/useTitle';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth';
 
 const Login = () => {
     useTitle('Login | Sound Safari');
     const [showPassword, setShowPassword] = useState(false);
-
+    const { login, error, setError } = useAuth();
+    const navigate = useNavigate();
 
     const handelSubmit = e => {
+        setError('')
         e.preventDefault()
         const data = new FormData(e.target)
         const formData = Object.fromEntries(data)
-        console.log(formData)
+        login(formData.email, formData.password)
+            .then((res) => {
+                console.log(res.user?.DisplayName)
+                navigate('/dashboard')
+            })
+            .catch(err => {
+                setError(err.code)
+            })
     }
 
     return (
         <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-lg">
-                <h1 className="text-center text-2xl font-bold text-secondary sm:text-3xl">
-                    Get started today
-                </h1>
-
+                <h1 className="text-center text-2xl font-bold text-secondary sm:text-3xl">Get started today </h1>
                 <p className="mx-auto mt-4 max-w-md text-center text-gray-500">Explore our comprehensive library of courses, meticulously crafted to cater to all levels of expertise.</p>
-
-                <form
-                    onSubmit={handelSubmit}
+                <form onSubmit={handelSubmit}
                     className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
                 >
                     <p className="text-center text-red-400 text-lg font-medium">Sign in to your account</p>
+                    {error && <p className="text-center text-red-400 text-sm font-medium">{error}</p>}
 
                     <div>
                         <label htmlFor="email" className="sr-only">Email</label>
@@ -40,7 +46,7 @@ const Login = () => {
                                 placeholder="Enter email"
                             />
 
-                            <span  className="absolute inset-y-0 end-0 grid place-content-center px-4">
+                            <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     className="h-4 w-4 text-gray-400"
@@ -70,7 +76,7 @@ const Login = () => {
                                 placeholder="Enter password"
                             />
 
-                            <span onClick={() => setShowPassword(!showPassword)} className="absolute inset-y-0 end-0 grid place-content-center px-4">
+                            <span onClick={() => setShowPassword(!showPassword)} className="absolute cursor-pointer inset-y-0 end-0 grid place-content-center px-4">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     className="h-4 w-4 text-gray-400"
