@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react';
 import useAxiosFetch from '../../../../hooks/useAxiosFetch';
 import { GrUpdate } from 'react-icons/gr'
 import { FcDeleteDatabase } from 'react-icons/fc';
+import Swal from 'sweetalert2';
+import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 const ManageUsers = () => {
 
     const axiosFetch = useAxiosFetch();
+    const axiosSecure  = useAxiosSecure();
     const [users, setUsers] = useState([]);
     useEffect(() => {
         axiosFetch.get('/users')
@@ -14,7 +17,28 @@ const ManageUsers = () => {
             .catch(err => console.log(err))
     }, [])
 
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/delete-user/${id}`)
+                .then(res => { 
+                    console.log(res.data)
+                    
+                })
+                .catch(err => console.log(err))
 
+
+            }
+        })
+    }
     return (
         <div>
             <h1 className='text-center text-4xl font-bold my-7'>Manage <span className='text-secondary'>Users</span></h1>
@@ -51,7 +75,7 @@ const ManageUsers = () => {
                                                     <span className='inline-flex items-center gap-2 cursor-pointer bg-green-500 py-1 rounded-md px-2 text-white'>Update <GrUpdate className='text-white' /></span>
                                                 </td>
                                                 <td className="whitespace-nowrap px-6 py-4">
-                                                <span className='inline-flex items-center gap-2 cursor-pointer bg-red-600 py-1 rounded-md px-2 text-white'>Delete <FcDeleteDatabase /></span>
+                                                    <span onClick={() => handleDelete(user._id)} className='inline-flex items-center gap-2 cursor-pointer bg-red-600 py-1 rounded-md px-2 text-white'>Delete <FcDeleteDatabase /></span>
                                                 </td>
                                             </tr>)
                                         }
