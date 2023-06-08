@@ -1,6 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useTitle } from '../../hooks/useTitle';
 
 const ErrorPage = () => {
+    useTitle('404 Page Not Found| Sound Safari');
+    const navigate = useNavigate();
+
     return (
         <div className="grid h-screen px-4 bg-white place-content-center">
             <div className="text-center">
@@ -12,12 +17,12 @@ const ErrorPage = () => {
 
                 <p className="mt-4 text-gray-500">We can't find that page.</p>
 
-                <a
-                    href="#"
+                <button
+                    onClick={() => navigate('/')}
                     className="inline-block px-5 py-3 mt-6 text-sm font-medium text-white bg-secondary rounded hover:bg-secondary focus:outline-none focus:ring"
                 >
                     Go Back Home
-                </a>
+                </button>
             </div>
         </div>
     );
