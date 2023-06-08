@@ -6,6 +6,7 @@ import Login from "../pages/user/Login";
 import Instructors from "../pages/Instructors/Instructors";
 import DashboardLayout from "../layout/DashboardLayout";
 import Dashboard from "../pages/Dashboard/Dashboard";
+import ManageUsers from "../pages/Dashboard/Admin/users/ManageUsers";
 
 export const router = createBrowserRouter([
     {
@@ -37,6 +38,10 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 element: <Dashboard />
+            },
+            {
+                path: 'manage-users',
+                element: <ManageUsers />
             }
         ]
     }

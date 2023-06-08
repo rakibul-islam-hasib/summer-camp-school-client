@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { BiHomeAlt } from "react-icons/bi";
 import { MdExplore, MdOfflineBolt } from "react-icons/md";
 import { GiFigurehead } from "react-icons/gi";
+import { FaUsers } from "react-icons/fa";
 import { NavLink, Outlet } from 'react-router-dom';
 import Scroll from '../hooks/useScroll';
 
-const menuItems = [
+const navItems = [
     { to: "/dashboard", icon: <BiHomeAlt className="text-2xl" />, label: "Dashboard Home" },
-    { to: "/browse", icon: <MdExplore className="text-2xl" />, label: "Browse" },
+    { to: "/dashboard/manage-users", icon: <FaUsers className="text-2xl" />, label: "Manage Users" },
     { to: "/trending", icon: <MdOfflineBolt className="text-2xl" />, label: "Trending" },
     { to: "/browse", icon: <GiFigurehead className="text-2xl" />, label: "Following" },
 ];
@@ -45,7 +46,7 @@ const DashboardLayout = () => {
                 {/* Nav links  */}
                 <ul className="pt-6">
                     <p className={`ml-3 text-light-gray-4 ${!open && "hidden"}`}><small>MENU</small></p>
-                    {menuItems.map((menuItem, index) => (
+                    {navItems.map((menuItem, index) => (
                         <li key={index} className="mb-2">
                             <NavLink
                                 to={menuItem.to}
@@ -64,7 +65,7 @@ const DashboardLayout = () => {
                 </ul>
                 <ul className="pt-6">
                     <p className={`ml-3 text-light-gray-4 ${!open && "hidden"}`}><small>MENU</small></p>
-                    {menuItems.map((menuItem, index) => (
+                    {navItems.map((menuItem, index) => (
                         <li key={index} className="mb-2">
                             <NavLink
                                 to={menuItem.to}
