@@ -6,6 +6,7 @@ import { FaUsers } from "react-icons/fa";
 import { NavLink, Outlet } from 'react-router-dom';
 import Scroll from '../hooks/useScroll';
 import { ToastContainer } from 'react-toastify';
+import { useUser } from '../hooks/useUser';
 
 const adminNavItems = [
     { to: "/dashboard", icon: <BiHomeAlt className="text-2xl" />, label: "Dashboard Home" },
@@ -29,6 +30,9 @@ const lastMenuItems = [
 
 const DashboardLayout = () => {
     const [open, setOpen] = useState(true);
+    const { currentUser } = useUser();
+    console.log("🚀 ~ file: DashboardLayout.jsx:34 ~ DashboardLayout ~ currentUser:", currentUser)
+
 
     return (
         <div className="flex">
