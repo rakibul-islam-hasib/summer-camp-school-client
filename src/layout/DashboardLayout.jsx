@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { BiHomeAlt } from "react-icons/bi";
-import { MdExplore, MdOfflineBolt } from "react-icons/md";
+import { MdExplore, MdOfflineBolt, MdPendingActions } from "react-icons/md";
 import { GiFigurehead } from "react-icons/gi";
-import { FaUsers } from "react-icons/fa";
+import { FaHome, FaUsers } from "react-icons/fa";
 import { NavLink, Outlet } from 'react-router-dom';
 import Scroll from '../hooks/useScroll';
 import { ToastContainer } from 'react-toastify';
@@ -16,9 +16,10 @@ const adminNavItems = [
     { to: "/browse", icon: <GiFigurehead className="text-2xl" />, label: "Following" },
 ];
 const instructorNavItem = [
-    { to: "/", icon: <IoSchoolSharp className="text-2xl" />, label: "My Classes" },
+    { to: "/dashboard/instructor-cp", icon: <FaHome className="text-2xl" />, label: "Home" },
     { to: "/dashboard/add-class", icon: <MdExplore className="text-2xl" />, label: "Add A class" },
-    { to: "/trending", icon: <MdOfflineBolt className="text-2xl" />, label: "Trending" },
+    { to: "/dashboard/my-classes", icon: <IoSchoolSharp className="text-2xl" />, label: "My Classes" },
+    { to: "/dashboard/my-pending", icon: <MdPendingActions className="text-2xl" />, label: "Pending Classes" },
     { to: "/browse", icon: <GiFigurehead className="text-2xl" />, label: "Following" },
 ];
 const lastMenuItems = [

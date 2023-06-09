@@ -44,8 +44,6 @@ const AddClass = () => {
                 error: 'Failed to submit your class',
             }
         )
-        // Perform form submission logic here
-        // You can access the form data in the state variables (e.g., className, classImage, etc.)
     };
     const handleImageChange = (e) => {
         const file = e.target.files[0];
