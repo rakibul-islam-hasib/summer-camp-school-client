@@ -13,6 +13,8 @@ import ErrorPage from "../pages/error/ErrorPage";
 import AddClass from "../pages/Dashboard/Instructors/AddClass";
 import MyClasses from "../pages/Dashboard/Instructors/MyClasses";
 import InstructorCP from "../pages/Dashboard/Instructors/InstructorCP";
+import AdminHome from "../pages/Dashboard/Admin/AdminHome";
+import ManageClasses from "../pages/Dashboard/Admin/ManageClasses";
 
 export const router = createBrowserRouter([
     {
@@ -59,6 +61,14 @@ export const router = createBrowserRouter([
                 path: 'update-user/:id',
                 element: <UpdateUser />,
                 loader: ({ params }) => fetch(`http://localhost:5000/users/${params.id}`),
+            },
+            {
+                path: 'admin-home',
+                element: <AdminHome />
+            },
+            {
+                path: 'manage-class',
+                element: <ManageClasses />
             },
             // * INSTRUCTOR ROUTES
             {

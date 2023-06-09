@@ -9,10 +9,11 @@ import { ToastContainer } from 'react-toastify';
 import { useUser } from '../hooks/useUser';
 import { IoSchoolSharp } from "react-icons/io5";
 import { IoMdDoneAll } from "react-icons/io";
+import { BsFillPostcardFill } from 'react-icons/bs';
 const adminNavItems = [
-    { to: "/dashboard", icon: <BiHomeAlt className="text-2xl" />, label: "Dashboard Home" },
+    { to: "/dashboard/admin-home", icon: <BiHomeAlt className="text-2xl" />, label: "Dashboard Home" },
     { to: "/dashboard/manage-users", icon: <FaUsers className="text-2xl" />, label: "Manage Users" },
-    { to: "/trending", icon: <MdOfflineBolt className="text-2xl" />, label: "Trending" },
+    { to: "/dashboard/manage-class", icon: <BsFillPostcardFill className="text-2xl" />, label: "Manage Classes" },
     { to: "/browse", icon: <GiFigurehead className="text-2xl" />, label: "Following" },
 ];
 const instructorNavItem = [
@@ -91,9 +92,9 @@ const DashboardLayout = () => {
                                 <NavLink
                                     to={menuItem.to}
                                     className={({ isActive }) =>
-                                    `flex ${isActive ? "bg-red-500 text-white " : "text-[#413F44]"
-                                    }  duration-150 rounded-md p-2 cursor-pointer hover:bg-secondary hover:text-white  font-bold text-sm items-center gap-x-4  `
-                                }
+                                        `flex ${isActive ? "bg-red-500 text-white " : "text-[#413F44]"
+                                        }  duration-150 rounded-md p-2 cursor-pointer hover:bg-secondary hover:text-white  font-bold text-sm items-center gap-x-4  `
+                                    }
                                 >
                                     {menuItem.icon}
                                     <span className={`${!open && "hidden"} origin-left duration-200`}>

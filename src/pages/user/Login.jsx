@@ -3,8 +3,10 @@ import { useTitle } from '../../hooks/useTitle';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { FadeLoader } from 'react-spinners';
+import { useUser } from '../../hooks/useUser';
 const Login = () => {
     useTitle('Login | Sound Safari');
+    const { refetch } = useUser();
     const [showPassword, setShowPassword] = useState(false);
     const { login, error, setError, loader, setLoader } = useAuth();
     const navigate = useNavigate();
@@ -16,6 +18,7 @@ const Login = () => {
         const formData = Object.fromEntries(data)
         login(formData.email, formData.password)
             .then(() => {
+                // refetch()
                 navigate('/dashboard')
             })
             .catch(err => {

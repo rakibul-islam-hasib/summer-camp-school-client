@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../../hooks/useAuth';
 import AdminStats from './AdminStats';
-import { Fade, Slide } from "react-awesome-reveal";
+import { Fade } from "react-awesome-reveal";
 import useAxiosFetch from '../../../hooks/useAxiosFetch';
 const AdminHome = () => {
     const { user } = useAuth();
