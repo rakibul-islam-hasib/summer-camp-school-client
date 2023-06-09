@@ -5,7 +5,7 @@ import useAxiosSecure from "./useAxiosSecure"
 export const useUser = () => {
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
-    const { data: currentUser } = useQuery({
+    const { data: currentUser  , isLoading} = useQuery({
         queryKey: ['user', user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/user/${user?.email}`);
@@ -13,5 +13,5 @@ export const useUser = () => {
         },
         enabled: !!user?.email
     })
-    return { currentUser }
+    return { currentUser  , isLoading}
 }

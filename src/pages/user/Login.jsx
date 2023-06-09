@@ -6,7 +6,7 @@ import { FadeLoader } from 'react-spinners';
 const Login = () => {
     useTitle('Login | Sound Safari');
     const [showPassword, setShowPassword] = useState(false);
-    const { login, error, setError, loader } = useAuth();
+    const { login, error, setError, loader, setLoader } = useAuth();
     const navigate = useNavigate();
 
     const handelSubmit = e => {
@@ -19,7 +19,8 @@ const Login = () => {
                 navigate('/dashboard')
             })
             .catch(err => {
-                setError(err.code)
+                setError(err.code);
+                setLoader(false)
             })
     }
 

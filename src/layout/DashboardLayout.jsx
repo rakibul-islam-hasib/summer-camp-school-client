@@ -7,6 +7,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 import Scroll from '../hooks/useScroll';
 import { ToastContainer } from 'react-toastify';
 import { useUser } from '../hooks/useUser';
+import { IoSchoolSharp } from "react-icons/io5";
 
 const adminNavItems = [
     { to: "/dashboard", icon: <BiHomeAlt className="text-2xl" />, label: "Dashboard Home" },
@@ -15,8 +16,8 @@ const adminNavItems = [
     { to: "/browse", icon: <GiFigurehead className="text-2xl" />, label: "Following" },
 ];
 const instructorNavItem = [
-    { to: "/", icon: <BiHomeAlt className="text-2xl" />, label: "Main Home" },
-    { to: "/browse", icon: <MdExplore className="text-2xl" />, label: "Browse" },
+    { to: "/", icon: <IoSchoolSharp className="text-2xl" />, label: "My Classes" },
+    { to: "/browse", icon: <MdExplore className="text-2xl" />, label: "Add A class" },
     { to: "/trending", icon: <MdOfflineBolt className="text-2xl" />, label: "Trending" },
     { to: "/browse", icon: <GiFigurehead className="text-2xl" />, label: "Following" },
 ];
@@ -30,9 +31,13 @@ const lastMenuItems = [
 
 const DashboardLayout = () => {
     const [open, setOpen] = useState(true);
-    const { currentUser } = useUser();
-    console.log("🚀 ~ file: DashboardLayout.jsx:34 ~ DashboardLayout ~ currentUser:", currentUser)
+    const { currentUser, isLoading } = useUser();
 
+    const role = currentUser?.role;
+
+    if (isLoading) {
+        return <div>Loading...</div>
+    }
 
     return (
         <div className="flex">
@@ -56,44 +61,69 @@ const DashboardLayout = () => {
                     </h1>
                 </div>
                 {/* Nav links  */}
-                <ul className="pt-6">
-                    <p className={`ml-3 text-light-gray-4 ${!open && "hidden"}`}><small>MENU</small></p>
-                    {adminNavItems.map((menuItem, index) => (
-                        <li key={index} className="mb-2">
-                            <NavLink
-                                to={menuItem.to}
-                                className={({ isActive }) =>
-                                    `flex ${isActive ? "bg-red-500 text-white " : "text-[#413F44]"
-                                    }  duration-150 rounded-md p-2 cursor-pointer hover:bg-secondary hover:text-white  font-bold text-sm items-center gap-x-4  `
-                                }
-                            >
-                                {menuItem.icon}
-                                <span className={`${!open && "hidden"} origin-left duration-200`}>
-                                    {menuItem.label}
-                                </span>
-                            </NavLink>
-                        </li>
-                    ))}
-                </ul>
-                <ul className="pt-6">
-                    <p className={`ml-3 text-light-gray-4 ${!open && "hidden"}`}><small>MENU</small></p>
-                    {adminNavItems.map((menuItem, index) => (
-                        <li key={index} className="mb-2">
-                            <NavLink
-                                to={menuItem.to}
-                                className={({ isActive }) =>
-                                    `flex ${isActive ? "bg-dark-primary-3 text-dark-primary" : "text-[#413F44]"
-                                    }  duration-150 rounded-md p-2 cursor-pointer hover:bg-dark-primary-3  font-bold text-sm items-center gap-x-4  `
-                                }
-                            >
-                                {menuItem.icon}
-                                <span className={`${!open && "hidden"} origin-left duration-200`}>
-                                    {menuItem.label}
-                                </span>
-                            </NavLink>
-                        </li>
-                    ))}
-                </ul>
+                {
+                    role === 'admin' && <ul className="pt-6">
+                        <p className={`ml-3 text-light-gray-4 ${!open && "hidden"}`}><small>MENU</small></p>
+                        {role === 'admin' && adminNavItems.map((menuItem, index) => (
+                            <li key={index} className="mb-2">
+                                <NavLink
+                                    to={menuItem.to}
+                                    className={({ isActive }) =>
+                                        `flex ${isActive ? "bg-red-500 text-white " : "text-[#413F44]"
+                                        }  duration-150 rounded-md p-2 cursor-pointer hover:bg-secondary hover:text-white  font-bold text-sm items-center gap-x-4  `
+                                    }
+                                >
+                                    {menuItem.icon}
+                                    <span className={`${!open && "hidden"} origin-left duration-200`}>
+                                        {menuItem.label}
+                                    </span>
+                                </NavLink>
+                            </li>
+                        ))}
+                    </ul>
+                }
+                {
+                    role === 'instructor' && <ul className="pt-6">
+                        <p className={`ml-3 text-light-gray-4 ${!open && "hidden"}`}><small>MENU</small></p>
+                        {instructorNavItem.map((menuItem, index) => (
+                            <li key={index} className="mb-2">
+                                <NavLink
+                                    to={menuItem.to}
+                                    className={({ isActive }) =>
+                                        `flex ${isActive ? "bg-dark-primary-3 text-dark-primary" : "text-[#413F44]"
+                                        }  duration-150 rounded-md p-2 cursor-pointer hover:bg-dark-primary-3  font-bold text-sm items-center gap-x-4  `
+                                    }
+                                >
+                                    {menuItem.icon}
+                                    <span className={`${!open && "hidden"} origin-left duration-200`}>
+                                        {menuItem.label}
+                                    </span>
+                                </NavLink>
+                            </li>
+                        ))}
+                    </ul>
+                }
+                {
+                    role === 'user' && <ul className="pt-6">
+                        <p className={`ml-3 text-light-gray-4 ${!open && "hidden"}`}><small>MENU</small></p>
+                        {lastMenuItems.map((menuItem, index) => (
+                            <li key={index} className="mb-2">
+                                <NavLink
+                                    to={menuItem.to}
+                                    className={({ isActive }) =>
+                                        `flex ${isActive ? "bg-dark-primary-3 text-dark-primary" : "text-[#413F44]"
+                                        }  duration-150 rounded-md p-2 cursor-pointer hover:bg-dark-primary-3  font-bold text-sm items-center gap-x-4  `
+                                    }
+                                >
+                                    {menuItem.icon}
+                                    <span className={`${!open && "hidden"} origin-left duration-200`}>
+                                        {menuItem.label}
+                                    </span>
+                                </NavLink>
+                            </li>
+                        ))}
+                    </ul>
+                }
                 <ul className="pt-6">
                     <p className={`ml-3 uppercase text-light-gray-4 ${!open && "hidden"}`}><small>Useful Links</small></p>
                     {lastMenuItems.map((menuItem, index) => (
