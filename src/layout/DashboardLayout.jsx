@@ -17,7 +17,7 @@ const adminNavItems = [
 ];
 const instructorNavItem = [
     { to: "/", icon: <IoSchoolSharp className="text-2xl" />, label: "My Classes" },
-    { to: "/browse", icon: <MdExplore className="text-2xl" />, label: "Add A class" },
+    { to: "/dashboard/add-class", icon: <MdExplore className="text-2xl" />, label: "Add A class" },
     { to: "/trending", icon: <MdOfflineBolt className="text-2xl" />, label: "Trending" },
     { to: "/browse", icon: <GiFigurehead className="text-2xl" />, label: "Following" },
 ];
@@ -90,9 +90,9 @@ const DashboardLayout = () => {
                                 <NavLink
                                     to={menuItem.to}
                                     className={({ isActive }) =>
-                                        `flex ${isActive ? "bg-dark-primary-3 text-dark-primary" : "text-[#413F44]"
-                                        }  duration-150 rounded-md p-2 cursor-pointer hover:bg-dark-primary-3  font-bold text-sm items-center gap-x-4  `
-                                    }
+                                    `flex ${isActive ? "bg-red-500 text-white " : "text-[#413F44]"
+                                    }  duration-150 rounded-md p-2 cursor-pointer hover:bg-secondary hover:text-white  font-bold text-sm items-center gap-x-4  `
+                                }
                                 >
                                     {menuItem.icon}
                                     <span className={`${!open && "hidden"} origin-left duration-200`}>
@@ -124,6 +124,25 @@ const DashboardLayout = () => {
                         ))}
                     </ul>
                 }
+                <ul className="pt-6">
+                    <p className={`ml-3 uppercase text-light-gray-4 ${!open && "hidden"}`}><small>Useful Links</small></p>
+                    {lastMenuItems.map((menuItem, index) => (
+                        <li key={index} className="mb-2">
+                            <NavLink
+                                to={menuItem.to}
+                                className={({ isActive }) =>
+                                    `flex ${isActive ? "bg-dark-primary-3 text-dark-primary" : "text-[#413F44]"
+                                    }  duration-150 rounded-md p-2 cursor-pointer hover:bg-dark-primary-3  font-bold text-sm items-center gap-x-4  `
+                                }
+                            >
+                                {menuItem.icon}
+                                <span className={`${!open && "hidden"} origin-left duration-200`}>
+                                    {menuItem.label}
+                                </span>
+                            </NavLink>
+                        </li>
+                    ))}
+                </ul>
                 <ul className="pt-6">
                     <p className={`ml-3 uppercase text-light-gray-4 ${!open && "hidden"}`}><small>Useful Links</small></p>
                     {lastMenuItems.map((menuItem, index) => (
