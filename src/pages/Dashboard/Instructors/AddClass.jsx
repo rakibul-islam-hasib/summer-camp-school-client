@@ -45,6 +45,9 @@ const AddClass = () => {
                         <input
                             className="w-full px-4 py-2 border border-secondary rounded-md focus:outline-none focus:ring-blue-500"
                             type="text"
+                            value={currentUser?.name}
+                            readOnly
+                            disabled
                             placeholder='Instructor Name'
                             name='instructorName'
                         />
@@ -54,31 +57,52 @@ const AddClass = () => {
                             Instructor email
                         </label>
                         <input
+                            title='You can not update your email'
                             className="w-full px-4 py-2 border border-secondary rounded-md focus:outline-none focus:ring-blue-500"
                             type="email"
+                            value={currentUser?.email}
+                            disabled
+                            readOnly
                             name='instructorEmail'
                         />
                     </div>
                 </div>
-                <div className="mb-6">
-                    <label className="block text-gray-700 font-bold mb-2" htmlFor="availableSeats">
-                        Available seats
-                    </label>
-                    <input
-                        className="w-full border-secondary px-4 py-2 border rounded-md focus:outline-none focus:ring-blue-500"
-                        type="number"
-                        name='availableSeats'
-                    />
+                <div className="grid gap-3 md:grid-cols-2">
+                    <div className="mb-6">
+                        <label className="block text-gray-700 font-bold mb-2" htmlFor="availableSeats">
+                            Available seats
+                        </label>
+                        <input
+                            className="w-full border-secondary px-4 py-2 border rounded-md focus:outline-none focus:ring-blue-500"
+                            type="number"
+                            placeholder='How many seats are available?'
+                            name='availableSeats'
+                        />
+                    </div>
+                    <div className="mb-6">
+                        <label className="block text-gray-700 font-bold mb-2" htmlFor="price">
+                            Price
+                        </label>
+                        <input
+                            className="w-full border-secondary px-4 py-2 border rounded-md focus:outline-none focus:ring-blue-500"
+                            type="number"
+                            placeholder='How much does it cost?'
+                            name='price'
+                        />
+                    </div>
                 </div>
                 <div className="mb-6">
                     <label className="block text-gray-700 font-bold mb-2" htmlFor="price">
-                        Price
+                        Youtube Link
                     </label>
                     <input
+                        
                         className="w-full border-secondary px-4 py-2 border rounded-md focus:outline-none focus:ring-blue-500"
-                        type="number"
+                        type="text"
+                        placeholder='Your course intro video link'
                         name='price'
                     />
+                    <p className='text-[12px] ml-2 mt-2 text-secondary'>Only youtube videos are support</p>
                 </div>
                 <div className="text-center w-full">
                     <button
