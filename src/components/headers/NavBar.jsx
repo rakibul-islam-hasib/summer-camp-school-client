@@ -132,7 +132,7 @@ const NavBar = () => {
                 <div className="flex px-4 items-center justify-between py-4">
                     {/* Logo */}
                     <div onClick={() => navigate('/')} className="flex-shrink-0 cursor-pointer pl-7 md:p-0 flex items-center">
-                        <div className={`${navBg === 'bg-transparent text-white' ? 'text-white' : 'text-black dark:text-white'}`}>
+                        <div className={``}>
                             <h1 className='text-2xl font-Cinzel  inline-flex gap-3  items-center font-bold'>Sound Safari <FcElectricalSensor className='text-4xl' /></h1>
                             <p className='font-bold text-[13px]  tracking-[8px]'>Learn Music</p>
                         </div>
@@ -156,7 +156,7 @@ const NavBar = () => {
                                 {navLinks.map((link) => (
                                     <li key={link.route}>
                                         <NavLink
-                                            className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' : 'text-black dark:text-white'} hover:text-secondary duration-300`}
+                                            className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' :`${navBg.includes('bg-transparent') ? 'text-white dark:text-white' : 'text-black dark:text-white'}`} hover:text-secondary duration-300`}
                                             to={link.route}
 
                                             style={{ whiteSpace: 'nowrap' }}
@@ -177,7 +177,7 @@ const NavBar = () => {
                                         >Login</NavLink></li>
                                 }
                                 {
-                                    user && <li><NavLink to='/dashboard' className='font-bold hover:text-secondary duration-300'>Dashboard</NavLink></li>
+                                    user && <li><NavLink to='/dashboard'  className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' :`${navBg.includes('bg-transparent') ? 'text-white' : 'text-black dark:text-white'}`} hover:text-secondary duration-300`}>Dashboard</NavLink></li>
                                 }
                                 {
                                     user && <li>

@@ -8,7 +8,7 @@ import Scroll from '../hooks/useScroll';
 import { ToastContainer } from 'react-toastify';
 import { useUser } from '../hooks/useUser';
 import { IoSchoolSharp } from "react-icons/io5";
-
+import { IoMdDoneAll } from "react-icons/io";
 const adminNavItems = [
     { to: "/dashboard", icon: <BiHomeAlt className="text-2xl" />, label: "Dashboard Home" },
     { to: "/dashboard/manage-users", icon: <FaUsers className="text-2xl" />, label: "Manage Users" },
@@ -20,7 +20,7 @@ const instructorNavItem = [
     { to: "/dashboard/add-class", icon: <MdExplore className="text-2xl" />, label: "Add A class" },
     { to: "/dashboard/my-classes", icon: <IoSchoolSharp className="text-2xl" />, label: "My Classes" },
     { to: "/dashboard/my-pending", icon: <MdPendingActions className="text-2xl" />, label: "Pending Classes" },
-    { to: "/browse", icon: <GiFigurehead className="text-2xl" />, label: "Following" },
+    { to: "/dashboard/my-approved", icon: <IoMdDoneAll className="text-2xl" />, label: "Approved Classes" },
 ];
 const lastMenuItems = [
     { to: "/", icon: <BiHomeAlt className="text-2xl" />, label: "Main Home" },

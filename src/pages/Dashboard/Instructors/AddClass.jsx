@@ -30,6 +30,7 @@ const AddClass = () => {
                         newData.instructorName = currentUser.name;
                         newData.instructorEmail = currentUser.email;
                         newData.status = 'pending';
+                        newData.submitted = new Date(); 
                         // console.log(newData);
                         axiosSecure.post('/new-class' , newData)
                         .then(res => {
@@ -68,6 +69,7 @@ const AddClass = () => {
                         <input
                             className=" w-full px-4 py-2  border border-secondary rounded-md focus:outline-none focus:ring-blue-500"
                             type="text"
+                            required
                             placeholder='Your Class Name'
                             name='name'
                         />
@@ -76,6 +78,7 @@ const AddClass = () => {
                         <label htmlFor="image" className="font-bold">Thumbnail Photo</label>
                         <input
                             type="file"
+                            required
                             onChange={handleImageChange}
                             name="image"
                             className="block mt-[5px] w-full border border-secondary shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500    file:border-0 file:bg-secondary file:text-white file:mr-4 file:py-3 file:px-4 " />
@@ -122,6 +125,7 @@ const AddClass = () => {
                         <input
                             className="w-full border-secondary px-4 py-2 border rounded-md focus:outline-none focus:ring-blue-500"
                             type="number"
+                            required
                             placeholder='How many seats are available?'
                             name='availableSeats'
                         />
@@ -133,6 +137,7 @@ const AddClass = () => {
                         <input
                             className="w-full border-secondary px-4 py-2 border rounded-md focus:outline-none focus:ring-blue-500"
                             type="number"
+                            required
                             placeholder='How much does it cost?'
                             name='price'
                         />
@@ -144,12 +149,18 @@ const AddClass = () => {
                     </label>
                     <p className='text-[12px] my-2 mt-2 text-secondary'>Only youtube videos are support</p>
                     <input
-
+                        required
                         className="w-full border-secondary px-4 py-2 border rounded-md focus:outline-none focus:ring-blue-500"
                         type="text"
                         placeholder='Your course intro video link'
                         name='videoLink'
                     />
+                </div>
+                <div className="mb-6">
+                    <label className="block text-gray-700 font-bold mb-2" htmlFor="price">
+                        Description About your course 
+                    </label>
+                    <textarea placeholder='Description about your course' name="description" className='resize-none border w-full p-2 rounded-lg  border-secondary outline-none' rows="4"></textarea>
                 </div>
                 <div className="text-center w-full">
                     <button
