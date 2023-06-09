@@ -7,9 +7,15 @@ import { NavLink, Outlet } from 'react-router-dom';
 import Scroll from '../hooks/useScroll';
 import { ToastContainer } from 'react-toastify';
 
-const navItems = [
+const adminNavItems = [
     { to: "/dashboard", icon: <BiHomeAlt className="text-2xl" />, label: "Dashboard Home" },
     { to: "/dashboard/manage-users", icon: <FaUsers className="text-2xl" />, label: "Manage Users" },
+    { to: "/trending", icon: <MdOfflineBolt className="text-2xl" />, label: "Trending" },
+    { to: "/browse", icon: <GiFigurehead className="text-2xl" />, label: "Following" },
+];
+const instructorNavItem = [
+    { to: "/", icon: <BiHomeAlt className="text-2xl" />, label: "Main Home" },
+    { to: "/browse", icon: <MdExplore className="text-2xl" />, label: "Browse" },
     { to: "/trending", icon: <MdOfflineBolt className="text-2xl" />, label: "Trending" },
     { to: "/browse", icon: <GiFigurehead className="text-2xl" />, label: "Following" },
 ];
@@ -19,6 +25,7 @@ const lastMenuItems = [
     { to: "/trending", icon: <MdOfflineBolt className="text-2xl" />, label: "Trending" },
     { to: "/browse", icon: <GiFigurehead className="text-2xl" />, label: "Following" },
 ];
+
 
 const DashboardLayout = () => {
     const [open, setOpen] = useState(true);
@@ -47,7 +54,7 @@ const DashboardLayout = () => {
                 {/* Nav links  */}
                 <ul className="pt-6">
                     <p className={`ml-3 text-light-gray-4 ${!open && "hidden"}`}><small>MENU</small></p>
-                    {navItems.map((menuItem, index) => (
+                    {adminNavItems.map((menuItem, index) => (
                         <li key={index} className="mb-2">
                             <NavLink
                                 to={menuItem.to}
@@ -66,7 +73,7 @@ const DashboardLayout = () => {
                 </ul>
                 <ul className="pt-6">
                     <p className={`ml-3 text-light-gray-4 ${!open && "hidden"}`}><small>MENU</small></p>
-                    {navItems.map((menuItem, index) => (
+                    {adminNavItems.map((menuItem, index) => (
                         <li key={index} className="mb-2">
                             <NavLink
                                 to={menuItem.to}
