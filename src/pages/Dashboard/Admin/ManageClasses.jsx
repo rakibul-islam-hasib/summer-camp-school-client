@@ -4,6 +4,7 @@ import useAxiosFetch from '../../../hooks/useAxiosFetch';
 import { FcDeleteDatabase } from 'react-icons/fc';
 import { GrUpdate } from 'react-icons/gr';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const ManageClasses = () => {
     const navigate = useNavigate();
@@ -24,6 +25,86 @@ const ManageClasses = () => {
                 setClasses(classes.map(cls => cls._id == id ? { ...cls, status: 'approved' } : cls))
             })
             .catch(err => console.log(err))
+    }
+    const handelPending = (id) => {
+        axiosSecure.put(`/change-status/${id}`, { status: 'pending' })
+            .then(res => {
+                console.log(res.data)
+                setClasses(classes.map(cls => cls._id == id ? { ...cls, status: 'pending' } : cls))
+            })
+            .catch(err => console.log(err))
+    }
+    const handelReject = (id) => {
+        Swal.fire({
+            title: 'Reason for reject',
+            input: 'text',
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Reject',
+            showLoaderOnConfirm: true,
+            preConfirm: async (text) => {
+                // console.log(text)
+                try {
+                    const res = await axiosSecure.put(`/change-status/${id}`, { status: 'rejected', reason: text })
+                    console.log(res.data.modifiedCount > 0)
+                    if (res.data.modifiedCount > 0) {
+                        setClasses(classes.map(cls => cls._id == id ? { ...cls, status: 'rejected' } : cls))
+                    }
+                    return res.data
+                } catch (error) {
+                    Swal.showValidationMessage(
+                        `Request failed: ${error}`
+                    )
+                }
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Changed..!',
+                    'You reject this class.',
+                    'success'
+                )
+            }
+        })
+    }
+    const handelReaccept = (id) => {
+        Swal.fire({
+            title: 'Reason for reaccept',
+            input: 'text',
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Reject',
+            showLoaderOnConfirm: true,
+            preConfirm: async (text) => {
+                // console.log(text)
+                try {
+                    const res = await axiosSecure.put(`/change-status/${id}`, { status: 'pending', reason: text })
+                    console.log(res.data.modifiedCount > 0)
+                    if (res.data.modifiedCount > 0) {
+                        setClasses(classes.map(cls => cls._id == id ? { ...cls, status: 'pending' } : cls))
+                    }
+                    return res.data
+                } catch (error) {
+                    Swal.showValidationMessage(
+                        `Request failed: ${error}`
+                    )
+                }
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Changed..!',
+                    'You reject this class.',
+                    'success'
+                )
+            }
+        })
     }
 
     return (
@@ -68,14 +149,39 @@ const ManageClasses = () => {
                                                             {
                                                                 cls.status === 'pending' && <span
                                                                     onClick={() => handleApprove(cls._id)}
-                                                                    className='  cursor-pointer bg-green-500 py-1 rounded-md px-2 text-white'>
-                                                                    Approve
+                                                                    className='text-[12px]  cursor-pointer bg-green-500 py-1 rounded-md px-2 text-white'>
+                                                                    Set  Approve
                                                                 </span>
                                                             }
-                                                            <span
-                                                                className=' cursor-pointer bg-red-600 py-1 rounded-md px-2 text-white'>
-                                                                Reject
-                                                            </span>
+                                                            {
+                                                                cls.status === 'approved' && <span
+                                                                    onClick={() => handelPending(cls._id)}
+                                                                    className='  cursor-pointer text-[12px] bg-green-500 py-1 rounded-md px-2 text-white'>
+                                                                    Set Pending
+                                                                </span>
+                                                            }
+                                                            {
+                                                                cls.status !== 'rejected' && <span
+                                                                    onClick={() => handelReject(cls._id)}
+                                                                    className=' cursor-pointer bg-red-600 py-1 rounded-md px-2 text-white'>
+                                                                    Reject
+                                                                </span>
+                                                            }
+                                                            {
+                                                                cls.status === 'rejected' && <span
+                                                                    onClick={() => handelReaccept(cls._id)}
+                                                                    className=' cursor-pointer bg-green-500 py-1 rounded-md px-2 text-white'>
+                                                                    Accept
+                                                                </span>
+                                                            }
+                                                            {
+                                                                cls.status === 'rejected' && <span
+                                                                    onClick={() => handelReject(cls._id)}
+                                                                    className=' cursor-pointer bg-red-600 py-1 rounded-md px-2 text-white'>
+                                                                    Ban User
+                                                                </span>
+                                                            }
+                                                           
                                                         </div>
                                                     </td>
 
