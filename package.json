@@ -14,6 +14,8 @@
     "@emotion/styled": "^11.11.0",
     "@headlessui/react": "^1.7.15",
     "@mui/material": "^5.13.4",
+    "@stripe/react-stripe-js": "^2.1.0",
+    "@stripe/stripe-js": "^1.54.0",
     "@tanstack/react-query": "^4.29.12",
     "alpinejs": "^3.12.2",
     "aos": "^2.3.4",
