@@ -9,13 +9,14 @@ const CheckoutPayment = ({ price }) => {
     const { currentUser, isLoading } = useUser();
     const [clientSecret, setClientSecret] = useState('');
     const [message, setMessage] = useState('');
-    const [classes, setClasses] = useState([]);
+    const [cart, setCart] = useState([]);
+    console.log("🚀 ~ file: CheckoutPayment.jsx:13 ~ CheckoutPayment ~ classes:", cart)
     useEffect(() => {
         axiosSecure.get(`/cart/${currentUser?.email}`)
             .then((res) => {
                 // SET CLASSES ID IN STATE
                 const classesId = res.data.map(item => item._id);
-                setClasses(classesId)
+                setCart(classesId)
             })
             .catch((err) => {
                 console.log(err)
@@ -78,7 +79,7 @@ const CheckoutPayment = ({ price }) => {
                 const paymentStatus = paymentIntent.status;
                 const userName = currentUser.name;
                 const userEmail = currentUser.email;
-                const classesId = classes;
+                const classesId = cart;
                 const data = {
                     transactionId,
                     paymentMethod,
@@ -89,14 +90,22 @@ const CheckoutPayment = ({ price }) => {
                     userEmail,
                     classesId
                 }
-                axiosSecure.post('/payment-info', data)
-                .then(res => { 
-                    console.log(res.data)
+                // axiosSecure.post('/payment-info', data)
+                fetch('http://localhost:5000/payment-info', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        authorization: `Bearer ${localStorage.getItem('token')}`
+                    },
+                    body: JSON.stringify(data),
                 })
-                .catch(err => {
-                    console.log(err)
-                })
-
+                    .then(res => res.json())
+                    .then(res => {
+                        console.log(res)
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
             }
 
 
