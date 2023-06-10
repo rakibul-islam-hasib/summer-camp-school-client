@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BiHomeAlt } from "react-icons/bi";
+import { BiHomeAlt, BiSelectMultiple } from "react-icons/bi";
 import { MdExplore, MdOfflineBolt, MdPendingActions } from "react-icons/md";
 import { GiFigurehead } from "react-icons/gi";
 import { FaHome, FaUsers } from "react-icons/fa";
@@ -22,6 +22,12 @@ const instructorNavItem = [
     { to: "/dashboard/my-classes", icon: <IoSchoolSharp className="text-2xl" />, label: "My Classes" },
     { to: "/dashboard/my-pending", icon: <MdPendingActions className="text-2xl" />, label: "Pending Classes" },
     { to: "/dashboard/my-approved", icon: <IoMdDoneAll className="text-2xl" />, label: "Approved Classes" },
+];
+const student = [
+    { to: "/dashboard/student-cp", icon: <BiHomeAlt className="text-2xl" />, label: "Dashboard" },
+    { to: "/dashboard/my-selected", icon: <BiSelectMultiple className="text-2xl" />, label: "My Selected" },
+    { to: "/trending", icon: <MdOfflineBolt className="text-2xl" />, label: "Trending" },
+    { to: "/browse", icon: <GiFigurehead className="text-2xl" />, label: "Following" },
 ];
 const lastMenuItems = [
     { to: "/", icon: <BiHomeAlt className="text-2xl" />, label: "Main Home" },
@@ -108,14 +114,14 @@ const DashboardLayout = () => {
                 {
                     role === 'user' && <ul className="pt-6">
                         <p className={`ml-3 text-light-gray-4 ${!open && "hidden"}`}><small>MENU</small></p>
-                        {lastMenuItems.map((menuItem, index) => (
+                        {student.map((menuItem, index) => (
                             <li key={index} className="mb-2">
                                 <NavLink
                                     to={menuItem.to}
                                     className={({ isActive }) =>
-                                        `flex ${isActive ? "bg-dark-primary-3 text-dark-primary" : "text-[#413F44]"
-                                        }  duration-150 rounded-md p-2 cursor-pointer hover:bg-dark-primary-3  font-bold text-sm items-center gap-x-4  `
-                                    }
+                                    `flex ${isActive ? "bg-red-500 text-white " : "text-[#413F44]"
+                                    }  duration-150 rounded-md p-2 cursor-pointer hover:bg-secondary hover:text-white  font-bold text-sm items-center gap-x-4  `
+                                }
                                 >
                                     {menuItem.icon}
                                     <span className={`${!open && "hidden"} origin-left duration-200`}>
