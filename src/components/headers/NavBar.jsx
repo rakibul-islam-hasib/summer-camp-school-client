@@ -123,7 +123,7 @@ const NavBar = () => {
 
     return (
         <motion.nav
-            className={`${navBg} ${isFixed ? 'static' : 'fixed'} top-0 transition-colors duration-500 ease-in-out  w-full z-10`}
+            className={`${isHome ? navBg : 'bg-white dark:bg-black'}  ${isFixed ? 'static' : 'fixed'} top-0 transition-colors duration-500 ease-in-out  w-full z-10`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
@@ -156,7 +156,7 @@ const NavBar = () => {
                                 {navLinks.map((link) => (
                                     <li key={link.route}>
                                         <NavLink
-                                            className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' :`${navBg.includes('bg-transparent') ? 'text-white dark:text-white' : 'text-black dark:text-white'}`} hover:text-secondary duration-300`}
+                                            className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' : `${navBg.includes('bg-transparent') ? 'text-white dark:text-white' : 'text-black dark:text-white'}`} hover:text-secondary duration-300`}
                                             to={link.route}
 
                                             style={{ whiteSpace: 'nowrap' }}
@@ -169,15 +169,15 @@ const NavBar = () => {
                                     user ? null : isLogin ? <li>
                                         <NavLink
                                             to='/register'
-                                            className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' :`${navBg.includes('bg-transparent') ? 'text-white' : 'text-black dark:text-white'}`} hover:text-secondary duration-300`}
+                                            className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' : `${navBg.includes('bg-transparent') ? 'text-white' : 'text-black dark:text-white'}`} hover:text-secondary duration-300`}
                                         >Register</NavLink></li> : <li>
                                         <NavLink
                                             to='/login'
-                                            className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' :`${navBg.includes('bg-transparent') ? 'text-white' : 'text-black dark:text-white'}`} hover:text-secondary duration-300`}
+                                            className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' : `${navBg.includes('bg-transparent') ? 'text-white' : 'text-black dark:text-white'}`} hover:text-secondary duration-300`}
                                         >Login</NavLink></li>
                                 }
                                 {
-                                    user && <li><NavLink to='/dashboard'  className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' :`${navBg.includes('bg-transparent') ? 'text-white' : 'text-black dark:text-white'}`} hover:text-secondary duration-300`}>Dashboard</NavLink></li>
+                                    user && <li><NavLink to='/dashboard' className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' : `${navBg.includes('bg-transparent') ? 'text-white' : 'text-black dark:text-white'}`} hover:text-secondary duration-300`}>Dashboard</NavLink></li>
                                 }
                                 {
                                     user && <li>
