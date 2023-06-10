@@ -20,13 +20,17 @@ const Classes = () => {
 
     return (
         <div>
-            <h1>Classes</h1>
+
+            <div className="mt-20 pt-3">
+                <h1 className="text-4xl font-bold text-center text-dark-primary">Classes</h1>
+            </div>
+
 
             <div className="my-16 w-[90%] grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-auto">
                 {classes.map((cls, index) => (
                     <div
                         key={index}
-                        className="relative w-64 h-80 mx-auto bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer"
+                        className="relative w-64 h-80 mx-auto bg-white dark:bg-slate-600 rounded-lg shadow-lg overflow-hidden cursor-pointer"
                         onMouseEnter={() => handleHover(index)}
                         onMouseLeave={() => handleHover(null)}
                     >
@@ -50,18 +54,18 @@ const Classes = () => {
                                 leaveTo="opacity-0"
                             >
                                 <div className="absolute inset-0 flex items-center justify-center">
-                                    <button className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600">
+                                    <button className="px-4 py-2 text-white bg-secondary duration-300 rounded hover:bg-red-700">
                                         Select
                                     </button>
                                 </div>
                             </Transition>
                         </div>
-                        <div className="px-6 py-4">
-                            <h3 className="text-xl font-semibold">Course Name</h3>
-                            <p className="text-gray-500">Instructor Name</p>
+                        <div className="px-6 py-2">
+                            <h3 className={`${cls.name.length > 25 ? 'text-[14px]' : 'text-[16px]'}  font-bold`}>{cls.name}</h3>
+                            <p className="text-gray-500 text-xs">Instructor : {cls.instructorName}</p>
                             <div className="flex items-center justify-between mt-4">
-                                <span className="text-gray-600">Available Seats: 10</span>
-                                <span className="text-green-500 font-semibold">$99</span>
+                                <span className="text-gray-600 text-xs">Available Seats: <span className='text-secondary'>{cls.availableSeats}</span> </span>
+                                <span className="text-green-500 font-semibold">${cls.price}</span>
                             </div>
                         </div>
                     </div>
