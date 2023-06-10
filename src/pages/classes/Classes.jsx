@@ -1,22 +1,68 @@
 import React, { useEffect, useState } from 'react';
 import useAxiosFetch from '../../hooks/useAxiosFetch';
 import { Transition } from '@headlessui/react';
-
+import { useUser } from '../../hooks/useUser';
+import { toast } from 'react-toastify';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 const Classes = () => {
     const [hoveredCard, setHoveredCard] = useState(null);
-
+    const { currentUser } = useUser();
+    const role = currentUser?.role;
     const handleHover = (index) => {
         setHoveredCard(index);
     };
 
     const [classes, setClasses] = useState([]);
     const axiosFetch = useAxiosFetch();
-
+    const axiosSecure = useAxiosSecure();
     useEffect(() => {
         axiosFetch.get('/classes')
             .then(res => setClasses(res.data))
             .catch(err => console.log(err))
     }, [])
+
+    const handelSelect = (id) => {
+        if (!currentUser) {
+            return toast.error('Please Login First');
+        }
+        axiosSecure.get(`/cart-item/${id}`)
+            .then(res => {
+                if (res.data.classId === id) {
+                    return toast.error('Already Selected');
+                }
+                else {
+                    const data = {
+                        classId: id,
+                        userMail: currentUser.email,
+                        date: new Date()
+                    }
+
+                    toast.promise(axiosSecure.post('/add-to-cart', data)
+                        .then(res => {
+                            console.log(res.data);
+                        })
+
+                        , {
+                            pending: 'Selecting...',
+                            success: {
+                                render({ data }) {
+                                    return `Selected Successfully`;
+                                }
+                            },
+                            error: {
+                                render({ data }) {
+                                    return `Error: ${data.message}`;
+                                }
+                            }
+                        });
+                }
+            })
+
+    }
+
+
+
+
 
     return (
         <div>
@@ -30,7 +76,7 @@ const Classes = () => {
                 {classes.map((cls, index) => (
                     <div
                         key={index}
-                        className="relative w-64 h-80 mx-auto bg-white dark:bg-slate-600 rounded-lg shadow-lg overflow-hidden cursor-pointer"
+                        className="relative hover:ring-[2px] hover:ring-secondary w-64 h-80 mx-auto bg-white dark:bg-slate-600 rounded-lg shadow-lg overflow-hidden cursor-pointer"
                         onMouseEnter={() => handleHover(index)}
                         onMouseLeave={() => handleHover(null)}
                     >
@@ -54,9 +100,11 @@ const Classes = () => {
                                 leaveTo="opacity-0"
                             >
                                 <div className="absolute inset-0 flex items-center justify-center">
-                                    <button className="px-4 py-2 text-white bg-secondary duration-300 rounded hover:bg-red-700">
+
+                                    <button onClick={() => handelSelect(cls._id)} title={role === 'admin' || role === 'instructor' ? 'Instructor/Admin Can not be able to select ' : 'You can select this classes'} disabled={role === 'admin' || role === 'instructor'} className="px-4 py-2 text-white disabled:bg-red-300 bg-secondary duration-300 rounded hover:bg-red-700">
                                         Select
                                     </button>
+
                                 </div>
                             </Transition>
                         </div>

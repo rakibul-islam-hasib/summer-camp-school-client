@@ -15,6 +15,7 @@ import MyClasses from "../pages/Dashboard/Instructors/MyClasses";
 import InstructorCP from "../pages/Dashboard/Instructors/InstructorCP";
 import AdminHome from "../pages/Dashboard/Admin/AdminHome";
 import ManageClasses from "../pages/Dashboard/Admin/ManageClasses";
+import StudentCP from "../pages/Dashboard/Student/StudentCP";
 
 export const router = createBrowserRouter([
     {
@@ -82,6 +83,11 @@ export const router = createBrowserRouter([
             {
                 path: 'my-classes',
                 element: <MyClasses />
+            }, 
+            // * STUDENT ROUTES
+            {
+                path : 'student-cp',
+                element : <StudentCP />
             }
         ]
     }
