@@ -17,6 +17,7 @@ import AdminHome from "../pages/Dashboard/Admin/AdminHome";
 import ManageClasses from "../pages/Dashboard/Admin/ManageClasses";
 import StudentCP from "../pages/Dashboard/Student/StudentCP";
 import SelectedClass from "../pages/Dashboard/Student/SelectedClass";
+import Payment from "../pages/Dashboard/Student/Payment/Payment";
 
 export const router = createBrowserRouter([
     {
@@ -93,6 +94,10 @@ export const router = createBrowserRouter([
             {
                 path : 'my-selected',
                 element : <SelectedClass />
+            }, 
+            {
+                path : 'user/payment',
+                element : <Payment />
             }
         ]
     }

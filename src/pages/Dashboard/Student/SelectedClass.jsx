@@ -3,11 +3,12 @@ import { useTitle } from '../../../hooks/useTitle';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useUser } from '../../../hooks/useUser';
 import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
 const SelectedClass = () => {
     useTitle('Selected Class | Sound Safari');
     const { currentUser } = useUser();
     const [classes, setClasses] = useState([]);
-    console.log(classes)
+    const navigate = useNavigate();
     const axiosSecure = useAxiosSecure();
     useEffect(() => {
         axiosSecure.get(`/cart/${currentUser?.email}`)
@@ -88,7 +89,7 @@ const SelectedClass = () => {
                                     <span className="font-semibold">Total</span>
                                     <span className="font-semibold">${total}</span>
                                 </div>
-                                <button disabled={total <= 0} className="bg-secondary text-white py-2 px-4 rounded-lg mt-4 w-full">Checkout</button>
+                                <button onClick={()=>navigate('/dashboard/user/payment')} disabled={total <= 0} className="bg-secondary text-white py-2 px-4 rounded-lg mt-4 w-full">Checkout</button>
                             </div>
                         </div>
                     </div>
