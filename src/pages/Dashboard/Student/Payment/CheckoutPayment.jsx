@@ -10,7 +10,6 @@ const CheckoutPayment = ({ price }) => {
     const [clientSecret, setClientSecret] = useState('');
     const [message, setMessage] = useState('');
     const [cart, setCart] = useState([]);
-    console.log("🚀 ~ file: CheckoutPayment.jsx:13 ~ CheckoutPayment ~ classes:", cart)
     useEffect(() => {
         axiosSecure.get(`/cart/${currentUser?.email}`)
             .then((res) => {

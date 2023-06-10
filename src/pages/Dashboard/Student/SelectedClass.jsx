@@ -82,12 +82,12 @@ const SelectedClass = () => {
                                 </div>
                                 <div className="flex justify-between mb-2">
                                     <span>Shipping</span>
-                                    <span>${shipping}</span>
+                                    <span>${shipping.toFixed(2)}</span>
                                 </div>
                                 <hr className="my-2" />
                                 <div className="flex justify-between mb-2">
                                     <span className="font-semibold">Total</span>
-                                    <span className="font-semibold">${total}</span>
+                                    <span className="font-semibold">${total.toFixed(2)}</span>
                                 </div>
                                 <button onClick={()=>navigate('/dashboard/user/payment' , {state : {price : total}})} disabled={total <= 0} className="bg-secondary text-white py-2 px-4 rounded-lg mt-4 w-full">Checkout</button>
                             </div>

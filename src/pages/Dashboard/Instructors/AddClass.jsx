@@ -31,6 +31,7 @@ const AddClass = () => {
                         newData.instructorEmail = currentUser.email;
                         newData.status = 'pending';
                         newData.submitted = new Date(); 
+                        newData.totalEnrolled = 0;
                         // console.log(newData);
                         axiosSecure.post('/new-class' , newData)
                         .then(res => {
