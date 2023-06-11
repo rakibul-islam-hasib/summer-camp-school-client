@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BiHomeAlt, BiSelectMultiple } from "react-icons/bi";
-import { MdExplore, MdOfflineBolt, MdPendingActions } from "react-icons/md";
+import { MdExplore, MdOfflineBolt, MdPayments, MdPendingActions } from "react-icons/md";
 import { GiFigurehead } from "react-icons/gi";
 import { FaHome, FaUsers } from "react-icons/fa";
 import { NavLink, Outlet } from 'react-router-dom';
@@ -26,7 +26,7 @@ const instructorNavItem = [
 const student = [
     { to: "/dashboard/student-cp", icon: <BiHomeAlt className="text-2xl" />, label: "Dashboard" },
     { to: "/dashboard/my-selected", icon: <BiSelectMultiple className="text-2xl" />, label: "My Selected" },
-    { to: "/trending", icon: <MdOfflineBolt className="text-2xl" />, label: "Trending" },
+    { to: "/dashboard/my-payments", icon: <MdPayments className="text-2xl" />, label: "Payment History" },
     { to: "/browse", icon: <GiFigurehead className="text-2xl" />, label: "Following" },
 ];
 const lastMenuItems = [
