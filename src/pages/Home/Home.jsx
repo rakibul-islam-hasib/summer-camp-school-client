@@ -3,6 +3,7 @@ import Hero from './Hero/Hero';
 import { useTitle } from '../../hooks/useTitle';
 import Facilities from './Facilities/Facilities';
 import Map from './Map/Map';
+import PopularClasses from './PopularClasses/PopularClasses';
 
 const Home = () => {
     useTitle('Home | Sound Safari');
@@ -10,6 +11,7 @@ const Home = () => {
         <section>
             <Hero /> 
             <Facilities />
+            <PopularClasses /> 
             <Map />
         </section>
     );

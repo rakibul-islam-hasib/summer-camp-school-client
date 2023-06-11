@@ -1,6 +1,6 @@
 import React from 'react';
 
-const StudentCP = () => {
+const PopularInstructor = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const StudentCP = () => {
     );
 };
 
-export default StudentCP;
+export default PopularInstructor;
