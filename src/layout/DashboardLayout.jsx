@@ -11,7 +11,7 @@ import { IoSchoolSharp } from "react-icons/io5";
 import { IoMdDoneAll } from "react-icons/io";
 import { BsFillPostcardFill } from 'react-icons/bs';
 import { SiInstructure } from 'react-icons/si';
-import { MdExplore } from 'react-icons/md';
+// import { MdExplore } from 'react-icons/md';
 import { TbBrandAppleArcade } from 'react-icons/tb';
 const adminNavItems = [
     { to: "/dashboard/admin-home", icon: <BiHomeAlt className="text-2xl" />, label: "Dashboard Home" },

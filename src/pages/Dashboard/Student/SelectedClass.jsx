@@ -46,7 +46,7 @@ const SelectedClass = () => {
                                     </thead>
                                     <tbody>
                                         {
-                                            classes.map((item , idx) => <tr key={item._id}>
+                                            classes.map((item, idx) => <tr key={item._id}>
                                                 <td className="py-4">{idx + 1}</td>
                                                 <td className="py-4">
                                                     <div className="flex items-center">
@@ -81,15 +81,15 @@ const SelectedClass = () => {
                                     </span>
                                 </div>
                                 <div className="flex justify-between mb-2">
-                                    <span>Shipping</span>
-                                    <span>${shipping.toFixed(2)}</span>
+                                    <span>Extra Fees</span>
+                                    <span>$0</span>
                                 </div>
                                 <hr className="my-2" />
                                 <div className="flex justify-between mb-2">
                                     <span className="font-semibold">Total</span>
                                     <span className="font-semibold">${total.toFixed(2)}</span>
                                 </div>
-                                <button onClick={()=>navigate('/dashboard/user/payment' , {state : {price : total}})} disabled={total <= 0} className="bg-secondary text-white py-2 px-4 rounded-lg mt-4 w-full">Checkout</button>
+                                <button onClick={() => navigate('/dashboard/user/payment', { state: { price: total } })} disabled={total <= 0} className="bg-secondary text-white py-2 px-4 rounded-lg mt-4 w-full">Checkout</button>
                             </div>
                         </div>
                     </div>
