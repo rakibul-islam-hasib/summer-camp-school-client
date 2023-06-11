@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import Scroll from '../hooks/useScroll';
 import AOS from 'aos';
 import { useAuth } from '../hooks/useAuth';
-import { HashLoader } from 'react-spinners'
+import { HashLoader } from 'react-spinners';
 const MainLayout = () => {
     const { loader } = useAuth();
     if (loader) {

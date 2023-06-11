@@ -1,5 +1,6 @@
 import React from 'react';
 import bgImg from '../../../assets/home/banner-1.jpg';
+import { Fade } from 'react-awesome-reveal';
 const Hero = () => {
     return (
         <div className='min-h-screen bg-cover' style={{ backgroundImage: `url(${bgImg})` }}>
@@ -7,6 +8,9 @@ const Hero = () => {
                 <div className="">
                     <div className="space-y-4">
                         <h3 className='text-4xl'>WE PROVIDES</h3>
+                        <Fade  cascade>
+                            Easy-to-use animation library for React apps
+                        </Fade>
                         <h1 className='md:text-7xl text-5xl font-bold '>Best Music Experience</h1>
                         <div className="w-1/2">
                             <p className=''>Offered chiefly farther of my no colonel shyness. Such on help ye some door if in. Laughter proposal laughing any son law consider.</p>

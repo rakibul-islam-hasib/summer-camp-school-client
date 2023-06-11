@@ -20,6 +20,7 @@ import SelectedClass from "../pages/Dashboard/Student/SelectedClass";
 import Payment from "../pages/Dashboard/Student/Payment/Payment";
 import MyPaymentHistory from "../pages/Dashboard/Student/Payment/History/MyPaymentHistory";
 import AsInstructor from "../pages/Dashboard/Student/Apply/AsInstructor";
+import AdminRoute from "./Privet/AdminRoute";
 
 export const router = createBrowserRouter([
     {
@@ -69,7 +70,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'admin-home',
-                element: <AdminHome />
+                element: <AdminRoute><AdminHome /></AdminRoute>
             },
             {
                 path: 'manage-class',
