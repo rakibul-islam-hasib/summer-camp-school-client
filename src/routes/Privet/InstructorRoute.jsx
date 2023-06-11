@@ -2,10 +2,10 @@ import React from 'react';
 import { useUser } from '../../hooks/useUser';
 import { Navigate} from 'react-router-dom';
 
-const StudentRoute = ({ children }) => {
+const InstructorRoute = ({ children }) => {
     const { currentUser } = useUser();
    
-    if (!currentUser ||  currentUser.role !== 'user') {
+    if (!currentUser ||  currentUser.role !== 'instructor') {
         return <Navigate to="/dashboard" />
     }
 
@@ -13,4 +13,4 @@ const StudentRoute = ({ children }) => {
     return children;
 };
 
-export default StudentRoute;
+export default InstructorRoute;

@@ -21,6 +21,8 @@ import Payment from "../pages/Dashboard/Student/Payment/Payment";
 import MyPaymentHistory from "../pages/Dashboard/Student/Payment/History/MyPaymentHistory";
 import AsInstructor from "../pages/Dashboard/Student/Apply/AsInstructor";
 import AdminRoute from "./Privet/AdminRoute";
+import InstructorRoute from "./Privet/InstructorRoute";
+import StudentRoute from "./Privet/StudentRoute";
 
 export const router = createBrowserRouter([
     {
@@ -59,13 +61,14 @@ export const router = createBrowserRouter([
                 index: true,
                 element: <Dashboard />
             },
+            // * ADMIN ROUTES
             {
                 path: 'manage-users',
-                element: <ManageUsers />
+                element: <AdminRoute><ManageUsers /></AdminRoute>
             },
             {
                 path: 'update-user/:id',
-                element: <UpdateUser />,
+                element: <AdminRoute><UpdateUser /></AdminRoute>,
                 loader: ({ params }) => fetch(`http://localhost:5000/users/${params.id}`),
             },
             {
@@ -74,41 +77,41 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'manage-class',
-                element: <ManageClasses />
+                element: <AdminRoute><ManageClasses /></AdminRoute>
             },
             // * INSTRUCTOR ROUTES
             {
                 path: 'instructor-cp',
-                element: <InstructorCP />
+                element: <InstructorRoute><InstructorCP /></InstructorRoute>
             },
             {
                 path: 'add-class',
-                element: <AddClass />
+                element: <InstructorRoute><AddClass /></InstructorRoute>
             },
             {
                 path: 'my-classes',
-                element: <MyClasses />
+                element: <InstructorRoute><MyClasses /></InstructorRoute>
             },
             // * STUDENT ROUTES
             {
                 path: 'student-cp',
-                element: <StudentCP />
+                element: <StudentRoute><StudentCP /></StudentRoute>
             },
             {
                 path: 'my-selected',
-                element: <SelectedClass />
+                element: <StudentRoute><SelectedClass /></StudentRoute>
             },
             {
                 path: 'user/payment',
-                element: <Payment />
+                element: <StudentRoute><Payment /></StudentRoute>
             },
             {
                 path: 'my-payments',
-                element: <MyPaymentHistory />
+                element: <StudentRoute><MyPaymentHistory /></StudentRoute>
             }, 
             {
                 path: 'apply-instructor',
-                element: <AsInstructor />
+                element: <StudentRoute><AsInstructor /></StudentRoute>
             }
         ]
     }
