@@ -24,7 +24,7 @@ const PopularClasses = () => {
 
         <div className="grid  md:grid-cols-2 lg:grid-cols-3">
             {
-                classes.map((item, index) => <Card key={index} availableSeats={item.availableSeats} price={item.price} name={item.name} image={item.image} totalEnrolled={item.totalEnrolled} />)
+                classes.map((item, index) => <Card id={item._id} key={index} availableSeats={item.availableSeats} price={item.price} name={item.name} image={item.image} totalEnrolled={item.totalEnrolled} />)
             }
         </div>
 

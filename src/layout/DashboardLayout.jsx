@@ -13,6 +13,8 @@ import { BsFillPostcardFill } from 'react-icons/bs';
 import { SiInstructure } from 'react-icons/si';
 // import { MdExplore } from 'react-icons/md';
 import { TbBrandAppleArcade } from 'react-icons/tb';
+import { useAuth } from '../hooks/useAuth';
+import { HashLoader } from 'react-spinners';
 const adminNavItems = [
     { to: "/dashboard/admin-home", icon: <BiHomeAlt className="text-2xl" />, label: "Dashboard Home" },
     { to: "/dashboard/manage-users", icon: <FaUsers className="text-2xl" />, label: "Manage Users" },
@@ -42,12 +44,18 @@ const lastMenuItems = [
 
 const DashboardLayout = () => {
     const [open, setOpen] = useState(true);
+    const { loader } = useAuth();
     const { currentUser, isLoading } = useUser();
 
     const role = currentUser?.role;
 
-    if (isLoading) {
-        return <div>Loading...</div>
+    if (loader || isLoading) {
+        return <div className='flex justify-center items-center h-screen'>
+            <HashLoader
+                color="#FF1949"
+                size={50}
+            />
+        </div>
     }
 
     return (

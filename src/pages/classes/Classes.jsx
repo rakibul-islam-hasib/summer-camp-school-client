@@ -72,11 +72,11 @@ const Classes = () => {
             </div>
 
 
-            <div className="my-16 w-[90%] grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-auto">
+            <div className="my-16 w-[90%] gap-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-auto">
                 {classes.map((cls, index) => (
                     <div
                         key={index}
-                        className="relative hover:ring-[2px] hover:ring-secondary w-64 h-80 mx-auto bg-white dark:bg-slate-600 rounded-lg shadow-lg overflow-hidden cursor-pointer"
+                        className="relative hover:-translate-y-2  duration-150 hover:ring-[2px] hover:ring-secondary w-64 h-80 mx-auto bg-white dark:bg-slate-600 rounded-lg shadow-lg overflow-hidden cursor-pointer"
                         onMouseEnter={() => handleHover(index)}
                         onMouseLeave={() => handleHover(null)}
                     >
