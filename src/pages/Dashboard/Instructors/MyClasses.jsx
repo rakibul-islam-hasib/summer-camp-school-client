@@ -5,9 +5,7 @@ import { Fade, Slide } from "react-awesome-reveal";
 import moment from 'moment'
 const MyClasses = () => {
     const [classes, setClasses] = useState([]);
-    console.log("🚀 ~ file: MyClasses.jsx:7 ~ MyClasses ~ classes:", classes)
     const { currentUser, isLoading } = useUser();
-    console.log("🚀 ~ file: MyClasses.jsx:9 ~ MyClasses ~ currentUser:", currentUser)
     const axiosSecure = useAxiosSecure();
     useEffect(() => {
         axiosSecure.get(`/classes/${currentUser?.email}`)
