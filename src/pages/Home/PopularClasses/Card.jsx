@@ -63,7 +63,7 @@ const Card = ({ name, image, availableSeats, price, totalEnrolled, id: itmId }) 
       />
       <div className="p-4">
         <motion.h2
-          className="text-xl font-semibold mb-2"
+          className="text-xl font-semibold mb-2 dark:text-white"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}

@@ -5,6 +5,7 @@ import Facilities from './Facilities/Facilities';
 import Map from './Map/Map';
 import PopularClasses from './PopularClasses/PopularClasses';
 import PopularInstructor from './PopularTeacher/PopularInstructor';
+import ExtraFacilities from './Facilities/ExtraFacilities';
 
 const Home = () => {
     useTitle('Home | Sound Safari');
@@ -13,6 +14,7 @@ const Home = () => {
             <Hero /> 
             <Facilities />
             <PopularClasses /> 
+            <ExtraFacilities />
             <PopularInstructor /> 
             <Map />
         </section>
