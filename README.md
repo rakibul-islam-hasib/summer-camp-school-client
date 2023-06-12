@@ -9,6 +9,22 @@
 * For Database I am used **MongoDB** 
 * Fully Dynamic website
 
+  
+
+----------
+
+**Packages**  
+|# | Name  |
+|-----|-----|
+|1|React|
+|2|Tailwind|
+|3|React Icons|
+|4|Firebase|
+|5|Framer Motion| 
+|6| Axios | 
+
+
+
 **Like This ?**  
 Want to visit live link ?  [Click Here](https://sound-safari-1.web.app/)
 
