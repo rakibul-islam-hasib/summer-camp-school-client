@@ -21,7 +21,7 @@ const MyClasses = () => {
 
 
 
-    const handleReview = (id) => {
+    const handleFeedback = (id) => {
         const theClass = classes.find(cls => cls._id === id);
         if (theClass.reason) {
             Swal.fire(
@@ -75,7 +75,7 @@ const MyClasses = () => {
                                                     </div>
                                                     <div className="w-1/3">
                                                         <h1 className='font-bold mb-3'>Action : </h1>
-                                                        <button onClick={() => handleReview(cls._id)} className='px-3 bg-orange-400 font-bold  py-1 text-white w-full rounded-lg'>View Review</button>
+                                                        <button onClick={() => handleFeedback(cls._id)} className='px-3 bg-orange-400 font-bold  py-1 text-white w-full rounded-lg'>View Feedback</button>
                                                         <button className='px-3 bg-green-500 font-bold  py-1 text-white w-full my-3 rounded-lg'>View Details</button>
                                                         <button className='px-3 bg-secondary font-bold  py-1 text-white w-full rounded-lg' onClick={() => navigate(`/dashboard/update/${cls._id}`)}>Update</button>
                                                     </div>
