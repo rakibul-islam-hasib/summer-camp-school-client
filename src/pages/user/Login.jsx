@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { FadeLoader } from 'react-spinners';
 import { useUser } from '../../hooks/useUser';
+import GoogleLogin from '../../components/Social/GoogleLogin';
 const Login = () => {
     useTitle('Login | Sound Safari');
     // const { refetch } = useUser();
@@ -30,11 +31,11 @@ const Login = () => {
 
     return (
         <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-            <div className="mx-auto max-w-lg">
                 <h1 className="text-center text-2xl font-bold text-secondary sm:text-3xl">Get started today </h1>
                 <p className="mx-auto mt-4 max-w-md text-center text-gray-500">Explore our comprehensive library of courses, meticulously crafted to cater to all levels of expertise.</p>
+            <div className="mx-auto max-w-lg mb-0 mt-6 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">
                 <form onSubmit={handelSubmit}
-                    className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
+                    className=" space-y-4"
                 >
                     <p className="text-center text-red-400 text-lg font-medium">Sign in to your account</p>
                     {error && <p className="text-center text-red-400 text-sm font-medium">{error}</p>}
@@ -118,6 +119,7 @@ const Login = () => {
                         <Link className="underline" to='/register'>Sign up</Link>
                     </p>
                 </form>
+                    <GoogleLogin />
             </div>
         </div>
     );

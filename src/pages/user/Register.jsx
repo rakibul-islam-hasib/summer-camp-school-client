@@ -204,8 +204,8 @@ const Register = () => {
                 <p className="text-center mt-4">
                     Already have an account? <Link to="/login" className="underline text-secondary">Login</Link>
                 </p>
-            </div>
             <GoogleLogin /> 
+            </div>
         </div>
     );
 };
