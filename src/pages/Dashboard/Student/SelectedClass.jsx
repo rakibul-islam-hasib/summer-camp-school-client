@@ -5,9 +5,9 @@ import { useUser } from '../../../hooks/useUser';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import { MdDeleteSweep } from 'react-icons/md';
-import { FiDelete, FiDollarSign } from 'react-icons/fi';
-import { RiMoneyDollarCircleFill } from 'react-icons/ri';
+import { FiDollarSign } from 'react-icons/fi';
 import { motion } from 'framer-motion';
+import Swal from 'sweetalert2';
 
 const SelectedClass = () => {
     useTitle('Selected Class | Sound Safari');
@@ -37,7 +37,33 @@ const SelectedClass = () => {
         navigate('/dashboard/user/payment', { state: { price: price } });
     };
 
-    const handleDelete = () => {
+    const handleDelete = (id) => {
+        console.log(id, 'id from delete')
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/delete-cart-item/${id}`)
+                .then(res => { 
+                    console.log(res.data)
+                    if (res.data.deletedCount > 0) {
+                        Swal.fire(
+                            'Deleted!',
+                            'Your selected class has been deleted.',
+                            'success'
+                        )
+                        const newClasses = classes.filter((item) => item._id !== id);
+                        setClasses(newClasses);
+                    }
+                })
+            }
+        })
         // Handle the delete action here
     };
 
@@ -81,15 +107,15 @@ const SelectedClass = () => {
                                                         whileHover={{ scale: 1.1 }}
                                                         whileTap={{ scale: 0.9 }}
                                                         className='px-3 py-1 cursor-pointer bg-red-500 rounded-3xl text-white font-bold'
-                                                        onClick={()=>handleDelete(item._id)}
+                                                        onClick={() => handleDelete(item._id)}
                                                     >
                                                         <MdDeleteSweep />
                                                     </motion.button>
                                                     <motion.button
                                                         whileHover={{ scale: 1.1 }}
                                                         whileTap={{ scale: 0.9 }}
-                                                        className='px-3 py-1 cursor-pointer bg-secondary rounded-3xl text-white font-bold flex items-center'
-                                                        onClick={()=>handlePay(item._id)}
+                                                        className='px-3 py-1 cursor-pointer bg-green-500 rounded-3xl text-white font-bold flex items-center'
+                                                        onClick={() => handlePay(item._id)}
                                                     >
                                                         <FiDollarSign className="mr-2" />
                                                         Pay
@@ -128,7 +154,7 @@ const SelectedClass = () => {
                                 <motion.button
                                     whileHover={{ scale: 1.1 }}
                                     whileTap={{ scale: 0.9 }}
-                                    onClick={handlePay}
+                                    onClick={() => navigate('/dashboard/user/payment', { state: { price: price } })}
                                     disabled={price <= 0}
                                     className="bg-secondary text-white py-2 px-4 rounded-lg mt-4 w-full"
                                 >

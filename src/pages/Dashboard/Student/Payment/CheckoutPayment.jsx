@@ -97,7 +97,8 @@ const CheckoutPayment = ({ price }) => {
                     paymentStatus,
                     userName,
                     userEmail,
-                    classesId
+                    classesId, 
+                    date : new Date()
                 }
                 // axiosSecure.post('/payment-info', data)
                 fetch('http://localhost:5000/payment-info', {
