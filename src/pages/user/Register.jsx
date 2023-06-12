@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AiOutlineUser, AiOutlineMail, AiOutlineLock, AiOutlinePhone, AiOutlinePicture } from 'react-icons/ai';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
+import GoogleLogin from '../../components/Social/GoogleLogin';
 
 const Register = () => {
     useTitle('Register | Sound Safari');
@@ -204,6 +205,7 @@ const Register = () => {
                     Already have an account? <Link to="/login" className="underline text-secondary">Login</Link>
                 </p>
             </div>
+            <GoogleLogin /> 
         </div>
     );
 };

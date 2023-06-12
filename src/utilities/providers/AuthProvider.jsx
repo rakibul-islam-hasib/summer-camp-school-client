@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import axios from 'axios';
 import { app } from '../../config/firebase.init';
 
@@ -47,6 +47,17 @@ const AuthProvider = ({ children }) => {
             throw error
         }
     }
+    const googleProvider = new GoogleAuthProvider();
+    const googleLogin = async () => {
+
+        try {
+            setLoader(true)
+            return await signInWithPopup(auth, googleProvider)
+        } catch (error) {
+            setError(error.code)
+            throw error
+        }
+    }
     // console.log(user)
     // Observe user state (auth)
     useEffect(() => {
@@ -72,7 +83,7 @@ const AuthProvider = ({ children }) => {
         return () => unsubscribe();
     }, []);
 
-    const contextVale = { user, loader, setLoader, signUp, login, logout, updateUser, error, setError }
+    const contextVale = { user, loader, setLoader, signUp, login, logout, updateUser, error, setError , googleLogin }
     return (
         <AuthContext.Provider value={contextVale}>
             {children}

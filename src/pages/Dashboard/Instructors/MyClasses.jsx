@@ -64,7 +64,7 @@ const MyClasses = () => {
                                                 <div className="flex gap-5">
                                                     <div className="">
                                                         <h1 className='font-bold mb-3'>Some Info : </h1>
-                                                        <h1 className='text-secondary my-2'><span className='text-black '>Total Student</span> : 0</h1>
+                                                        <h1 className='text-secondary my-2'><span className='text-black '>Total Student</span> : {cls.totalEnrolled ? cls.totalEnrolled : 0}</h1>
                                                         <h1 className='text-secondary'><span className='text-black '>Total Seats</span> : {cls.availableSeats}</h1>
                                                         <h1 className='text-secondary my-2'><span className='text-black '>Status</span> : <span className={`font-bold ${cls.status === 'pending' ? 'text-orange-400' : cls.status === 'checking' ? 'text-yellow-300' : cls.status === 'approved' ? 'text-green-500' : 'text-red-600'}`}>{cls.status}</span></h1>
                                                     </div>
