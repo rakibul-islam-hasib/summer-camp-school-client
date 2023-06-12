@@ -8,7 +8,8 @@ const Payment = () => {
     const key = import.meta.env.VITE_STRIPE;
     const location = useLocation();
     const price = location.state?.price;
-    console.log(price, 'price form payment');
+    const cartItm = location.state?.itemId;
+    console.log(cartItm, 'itm form payment');
     if (!price) {
         return <Navigate to="/dashboard/my-selected" replace />
     }
@@ -17,7 +18,7 @@ const Payment = () => {
     return (
         <div className="my-40 stripe-custom-class">
             <Elements stripe={stripePromise}>
-                <CheckoutPayment price={price} />
+                <CheckoutPayment price={price} cartItm={cartItm} />
             </Elements>
         </div>
     );

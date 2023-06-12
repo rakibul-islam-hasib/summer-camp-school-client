@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { useUser } from '../../../../hooks/useUser';
-const CheckoutPayment = ({ price }) => {
+const CheckoutPayment = ({ price , cartItm }) => {
+    const URL =`http://localhost:5000/payment-info?${cartItm&&`classId=${cartItm}`}`
+    console.log(URL)
     const stripe = useStripe();
     const elements = useElements();
     const axiosSecure = useAxiosSecure();
@@ -88,7 +90,6 @@ const CheckoutPayment = ({ price }) => {
                 const paymentStatus = paymentIntent.status;
                 const userName = currentUser.name;
                 const userEmail = currentUser.email;
-                const classesId = cart;
                 const data = {
                     transactionId,
                     paymentMethod,
@@ -97,11 +98,11 @@ const CheckoutPayment = ({ price }) => {
                     paymentStatus,
                     userName,
                     userEmail,
-                    classesId, 
+                    classesId : cartItm ? [cartItm] : cart, 
                     date : new Date()
                 }
                 // axiosSecure.post('/payment-info', data)
-                fetch('http://localhost:5000/payment-info', {
+                fetch(URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

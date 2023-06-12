@@ -33,8 +33,9 @@ const SelectedClass = () => {
     const handlePay = (id) => {
         console.log(id, 'id from pay')
         const item = classes.find((item) => item._id === id);
+        // console.log(item, 'item from pay')
         const price = item.price;
-        navigate('/dashboard/user/payment', { state: { price: price } });
+        navigate('/dashboard/user/payment', { state: { price: price  , itemId : id} });
     };
 
     const handleDelete = (id) => {
@@ -154,7 +155,7 @@ const SelectedClass = () => {
                                 <motion.button
                                     whileHover={{ scale: 1.1 }}
                                     whileTap={{ scale: 0.9 }}
-                                    onClick={() => navigate('/dashboard/user/payment', { state: { price: price } })}
+                                    onClick={() => navigate('/dashboard/user/payment', { state: { price: price , itemId : null} })}
                                     disabled={price <= 0}
                                     className="bg-secondary text-white py-2 px-4 rounded-lg mt-4 w-full"
                                 >
