@@ -116,7 +116,9 @@ const NavBar = () => {
                 setNavBg('bg-white dark:bg-black dark:text-white text-black');
             }
         } else {
-            setNavBg(`dark:text-white ${isHome ? 'text-white bg-transparent' : 'text-black dark:text-white dark:bg-black'}`);
+            // setNavBg(`dark:text-white ${isHome ? 'text-white bg-transparent' : 'text-black dark:text-white dark:bg-black'}`);
+            setNavBg(`${isHome || location.pathname === '/' ? 'bg-transparent' : 'bg-white dark:bg-black'} dark:text-white text-white`);
+
         }
     }, [scrollPosition]);
 
@@ -156,13 +158,14 @@ const NavBar = () => {
                                 {navLinks.map((link) => (
                                     <li key={link.route}>
                                         <NavLink
-                                            className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' : `${navBg.includes('bg-transparent') ? 'text-white dark:text-white' : 'text-black dark:text-white'}`} hover:text-secondary duration-300`}
+                                            className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' : `${navBg.includes('bg-transparent') ? 'text-white' : 'text-black dark:text-white'}`} hover:text-secondary duration-300`}
                                             to={link.route}
-
                                             style={{ whiteSpace: 'nowrap' }}
                                         >
                                             {link.name}
                                         </NavLink>
+
+
                                     </li>
                                 ))}
                                 {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BiHomeAlt, BiSelectMultiple } from "react-icons/bi";
+import { BiHomeAlt, BiLogInCircle, BiSelectMultiple } from "react-icons/bi";
 import { MdExplore, MdOfflineBolt, MdPayments, MdPendingActions } from "react-icons/md";
 import { GiFigurehead } from "react-icons/gi";
 import { FaHome, FaUsers } from "react-icons/fa";
@@ -15,6 +15,7 @@ import { SiInstructure } from 'react-icons/si';
 import { TbBrandAppleArcade } from 'react-icons/tb';
 import { useAuth } from '../hooks/useAuth';
 import { HashLoader } from 'react-spinners';
+import Swal from 'sweetalert2';
 const adminNavItems = [
     { to: "/dashboard/admin-home", icon: <BiHomeAlt className="text-2xl" />, label: "Dashboard Home" },
     { to: "/dashboard/manage-users", icon: <FaUsers className="text-2xl" />, label: "Manage Users" },
@@ -36,7 +37,7 @@ const student = [
 ];
 const lastMenuItems = [
     { to: "/", icon: <BiHomeAlt className="text-2xl" />, label: "Main Home" },
-    { to: "/browse", icon: <MdExplore className="text-2xl" />, label: "Browse" },
+    // { to: "/browse", icon: <MdExplore className="text-2xl" />, label: "Browse" },
     { to: "/trending", icon: <MdOfflineBolt className="text-2xl" />, label: "Trending" },
     { to: "/browse", icon: <GiFigurehead className="text-2xl" />, label: "Following" },
 ];
@@ -44,10 +45,40 @@ const lastMenuItems = [
 
 const DashboardLayout = () => {
     const [open, setOpen] = useState(true);
-    const { loader } = useAuth();
-    console.log("🚀 ~ file: DashboardLayout.jsx:48 ~ DashboardLayout ~ loader:", loader)
-    const { currentUser, isLoading } = useUser();
-    console.log("🚀 ~ file: DashboardLayout.jsx:50 ~ DashboardLayout ~ isLoading:", isLoading)
+    const { loader, logout } = useAuth();
+    const { currentUser } = useUser();
+
+    const handleLogout = (e) => {
+        // e.preventDefault();
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, log me out!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                logout()
+                    .then(() => {
+                        Swal.fire(
+                            'Logged out..!',
+                            'You are logged outed.',
+                            'success'
+                        )
+                    })
+                    .catch((err) => {
+                        Swal.fire(
+                            'Error!',
+                            err.message,
+                            'error'
+                        )
+                    })
+            }
+        })
+        // logout();
+    }
 
     const role = currentUser?.role;
 
@@ -163,6 +194,20 @@ const DashboardLayout = () => {
                             </NavLink>
                         </li>
                     ))}
+                    <li>
+                        <NavLink
+                            onClick={() => handleLogout()}
+                            className={({ isActive }) =>
+                                `flex ${isActive ? "bg-dark-primary-3 text-dark-primary" : "text-[#413F44]"
+                                }  duration-150 rounded-md inline-flex p-2 cursor-pointer hover:bg-dark-primary-3  font-bold text-sm items-center gap-x-4  `
+                            }
+                        >
+                            <BiLogInCircle className='text-2xl' />
+                            <span className={`${!open && "hidden"} origin-left duration-200`}>
+                                Logout
+                            </span>
+                        </NavLink>
+                    </li>
                 </ul>
                 <ul className="pt-6">
                     <p className={`ml-3 uppercase text-light-gray-4 ${!open && "hidden"}`}><small>Useful Links</small></p>
