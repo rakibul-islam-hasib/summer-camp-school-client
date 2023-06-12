@@ -4,6 +4,7 @@ import { useUser } from '../../../hooks/useUser';
 import { Fade, Slide } from "react-awesome-reveal";
 import moment from 'moment'
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 const MyClasses = () => {
     const [classes, setClasses] = useState([]);
     const { currentUser, isLoading } = useUser();
@@ -17,6 +18,26 @@ const MyClasses = () => {
 
 
 
+
+
+
+    const handleReview = (id) => {
+        const theClass = classes.find(cls => cls._id === id);
+        if (theClass.reason) {
+            Swal.fire(
+                'Reason For Rejected',
+                theClass.reason,
+                'info'
+            )
+        }
+        else {
+            Swal.fire(
+                'Wow Looks Good',
+                'Your class is approved',
+                'success'
+            )
+        }
+    }
 
     return (
         <div>
@@ -54,7 +75,7 @@ const MyClasses = () => {
                                                     </div>
                                                     <div className="w-1/3">
                                                         <h1 className='font-bold mb-3'>Action : </h1>
-                                                        <button className='px-3 bg-orange-400 font-bold  py-1 text-white w-full rounded-lg'>View Review</button>
+                                                        <button onClick={() => handleReview(cls._id)} className='px-3 bg-orange-400 font-bold  py-1 text-white w-full rounded-lg'>View Review</button>
                                                         <button className='px-3 bg-green-500 font-bold  py-1 text-white w-full my-3 rounded-lg'>View Details</button>
                                                         <button className='px-3 bg-secondary font-bold  py-1 text-white w-full rounded-lg' onClick={() => navigate(`/dashboard/update/${cls._id}`)}>Update</button>
                                                     </div>

@@ -45,10 +45,8 @@ const ManageClasses = () => {
             confirmButtonText: 'Reject',
             showLoaderOnConfirm: true,
             preConfirm: async (text) => {
-                // console.log(text)
                 try {
                     const res = await axiosSecure.put(`/change-status/${id}`, { status: 'rejected', reason: text })
-                    console.log(res.data.modifiedCount > 0)
                     if (res.data.modifiedCount > 0) {
                         setClasses(classes.map(cls => cls._id == id ? { ...cls, status: 'rejected' } : cls))
                     }
@@ -58,6 +56,7 @@ const ManageClasses = () => {
                         `Request failed: ${error}`
                     )
                 }
+
             },
             allowOutsideClick: () => !Swal.isLoading()
         }).then((result) => {
@@ -179,7 +178,7 @@ const ManageClasses = () => {
                                                                     Ban User
                                                                 </span>
                                                             }
-                                                           
+
                                                         </div>
                                                     </td>
 

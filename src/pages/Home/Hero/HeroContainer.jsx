@@ -5,6 +5,7 @@ import "swiper/css/effect-creative";
 import { EffectCreative } from "swiper";
 // import './Temp.css'
 import Hero from './Hero';
+import Hero2 from './Hero2';
 const HeroContainer = () => {
 
     return (
@@ -35,13 +36,8 @@ const HeroContainer = () => {
                     <Hero />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <Hero />
+                    <Hero2 />
                 </SwiperSlide>
-                <SwiperSlide>
-                    <Hero />
-                </SwiperSlide>
-
-
             </Swiper>
 
         </>
