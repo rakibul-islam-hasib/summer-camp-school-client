@@ -15,22 +15,22 @@ const Facilities = () => {
                     <h1 className='inline-flex items-center dark:text-white gap-2 text-4xl ml-5 font-bold my-4'>Our Facilities <AiOutlineMinus /></h1>
                     <div className="flex items-center gap-4">
                         <div className="relative">
-                            <img className='w-[150px] h-[150px] rounded-full' src="https://validthemes.live/themeforest/edukat/assets/img/thumb/1.jpg" alt="" />
+                            <img className='w-[150px] h-[150px] rounded-full' src="https://i.ibb.co/fNfpqJJ/grant-Uhp-YKnq-Zw-E8-unsplash.jpg" alt="" />
                             <div className='text-3xl absolute -bottom-6 left-11  px-3 py-3 bg-secondary w-fit rounded-full text-white'><BsBook className='' /></div>
                         </div>
                         <div className="w-1/2">
-                            <h1 className='text-xl font-bold'>Books & Library</h1>
-                            <p>Outweigh desirous sex overcame. Improved property reserved disposal do offering me for teaching.</p>
+                            <h1 className='text-xl font-bold'>Cool Room</h1>
+                            <p>We have awesome room . Improved property reserved disposal do offering me for teaching.</p>
                         </div>
                     </div>
                     <div className="flex mt-12 items-center gap-4">
                         <div className="relative">
-                            <img className='w-[150px] h-[150px] rounded-full' src="https://validthemes.live/themeforest/edukat/assets/img/thumb/1.jpg" alt="" />
+                            <img className='w-[150px] h-[150px] rounded-full' src="https://i.ibb.co/k8ghSm5/jacek-dylag-h-UHzai-AHu-Uc-unsplash.jpg" alt="" />
                             <div className='text-3xl absolute -bottom-6 left-11  px-3 py-3 bg-secondary w-fit rounded-full text-white'><BsBook className='' /></div>
                         </div>
                         <div className="w-1/2">
-                            <h1 className='text-xl font-bold'>Books & Library</h1>
-                            <p>Outweigh desirous sex overcame. Improved property reserved disposal do offering me for teaching.</p>
+                            <h1 className='text-xl font-bold'>Experience Teacher</h1>
+                            <p>We have experienced teacher. Improved property reserved disposal do offering me for teaching.</p>
                         </div>
                     </div>
                     <div className="mt-12">
