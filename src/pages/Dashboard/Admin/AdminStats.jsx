@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Fade, Slide } from "react-awesome-reveal";
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 const AdminStats = ({ users }) => {
+  const [data , setData] = useState({}); 
+  console.log("🚀 ~ file: AdminStats.jsx:6 ~ AdminStats ~ data:", data)
+  const axiosSecure = useAxiosSecure();
+  useEffect(()=>{
+    axiosSecure.get('/admin-stats')
+    .then(res => { 
+      setData(res.data)
+    })
+    .catch(err => console.log(err))
+  },[])
   return (
     <Slide>
       <div className="grid grid-cols-1 gap-4 px-4 mt-8 sm:grid-cols-4 sm:px-8">
@@ -22,8 +33,8 @@ const AdminStats = ({ users }) => {
             </svg>
           </div>
           <div className="px-4 text-gray-700">
-            <h3 className="text-sm tracking-wider">Total Post</h3>
-            <p className="text-3xl">39,265</p>
+            <h3 className="text-sm whitespace-nowrap   tracking-wider">Approved Class</h3>
+            <p className="text-3xl">{data.approvedClasses}</p>
           </div>
         </div>
         <div className="flex items-center bg-white border rounded-sm overflow-hidden shadow">
@@ -33,8 +44,8 @@ const AdminStats = ({ users }) => {
             </svg>
           </div>
           <div className="px-4 text-gray-700">
-            <h3 className="text-sm tracking-wider">Total Comment</h3>
-            <p className="text-3xl">142,334</p>
+            <h3 className="text-sm tracking-wider">Instructors</h3>
+            <p className="text-3xl">{data.instructors}</p>
           </div>
         </div>
         <div className="flex items-center bg-white border rounded-sm overflow-hidden shadow">
@@ -44,8 +55,8 @@ const AdminStats = ({ users }) => {
             </svg>
           </div>
           <div className="px-4 text-gray-700">
-            <h3 className="text-sm tracking-wider">Server Load</h3>
-            <p className="text-3xl">34.12%</p>
+            <h3 className="text-sm tracking-wider">Pending Class</h3>
+            <p className="text-3xl">{data.pendingClasses}</p>
           </div>
         </div>
       </div>
