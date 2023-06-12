@@ -12,7 +12,7 @@ const ManageClasses = () => {
     const axiosSecure = useAxiosSecure();
     const [classes, setClasses] = useState([])
     useEffect(() => {
-        axiosFetch.get('/classes')
+        axiosFetch.get('/classes-manage')
             .then(res => setClasses(res.data))
             .catch(err => console.log(err))
     }, [])

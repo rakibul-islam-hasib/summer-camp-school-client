@@ -3,9 +3,11 @@ import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useUser } from '../../../hooks/useUser';
 import { Fade, Slide } from "react-awesome-reveal";
 import moment from 'moment'
+import { useNavigate } from 'react-router-dom';
 const MyClasses = () => {
     const [classes, setClasses] = useState([]);
     const { currentUser, isLoading } = useUser();
+    const navigate = useNavigate();
     const axiosSecure = useAxiosSecure();
     useEffect(() => {
         axiosSecure.get(`/classes/${currentUser?.email}`)
@@ -54,7 +56,7 @@ const MyClasses = () => {
                                                         <h1 className='font-bold mb-3'>Action : </h1>
                                                         <button className='px-3 bg-orange-400 font-bold  py-1 text-white w-full rounded-lg'>View Review</button>
                                                         <button className='px-3 bg-green-500 font-bold  py-1 text-white w-full my-3 rounded-lg'>View Details</button>
-                                                        <button className='px-3 bg-secondary font-bold  py-1 text-white w-full rounded-lg'>Request delete</button>
+                                                        <button className='px-3 bg-secondary font-bold  py-1 text-white w-full rounded-lg' onClick={() => navigate(`/dashboard/update/${cls._id}`)}>Update</button>
                                                     </div>
                                                 </div>
                                             </div>

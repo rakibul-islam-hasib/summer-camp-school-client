@@ -6,11 +6,11 @@ import { useUser } from '../../../../hooks/useUser';
 const EnrolledClasses = () => {
     const [data, setData] = useState([]);
     console.log(data)
-    const axiosFetch = useAxiosFetch();
-    const ax = useAxiosSecure();
     const { currentUser } = useUser();
+    const axiosFetch = useAxiosFetch();
+    const axiosSecure = useAxiosSecure();
     useEffect(() => {
-        ax.get(`/enrolled-classes/${currentUser.email}`)
+        axiosSecure.get(`/enrolled-classes/${currentUser.email}`)
             .then(res => setData(res.data))
             .catch(err => console.log(err))
     }, [])

@@ -25,6 +25,7 @@ import InstructorRoute from "./Privet/InstructorRoute";
 import StudentRoute from "./Privet/StudentRoute";
 import PrivetRoute from "./Privet/PrivetRoute";
 import EnrolledClasses from "../pages/Dashboard/Student/Enroll/EnrolledClasses";
+import UpdateClass from "../pages/Dashboard/Instructors/UpdateClass";
 
 export const router = createBrowserRouter([
     {
@@ -93,6 +94,10 @@ export const router = createBrowserRouter([
             {
                 path: 'my-classes',
                 element: <InstructorRoute><MyClasses /></InstructorRoute>
+            },
+            {
+                path: 'update/:id',
+                element: <InstructorRoute><UpdateClass /></InstructorRoute>,
             },
             // * STUDENT ROUTES
             {

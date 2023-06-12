@@ -8,6 +8,9 @@ const Classes = () => {
     const [hoveredCard, setHoveredCard] = useState(null);
     const { currentUser } = useUser();
     const role = currentUser?.role;
+    const [enrolledClasses, setEnrolledClasses] = useState([]);
+    console.log("🚀 ~ file: Classes.jsx:12 ~ Classes ~ enrolledClasses:", enrolledClasses)
+
     const handleHover = (index) => {
         setHoveredCard(index);
     };
@@ -22,6 +25,9 @@ const Classes = () => {
     }, [])
 
     const handelSelect = (id) => {
+        axiosSecure.get(`/enrolled-classes/${currentUser?.email}`)
+            .then(res => setEnrolledClasses(res.data))
+            .catch(err => console.log(err))
         if (!currentUser) {
             return toast.error('Please Login First');
         }
@@ -29,6 +35,9 @@ const Classes = () => {
             .then(res => {
                 if (res.data.classId === id) {
                     return toast.error('Already Selected');
+                }
+                else if (enrolledClasses.find(item => item.classes._id === id)) {
+                    return toast.error('Already Enrolled');
                 }
                 else {
                     const data = {
@@ -76,7 +85,7 @@ const Classes = () => {
                 {classes.map((cls, index) => (
                     <div
                         key={index}
-                        className="relative hover:-translate-y-2  duration-150 hover:ring-[2px] hover:ring-secondary w-64 h-80 mx-auto bg-white dark:bg-slate-600 rounded-lg shadow-lg overflow-hidden cursor-pointer"
+                        className={`relative hover:-translate-y-2  duration-150 hover:ring-[2px] hover:ring-secondary w-64 h-80 mx-auto ${cls.availableSeats < 1 ? 'bg-red-300' : 'bg-white'} dark:bg-slate-600 rounded-lg shadow-lg overflow-hidden cursor-pointer`}
                         onMouseEnter={() => handleHover(index)}
                         onMouseLeave={() => handleHover(null)}
                     >
@@ -101,7 +110,7 @@ const Classes = () => {
                             >
                                 <div className="absolute inset-0 flex items-center justify-center">
 
-                                    <button onClick={() => handelSelect(cls._id)} title={role === 'admin' || role === 'instructor' ? 'Instructor/Admin Can not be able to select ' : 'You can select this classes'} disabled={role === 'admin' || role === 'instructor'} className="px-4 py-2 text-white disabled:bg-red-300 bg-secondary duration-300 rounded hover:bg-red-700">
+                                    <button onClick={() => handelSelect(cls._id)} title={role === 'admin' || role === 'instructor' ? 'Instructor/Admin Can not be able to select ' ? cls.availableSeats <1 : 'No seat avalible' : 'You can select this classes' } disabled={role === 'admin' || role === 'instructor' || cls.availableSeats < 1} className="px-4 py-2 text-white disabled:bg-red-300 bg-secondary duration-300 rounded hover:bg-red-700">
                                         Select
                                     </button>
 

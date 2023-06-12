@@ -1,9 +1,11 @@
 import React from 'react';
-
+import bgimg from '../../../assets/dashboard/jaconda-14.png'
 const InstructorCP = () => {
     return (
         <div>
-            <h1>Instructor Control Panel</h1>
+            <div className='h-screen'>
+                <img className='h-full w-fit' src={bgimg} alt="" />
+            </div>
         </div>
     );
 };

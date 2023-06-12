@@ -4,9 +4,8 @@ import useAxiosFetch from '../../../hooks/useAxiosFetch';
 const ShowInstructors = () => {
     const axiosInstance = useAxiosFetch();
     const [instructors, setInstructors] = useState([]);
-    console.log("🚀 ~ file: ShowInstructors.jsx:7 ~ ShowInstructors ~ instructors:", instructors)
     useEffect(() => {
-        axiosInstance.get('/users')
+        axiosInstance.get('/instructors')
             .then(res => setInstructors(res.data))
     }, [])
     return (
