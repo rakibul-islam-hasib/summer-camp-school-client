@@ -8,8 +8,18 @@ const CheckoutPayment = ({ price }) => {
     const axiosSecure = useAxiosSecure();
     const { currentUser, isLoading } = useUser();
     const [clientSecret, setClientSecret] = useState('');
+    const [succeeded, setSucceeded] = useState('');
     const [message, setMessage] = useState('');
     const [cart, setCart] = useState([]);
+
+    // Return the amount is less than 0 or not provided
+    if (price < 0 || !price) {
+        return <Navigate to="/dashboard/my-selected" replace />
+    }
+
+
+
+
     useEffect(() => {
         axiosSecure.get(`/cart/${currentUser?.email}`)
             .then((res) => {
@@ -101,6 +111,12 @@ const CheckoutPayment = ({ price }) => {
                     .then(res => res.json())
                     .then(res => {
                         console.log(res)
+                        if (res.deletedResult.deletedCount > 0 && res.paymentResult.insertedId && res.updatedResult.modifiedCount > 0) {
+                            setSucceeded('Payment Successful , You can now access your classes')
+                        }
+                        else {
+                            setSucceeded('Payment Failed , Please try again')
+                        }
                     })
                     .catch(err => {
                         console.log(err)
@@ -112,28 +128,34 @@ const CheckoutPayment = ({ price }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <CardElement
-                options={{
-                    style: {
-                        base: {
-                            fontSize: '16px',
-                            color: '#424770',
-                            '::placeholder': {
-                                color: '#aab7c4',
+        <>
+            <div className="text-center">
+                <h1 className="text-2xl font-bold">Payment Amount : <span className='text-secondary'>{price}$</span></h1>
+            </div>
+            <form onSubmit={handleSubmit}>
+                <CardElement
+                    options={{
+                        style: {
+                            base: {
+                                fontSize: '16px',
+                                color: '#424770',
+                                '::placeholder': {
+                                    color: '#aab7c4',
+                                },
+                            },
+                            invalid: {
+                                color: '#9e2146',
                             },
                         },
-                        invalid: {
-                            color: '#9e2146',
-                        },
-                    },
-                }}
-            />
-            <button type="submit" disabled={!stripe || !clientSecret || isLoading}>
-                Pay
-            </button>
-            {message && <p className="text-red-500">{message}</p>}
-        </form>
+                    }}
+                />
+                <button type="submit" disabled={!stripe || !clientSecret || isLoading}>
+                    Pay
+                </button>
+                {message && <p className="text-red-500">{message}</p>}
+                {succeeded && <p className="text-green-500">{succeeded}</p>}
+            </form>
+        </>
     );
 };
 

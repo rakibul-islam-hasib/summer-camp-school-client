@@ -25,7 +25,7 @@ const Classes = () => {
         if (!currentUser) {
             return toast.error('Please Login First');
         }
-        axiosSecure.get(`/cart-item/${id}`)
+        axiosSecure.get(`/cart-item/${id}?email=${currentUser.email}`)
             .then(res => {
                 if (res.data.classId === id) {
                     return toast.error('Already Selected');

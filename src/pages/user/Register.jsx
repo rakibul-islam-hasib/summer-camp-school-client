@@ -5,6 +5,8 @@ import { AuthContext } from '../../utilities/providers/AuthProvider';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { AiOutlineUser, AiOutlineMail, AiOutlineLock, AiOutlinePhone, AiOutlinePicture } from 'react-icons/ai';
+import { HiOutlineLocationMarker } from 'react-icons/hi';
 
 const Register = () => {
     useTitle('Register | Sound Safari');
@@ -14,6 +16,7 @@ const Register = () => {
         register,
         handleSubmit,
         formState: { errors },
+        watch,
     } = useForm();
 
     const onSubmit = (data) => {
@@ -30,8 +33,8 @@ const Register = () => {
                                 photoUrl: user.photoURL,
                                 gender: data.gender,
                                 address: data.address,
-                                role: 'user', 
-                                phone : data.phone,                 
+                                role: 'user',
+                                phone: data.phone,
                             };
 
                             if (user.email && user.displayName) {
@@ -53,13 +56,14 @@ const Register = () => {
                     throw new Error(err);
                 }),
             {
-                pending: 'Please wait...', 
+                pending: 'Please wait...',
                 success: 'Registration successful!',
                 error: 'Registration failed!',
             }
         );
     };
 
+    const password = watch('password', '');
 
     return (
         <div className="flex justify-center items-center pt-14 bg-gray-100">
@@ -70,10 +74,11 @@ const Register = () => {
                     <div className="flex items-center gap-5">
                         <div className="mb-4">
                             <label htmlFor="name" className="block text-gray-700 font-bold mb-2">
+                                <AiOutlineUser className="inline-block mr-2 mb-1 text-lg" />
                                 Name
                             </label>
                             <input
-                                placeholder='Enter your name'
+                                placeholder="Enter your name"
                                 type="text"
                                 {...register('name', { required: true })}
                                 className="w-full border-gray-300 border rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300"
@@ -81,10 +86,11 @@ const Register = () => {
                         </div>
                         <div className="mb-4">
                             <label htmlFor="email" className="block text-gray-700 font-bold mb-2">
+                                <AiOutlineMail className="inline-block mr-2 mb-1 text-lg" />
                                 Email
                             </label>
                             <input
-                                placeholder='Enter your email'
+                                placeholder="Enter your email"
                                 type="email"
                                 {...register('email', { required: true })}
                                 className="w-full border-gray-300 border rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300"
@@ -94,10 +100,11 @@ const Register = () => {
                     <div className="flex items-center gap-5">
                         <div className="mb-4">
                             <label htmlFor="password" className="block text-gray-700 font-bold mb-2">
+                                <AiOutlineLock className="inline-block mr-2 mb-1 text-lg" />
                                 Password
                             </label>
                             <input
-                                placeholder='Enter Password'
+                                placeholder="Enter Password"
                                 type="password"
                                 {...register('password', {
                                     required: true,
@@ -106,40 +113,58 @@ const Register = () => {
                                 })}
                                 className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300"
                             />
-                            {errors.password && (
-                                <div className="text-red-500 text-sm w-full mt-1">
-                                    <p>Password must be at least 6 characters long, <br /> contain a capital letter, <br /> and a special character.</p>
-                                </div>
-                            )}
-
                         </div>
                         <div className="mb-4">
+                            <label htmlFor="confirmPassword" className="block text-gray-700 font-bold mb-2">
+                                <AiOutlineLock className="inline-block mr-2 mb-1 text-lg" />
+                                Confirm Password
+                            </label>
+                            <input
+                                placeholder="Confirm Password"
+                                type="password"
+                                {...register('confirmPassword', {
+                                    required: true,
+                                    validate: (value) => value === password || 'Passwords do not match',
+                                })}
+                                className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300"
+                            />
+                            {errors.confirmPassword && (
+                                <div className="text-red-500 text-sm w-full mt-1">
+                                    <p>{errors.confirmPassword.message}</p>
+                                </div>
+                            )}
+                        </div>
+
+                    </div>
+                    <div className="flex items-center gap-5">
+                        <div className="mb-4">
                             <label htmlFor="phoneNumber" className="block text-gray-700 font-bold mb-2">
+                                <AiOutlinePhone className="inline-block mr-2 mb-1 text-lg" />
                                 Phone Number
                             </label>
                             <input
-                                placeholder='Phone Number'
+                                placeholder="Phone Number"
                                 type="tel"
                                 {...register('phone', { required: true })}
                                 className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300"
                             />
                         </div>
-                    </div>
-                    <div className="flex items-center gap-5">
                         <div className="mb-4">
                             <label htmlFor="photoUrl" className="block text-gray-700 font-bold mb-2">
+                                <AiOutlinePicture className="inline-block mr-2 mb-1 text-lg" />
                                 Photo URL
                             </label>
                             <input
-                                placeholder='Photo URL'
+                                placeholder="Photo URL"
                                 type="text"
                                 {...register('photoUrl')}
                                 className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300"
                             />
                         </div>
-
-                        <div className="mb-4 w-1/2">
+                    </div>
+                        <div className="">
                             <label htmlFor="gender" className="block text-gray-700 font-bold mb-2">
+                                <AiOutlineUser className="inline-block mr-2 mb-1 text-lg" />
                                 Gender
                             </label>
                             <select
@@ -152,29 +177,32 @@ const Register = () => {
                                 <option value="other">Other</option>
                             </select>
                         </div>
-                    </div>
-
-                    <div className="mb-4">
-                        <label htmlFor="address" className="block text-gray-700 font-bold mb-2">
-                            Address
-                        </label>
-                        <textarea
-                            {...register('address', { required: true })}
-                            className="w-full border resize-none border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300"
-                            rows="3"
-                            placeholder='Enter your address'
-                        ></textarea>
-                    </div>
+                        <div className="mb-4">
+                            <label htmlFor="address" className="block text-gray-700 font-bold mb-2">
+                                <HiOutlineLocationMarker className="inline-block mr-2 mb-1 text-lg" />
+                                Address
+                            </label>
+                            <textarea
+                                {...register('address', { required: true })}
+                                className="w-full border resize-none border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300"
+                                rows="3"
+                                placeholder="Enter your address"
+                            ></textarea>
+                        </div>
                     <div className="text-center">
-                        <button
-                            type="submit"
-                            className="bg-secondary hover:bg-red-500 text-white py-2 px-4 rounded-md"
-                        >
+                        <button type="submit" className="bg-secondary hover:bg-red-500 text-white py-2 px-4 rounded-md">
                             Register
                         </button>
+                        {errors.password && (
+                            <div className="text-red-500 text-sm w-full mt-1">
+                                <p>Password must be at least 6 characters long, contain a <br /> capital letter, and a special character.</p>
+                            </div>
+                        )}
                     </div>
                 </form>
-                <p className='text-center mt-4'>Already have an account ? <Link to='/login' className='underline text-secondary'>Login</Link> </p>
+                <p className="text-center mt-4">
+                    Already have an account? <Link to="/login" className="underline text-secondary">Login</Link>
+                </p>
             </div>
         </div>
     );
