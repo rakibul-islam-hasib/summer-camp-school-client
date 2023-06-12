@@ -45,11 +45,13 @@ const lastMenuItems = [
 const DashboardLayout = () => {
     const [open, setOpen] = useState(true);
     const { loader } = useAuth();
+    console.log("🚀 ~ file: DashboardLayout.jsx:48 ~ DashboardLayout ~ loader:", loader)
     const { currentUser, isLoading } = useUser();
+    console.log("🚀 ~ file: DashboardLayout.jsx:50 ~ DashboardLayout ~ isLoading:", isLoading)
 
     const role = currentUser?.role;
 
-    if (loader || isLoading) {
+    if (loader) {
         return <div className='flex justify-center items-center h-screen'>
             <HashLoader
                 color="#FF1949"

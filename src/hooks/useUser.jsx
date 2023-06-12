@@ -13,5 +13,6 @@ export const useUser = () => {
         },
         enabled: !!user?.email && !!localStorage.getItem('token'),
     })
+    // console.log(isLoading , 'isLoading')
     return { currentUser  , isLoading , refetch}
 }

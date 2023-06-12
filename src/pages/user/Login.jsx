@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useTitle } from '../../hooks/useTitle';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { FadeLoader } from 'react-spinners';
 import { useUser } from '../../hooks/useUser';
 const Login = () => {
     useTitle('Login | Sound Safari');
-    const { refetch } = useUser();
+    // const { refetch } = useUser();
+    const location = useLocation();
     const [showPassword, setShowPassword] = useState(false);
     const { login, error, setError, loader, setLoader } = useAuth();
     const navigate = useNavigate();
@@ -19,7 +20,7 @@ const Login = () => {
         login(formData.email, formData.password)
             .then(() => {
                 // refetch()
-                navigate('/dashboard')
+                navigate(location.state?.from || '/dashboard')
             })
             .catch(err => {
                 setError(err.code);

@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom';
 
 const DashboardNavigate = () => {
     const { currentUser, isLoading } = useUser();
+    console.log("🚀 ~ file: DashboardNavigate.jsx:7 ~ DashboardNavigate ~ isLoading:", isLoading)
 
     const role = currentUser?.role;
 

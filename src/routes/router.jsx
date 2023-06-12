@@ -23,6 +23,7 @@ import AsInstructor from "../pages/Dashboard/Student/Apply/AsInstructor";
 import AdminRoute from "./Privet/AdminRoute";
 import InstructorRoute from "./Privet/InstructorRoute";
 import StudentRoute from "./Privet/StudentRoute";
+import PrivetRoute from "./Privet/PrivetRoute";
 
 export const router = createBrowserRouter([
     {
@@ -59,7 +60,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Dashboard />
+                element: <PrivetRoute><Dashboard /></PrivetRoute>
             },
             // * ADMIN ROUTES
             {
