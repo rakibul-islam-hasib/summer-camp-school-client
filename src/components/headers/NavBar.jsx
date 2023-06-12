@@ -214,18 +214,40 @@ const NavBar = () => {
                             exit={{ opacity: 0, height: 0 }}
                             transition={{ duration: 0.5 }}
                         >
-                            {
-                                navLinks.map((link) => (
+                            {navLinks.map((link) => (
+                                <li key={link.route}>
                                     <NavLink
-                                        key={link.route}
-                                        className={({ isActive }) => `block ${isActive ? 'text-primary' : 'text-white'} px-4 py-2  hover:text-primary duration-300`}
+                                        className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' : `${navBg.includes('bg-transparent') ? 'text-white' : 'text-black dark:text-white'}`} hover:text-secondary duration-300`}
                                         to={link.route}
-                                        onClick={toggleMobileMenu}
+                                        style={{ whiteSpace: 'nowrap' }}
                                     >
                                         {link.name}
                                     </NavLink>
-                                ))
 
+
+                                </li>
+                            ))}
+                            {
+                                user ? null : isLogin ? <li>
+                                    <NavLink
+                                        to='/register'
+                                        className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' : `${navBg.includes('bg-transparent') ? 'text-white' : 'text-black dark:text-white'}`} hover:text-secondary duration-300`}
+                                    >Register</NavLink></li> : <li>
+                                    <NavLink
+                                        to='/login'
+                                        className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' : `${navBg.includes('bg-transparent') ? 'text-white' : 'text-black dark:text-white'}`} hover:text-secondary duration-300`}
+                                    >Login</NavLink></li>
+                            }
+                            {
+                                user && <li><NavLink to='/dashboard' className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' : `${navBg.includes('bg-transparent') ? 'text-white' : 'text-black dark:text-white'}`} hover:text-secondary duration-300`}>Dashboard</NavLink></li>
+                            }
+                            {
+                                user && <li>
+                                    <img src={user?.photoURL} className='h-[40px] rounded-full w-[40px]' alt="" />
+                                </li>
+                            }
+                            {
+                                user && <li><NavLink className='font-bold px-3 py-2 bg-secondary text-white rounded-xl' onClick={handelLogout}>Logout</NavLink></li>
                             }
 
                             {/* Add more mobile menu links as needed */}
