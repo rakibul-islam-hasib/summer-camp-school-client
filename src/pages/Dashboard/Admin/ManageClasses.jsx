@@ -136,7 +136,7 @@ const ManageClasses = () => {
                                                     <td className="whitespace-nowrap px-6 py-4">
                                                         <img src={cls.image} className='h-[35px] w-[35px]' alt="" />
                                                     </td>
-                                                    <td className="whitespace-nowrap px-6 py-4">{cls.name}</td>
+                                                    <td className="whitespace-pre-wrap px-6 py-4">{cls.name}</td>
                                                     <td className="whitespace-nowrap px-6 py-4">{cls.instructorName}</td>
                                                     <td className="whitespace-nowrap px-6 py-4">
                                                         <span className={`font-bold ${cls.status === 'pending' ? 'bg-orange-400' : cls.status === 'checking' ? 'bg-yellow-500' : cls.status === 'approved' ? 'bg-green-600' : 'bg-red-600'} px-2 py-1 uppercase text-white rounded-xl`}>{cls.status}</span>
@@ -144,40 +144,32 @@ const ManageClasses = () => {
                                                     <td className="whitespace-nowrap px-6 py-4">
                                                         <div className="flex gap-2">
                                                             {
-                                                                cls.status === 'pending' && <span
+                                                                <button
+                                                                    disabled={cls.status === 'approved' || cls.status === 'rejected' || cls.status === 'checking'}
                                                                     onClick={() => handleApprove(cls._id)}
-                                                                    className='text-[12px]  cursor-pointer bg-green-500 py-1 rounded-md px-2 text-white'>
-                                                                    Set  Approve
-                                                                </span>
+                                                                    className='text-[12px]  cursor-auto disabled:bg-green-700 bg-green-500 py-1 rounded-md px-2 text-white'>
+                                                                    Approve
+                                                                </button>
                                                             }
                                                             {
-                                                                cls.status === 'approved' && <span
-                                                                    onClick={() => handelPending(cls._id)}
-                                                                    className='  cursor-pointer text-[12px] bg-green-500 py-1 rounded-md px-2 text-white'>
-                                                                    Set Pending
-                                                                </span>
+
+                                                                <button
+                                                                    disabled={cls.status === 'rejected' || cls.status === 'checking' || cls.status === 'approved'}
+                                                                    onClick={() => handelReject(cls._id)}
+                                                                    className=' cursor-pointer disabled:bg-red-800 bg-red-600 py-1 rounded-md px-2 text-white'>
+                                                                    Deny
+                                                                </button>
                                                             }
                                                             {
-                                                                cls.status !== 'rejected' && <span
+
+                                                                <button
+                                                                    disabled={cls.status === 'rejected' || cls.status === 'checking'}
                                                                     onClick={() => handelReject(cls._id)}
                                                                     className=' cursor-pointer bg-red-600 py-1 rounded-md px-2 text-white'>
-                                                                    Reject
-                                                                </span>
+                                                                    Feedback
+                                                                </button>
                                                             }
-                                                            {
-                                                                cls.status === 'rejected' && <span
-                                                                    onClick={() => handelReaccept(cls._id)}
-                                                                    className=' cursor-pointer bg-green-500 py-1 rounded-md px-2 text-white'>
-                                                                    Accept
-                                                                </span>
-                                                            }
-                                                            {
-                                                                cls.status === 'rejected' && <span
-                                                                    onClick={() => handelReject(cls._id)}
-                                                                    className=' cursor-pointer bg-red-600 py-1 rounded-md px-2 text-white'>
-                                                                    Ban User
-                                                                </span>
-                                                            }
+
 
                                                         </div>
                                                     </td>
