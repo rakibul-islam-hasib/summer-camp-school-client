@@ -8,15 +8,15 @@ const Map = () => {
                 <div className="flex md:flex-row flex-col py-7 gap-16">
                     <div className="text-center">
                         <h1 className='text-5xl font-bold'><CountUp duration={2} end={35} />M+</h1>
-                        <p className='font-bold text-lg'>Learners & counting</p>
+                        <p className='font-bold text-lg'>Visitor</p>
                     </div>
                     <div className="text-center">
-                        <h1 className='text-5xl font-bold'><CountUp duration={2} end={35} />M+</h1>
-                        <p className='font-bold text-lg'>Learners & counting</p>
+                        <h1 className='text-5xl font-bold'><CountUp duration={3} end={5} />M+</h1>
+                        <p className='font-bold text-lg'>Subscriber</p>
                     </div>
                     <div className="text-center">
-                        <h1 className='text-5xl font-bold'><CountUp duration={2} end={35} />M+</h1>
-                        <p className='font-bold text-lg'>Learners & counting</p>
+                        <h1 className='text-5xl font-bold'><CountUp duration={2} end={950} />k+</h1>
+                        <p className='font-bold text-lg'>Students</p>
                     </div>
                     <div className="text-center">
                         <h1 className='text-5xl font-bold'><CountUp duration={2} end={90} />%</h1>
