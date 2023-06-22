@@ -1,17 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTitle } from '../../hooks/useTitle';
-import image from '../../assets/Error/404.svg';
 const ErrorPage = () => {
     useTitle('404 Page Not Found| Sound Safari');
     const navigate = useNavigate();
-    // TODO : After getting mark remove the image and use the h1 tag
     return (
         <div className="grid h-screen px-4 bg-white place-content-center">
             <div className="text-center">
-                {/* <h1 className="font-black text-gray-200 text-9xl">404</h1> */}
-                <img src={image} alt="404" className="w-96" />
-
+                <h1 className="font-black text-gray-200 text-9xl">404</h1>
                 <p className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                     Uh-oh!
                 </p>
