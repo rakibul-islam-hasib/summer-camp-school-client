@@ -1,15 +1,30 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
-import { FiUser, FiMail, FiPhone, FiBriefcase, FiSend } from 'react-icons/fi';
+import { FiUser, FiMail, FiBriefcase, FiSend } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 import { useUser } from '../../../../hooks/useUser';
+import useAxiosFetch from '../../../../hooks/useAxiosFetch';
+
 const AsInstructor = () => {
-    const { register, handleSubmit } = useForm();
     const { currentUser } = useUser();
-    const onSubmit = (data) => {
+    const axiosFetch = useAxiosFetch();
+    const onSubmit = (e) => {
+        e.preventDefault();
+
+        const name = e.target.name.value;
+        const email = e.target.email.value;
+        const experience = e.target.experience.value;
+
+        const data = {
+            name,
+            email,
+            experience,
+        };
+        axiosFetch.post('/as-instructor', data)
+        .then(res => { 
+            console.log(res.data);
+        })
         console.log(data);
     };
-
 
     const inputVariants = {
         hidden: { opacity: 0, x: -20 },
@@ -23,7 +38,7 @@ const AsInstructor = () => {
 
     return (
         <div className="py-4 min-h-screen flex items-center w-[60%]">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={onSubmit}>
                 <div className="flex w-full">
                     <motion.div
                         variants={inputVariants}
@@ -44,7 +59,7 @@ const AsInstructor = () => {
                                 className="ml-2 w-full border-b border-gray-300 focus:border-secondary outline-none"
                                 type="text"
                                 id="name"
-                                {...register('name', { required: true })}
+                                name="name"
                             />
                         </div>
                     </motion.div>
@@ -67,7 +82,7 @@ const AsInstructor = () => {
                                 className="ml-2 w-full border-b border-gray-300 focus:border-secondary outline-none"
                                 type="email"
                                 id="email"
-                                {...register('email', { required: true })}
+                                name="email"
                             />
                         </div>
                     </motion.div>
@@ -86,11 +101,11 @@ const AsInstructor = () => {
                     <div className="flex items-center mt-1">
                         <FiBriefcase className="text-gray-500" />
                         <textarea
-                            placeholder='Tell us about your experience...'
+                            placeholder="Tell us about your experience..."
                             className="ml-2 rounded-lg px-2 placeholder:text-sm py-1 w-full border border-gray-300 focus:border-secondary outline-none resize-none"
                             id="experience"
-                            {...register('experience')}
-                        />
+                            name="experience"
+                        ></textarea>
                     </div>
                 </motion.div>
 

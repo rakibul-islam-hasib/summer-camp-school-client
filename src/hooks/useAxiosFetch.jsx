@@ -3,20 +3,18 @@ import axios from 'axios';
 
 const useAxiosFetch = () => {
   const axiosInstance = axios.create({
-    baseURL: 'https://sound-safari.vercel.app', // Replace with your base URL
+    baseURL: 'http://localhost:5000', // TODO : Replace with base URL
   });
 
   useEffect(() => {
     const requestInterceptor = axiosInstance.interceptors.request.use((config) => {
-      // You can add custom request headers or modify the request config here if needed
       return config;
     });
 
     const responseInterceptor = axiosInstance.interceptors.response.use(
       (response) => response,
       (error) => {
-        // You can handle response errors here if needed
-        throw error; // Rethrow the error to maintain consistent error handling
+        throw error;
       }
     );
 

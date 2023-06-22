@@ -31,3 +31,5 @@ Want to visit live link ?  [Click Here](https://sound-safari-1.web.app/)
 Live Link : [https://sound-safari-1.web.app/](https://sound-safari-1.web.app/)
 
 
+### Updates 
+* Error Page Ugly image removed and awesome text added 
