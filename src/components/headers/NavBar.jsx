@@ -110,7 +110,7 @@ const NavBar = () => {
     useEffect(() => {
         if (scrollPosition > 100) {
             if (isHome) {
-                setNavBg('bg-white dark:bg-black dark:text-white text-black');
+                setNavBg('bg-white backdrop-filter backdrop-blur-xl bg-opacity-0 dark:bg-black dark:text-white text-black');
             }
             else {
                 setNavBg('bg-white dark:bg-black dark:text-white text-black');
@@ -125,7 +125,7 @@ const NavBar = () => {
 
     return (
         <motion.nav
-            className={`${isHome ? navBg : 'bg-white dark:bg-black'}  ${isFixed ? 'static' : 'fixed'} top-0 transition-colors duration-500 ease-in-out  w-full z-10`}
+            className={`${isHome ? navBg : 'bg-white dark:bg-black backdrop-blur-2xl'}  ${isFixed ? 'static' : 'fixed'} top-0 transition-colors duration-500 ease-in-out  w-full z-10`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
