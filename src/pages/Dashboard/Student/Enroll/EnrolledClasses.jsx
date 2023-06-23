@@ -1,19 +1,52 @@
 import React, { useEffect, useState } from 'react';
-import useAxiosFetch from '../../../../hooks/useAxiosFetch';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { useUser } from '../../../../hooks/useUser';
-
+import { Pagination, ThemeProvider, createTheme } from '@mui/material';
+import { v4 } from 'uuid';
 const EnrolledClasses = () => {
     const [data, setData] = useState([]);
-    console.log(data)
+    const [page, setPage] = useState(1);
+    const [paginatedData, setPaginatedData] = useState([])
     const { currentUser } = useUser();
-    const axiosFetch = useAxiosFetch();
+    let itemPerPage = 2;
+    const totalPage = Math.ceil(data.length / itemPerPage);
     const axiosSecure = useAxiosSecure();
+    const theme = createTheme({
+        palette: {
+            primary: {
+                main: '#ff0000', // Set the primary color
+            },
+            secondary: {
+                main: '#00ff00', // Set the secondary color
+            },
+        },
+    });
+
+
     useEffect(() => {
         axiosSecure.get(`/enrolled-classes/${currentUser.email}`)
             .then(res => setData(res.data))
             .catch(err => console.log(err))
     }, [])
+
+    // Pagination
+    useEffect(() => {
+        let lastIndex = page * itemPerPage;
+        let firstIndex = lastIndex - itemPerPage;
+
+        // Adjust lastIndex if it exceeds the total number of items
+        if (lastIndex > data.length) {
+            lastIndex = data.length;
+        }
+
+        const currentData = data.slice(firstIndex, lastIndex);
+        setPaginatedData(currentData);
+    }, [page, totalPage]);
+
+
+
+
+    const handleChange = (event, value) => setPage(value);
 
     return (
         <div>
@@ -24,7 +57,7 @@ const EnrolledClasses = () => {
 
             <div className="grid md:grid-cols-2 gap-8">
                 {
-                    data.map(item => <div key={item.classes._id} className="
+                    paginatedData.map(item => <div key={item.classes._id + v4()} className="
                 bg-white
                 shadow-md
                 h-96
@@ -72,6 +105,11 @@ const EnrolledClasses = () => {
                     </div>)
                 }
             </div>
+            <ThemeProvider theme={theme}>
+                <div className="w-full h-full flex justify-center items-center my-10">
+                    <Pagination onChange={handleChange} count={totalPage} color="primary" />
+                </div>
+            </ThemeProvider>
         </div>
     );
 };
