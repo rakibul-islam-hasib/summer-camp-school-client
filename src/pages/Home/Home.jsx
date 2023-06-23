@@ -12,10 +12,12 @@ const Home = () => {
     return (
         <section>
             <HeroContainer />
-            <Facilities />
-            <PopularClasses /> 
-            <ExtraFacilities />
-            <PopularInstructor /> 
+            <div className="max-w-screen-xl mx-auto">
+                <Facilities />
+                <PopularClasses />
+                <ExtraFacilities />
+                <PopularInstructor />
+            </div>
             <Map />
         </section>
     );

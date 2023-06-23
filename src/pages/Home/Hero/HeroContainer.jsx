@@ -9,7 +9,7 @@ import Hero2 from './Hero2';
 const HeroContainer = () => {
 
     return (
-        <>
+        <section className=''>
             {/* <Hero /> */}
             <Swiper
                 grabCursor={true}
@@ -40,7 +40,7 @@ const HeroContainer = () => {
                 </SwiperSlide>
             </Swiper>
 
-        </>
+        </section>
     );
 };
 
