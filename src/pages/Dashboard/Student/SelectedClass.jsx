@@ -3,18 +3,35 @@ import { useTitle } from '../../../hooks/useTitle';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useUser } from '../../../hooks/useUser';
 import moment from 'moment';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { MdDeleteSweep } from 'react-icons/md';
 import { FiDollarSign } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 import Swal from 'sweetalert2';
+import { Pagination, ThemeProvider, createTheme } from '@mui/material';
 
 const SelectedClass = () => {
     useTitle('Selected Class | Sound Safari');
     const { currentUser } = useUser();
     const [classes, setClasses] = useState([]);
+    const [paginatedData, setPaginatedData] = useState([]);
+    const [page, setPage] = useState(1);
+    const itemPerPage = 5;
+    const totalPage = Math.ceil(classes.length / itemPerPage);
     const navigate = useNavigate();
+
     const axiosSecure = useAxiosSecure();
+
+    const theme = createTheme({
+        palette: {
+            primary: {
+                main: '#ff0000', // Set the primary color
+            },
+            secondary: {
+                main: '#00ff00', // Set the secondary color
+            },
+        },
+    });
 
     useEffect(() => {
         axiosSecure.get(`/cart/${currentUser?.email}`)
@@ -24,8 +41,17 @@ const SelectedClass = () => {
             .catch((err) => {
                 console.log(err)
             })
-    }, [])
+    }, [currentUser?.email])
 
+    const handleChange = (event, value) => {
+        setPage(value);
+    }
+    useEffect(() => {
+        const lastIndex = page * itemPerPage;
+        const firstIndex = lastIndex - itemPerPage;
+        const currentItems = classes.slice(firstIndex, lastIndex);
+        setPaginatedData(currentItems);
+    }, [page, classes])
     const totalPrice = classes.reduce((acc, item) => acc + parseInt(item.price), 0);
     const totalTax = totalPrice * 0.01;
     const price = totalPrice + totalTax;
@@ -35,11 +61,10 @@ const SelectedClass = () => {
         const item = classes.find((item) => item._id === id);
         // console.log(item, 'item from pay')
         const price = item.price;
-        navigate('/dashboard/user/payment', { state: { price: price  , itemId : id} });
+        navigate('/dashboard/user/payment', { state: { price: price, itemId: id } });
     };
 
     const handleDelete = (id) => {
-        console.log(id, 'id from delete')
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -51,18 +76,18 @@ const SelectedClass = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 axiosSecure.delete(`/delete-cart-item/${id}`)
-                .then(res => { 
-                    console.log(res.data)
-                    if (res.data.deletedCount > 0) {
-                        Swal.fire(
-                            'Deleted!',
-                            'Your selected class has been deleted.',
-                            'success'
-                        )
-                        const newClasses = classes.filter((item) => item._id !== id);
-                        setClasses(newClasses);
-                    }
-                })
+                    .then(res => {
+                        console.log(res.data)
+                        if (res.data.deletedCount > 0) {
+                            Swal.fire(
+                                'Deleted!',
+                                'Your selected class has been deleted.',
+                                'success'
+                            )
+                            const newClasses = classes.filter((item) => item._id !== id);
+                            setClasses(newClasses);
+                        }
+                    })
             }
         })
         // Handle the delete action here
@@ -90,44 +115,50 @@ const SelectedClass = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {classes.map((item, idx) => (
-                                            <tr key={item._id}>
-                                                <td className="py-4">{idx + 1}</td>
-                                                <td className="py-4">
-                                                    <div className="flex items-center">
-                                                        <img className="h-16 w-16 mr-4" src={item.image} alt="Product image" />
-                                                        <span className={`font-semibold ${item.name.length > 20 ? 'text-[13px]' : 'text-[18px]'} whitespace-pre-wrap`}>{item.name}</span>
-                                                    </div>
-                                                </td>
-                                                <td className="py-4">${item.price}</td>
-                                                <td className="py-4">
-                                                    <p className='text-green-700 text-sm'>{moment(item.submitted).format('MMMM Do YYYY')}</p>
-                                                </td>
-                                                <td className="py-4 flex pt-8 gap-2">
-                                                    <motion.button
-                                                        whileHover={{ scale: 1.1 }}
-                                                        whileTap={{ scale: 0.9 }}
-                                                        className='px-3 py-1 cursor-pointer bg-red-500 rounded-3xl text-white font-bold'
-                                                        onClick={() => handleDelete(item._id)}
-                                                    >
-                                                        <MdDeleteSweep />
-                                                    </motion.button>
-                                                    <motion.button
-                                                        whileHover={{ scale: 1.1 }}
-                                                        whileTap={{ scale: 0.9 }}
-                                                        className='px-3 py-1 cursor-pointer bg-green-500 rounded-3xl text-white font-bold flex items-center'
-                                                        onClick={() => handlePay(item._id)}
-                                                    >
-                                                        <FiDollarSign className="mr-2" />
-                                                        Pay
-                                                    </motion.button>
+                                        {
+                                            classes.length === 0 ? <h1 className='whitespace-nowrap my-4'>You don't have any selected classes . Please select classes from <Link to='/classes' className='text-secondary '>Here</Link></h1> : // If there is no item in the cart
+                                                paginatedData.map((item, idx) => {
+                                                    const letIdx = (page - 1) * itemPerPage + idx + 1;
+                                                    return <tr key={item._id}>
+                                                        <td className="py-4">{letIdx}</td>
+                                                        <td className="py-4">
+                                                            <div className="flex items-center">
+                                                                <img className="h-16 w-16 mr-4" src={item.image} alt="Product image" />
+                                                                <span className={`font-semibold ${item.name.length > 20 ? 'text-[13px]' : 'text-[18px]'} whitespace-pre-wrap`}>{item.name}</span>
+                                                            </div>
+                                                        </td>
+                                                        <td className="py-4">${item.price}</td>
+                                                        <td className="py-4">
+                                                            <p className='text-green-700 text-sm'>{moment(item.submitted).format('MMMM Do YYYY')}</p>
+                                                        </td>
+                                                        <td className="py-4 flex pt-8 gap-2">
+                                                            <motion.button
+                                                                whileHover={{ scale: 1.1 }}
+                                                                whileTap={{ scale: 0.9 }}
+                                                                className='px-3 py-1 cursor-pointer bg-red-500 rounded-3xl text-white font-bold'
+                                                                onClick={() => handleDelete(item._id)}
+                                                            >
+                                                                <MdDeleteSweep />
+                                                            </motion.button>
+                                                            <motion.button
+                                                                whileHover={{ scale: 1.1 }}
+                                                                whileTap={{ scale: 0.9 }}
+                                                                className='px-3 py-1 cursor-pointer bg-green-500 rounded-3xl text-white font-bold flex items-center'
+                                                                onClick={() => handlePay(item._id)}
+                                                            >
+                                                                <FiDollarSign className="mr-2" />
+                                                                Pay
+                                                            </motion.button>
 
 
-                                                </td>
-                                            </tr>
-                                        ))}
+                                                        </td>
+                                                    </tr>
+                                                })}
                                     </tbody>
                                 </table>
+                                <ThemeProvider theme={theme}>
+                                    <Pagination onChange={handleChange} count={totalPage} color="primary" />
+                                </ThemeProvider>
                             </div>
                         </div>
                         <div className="md:w-1/5 fixed right-3">
@@ -155,7 +186,7 @@ const SelectedClass = () => {
                                 <motion.button
                                     whileHover={{ scale: 1.1 }}
                                     whileTap={{ scale: 0.9 }}
-                                    onClick={() => navigate('/dashboard/user/payment', { state: { price: price , itemId : null} })}
+                                    onClick={() => navigate('/dashboard/user/payment', { state: { price: price, itemId: null } })}
                                     disabled={price <= 0}
                                     className="bg-secondary text-white py-2 px-4 rounded-lg mt-4 w-full"
                                 >
