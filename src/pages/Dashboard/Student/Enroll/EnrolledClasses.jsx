@@ -3,10 +3,12 @@ import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { useUser } from '../../../../hooks/useUser';
 import { Pagination, ThemeProvider, createTheme } from '@mui/material';
 import { v4 } from 'uuid';
+import { ScaleLoader } from 'react-spinners';
 const EnrolledClasses = () => {
     const [data, setData] = useState([]);
     const [page, setPage] = useState(1);
-    const [paginatedData, setPaginatedData] = useState([])
+    const [paginatedData, setPaginatedData] = useState([]); 
+    const [loading, setLoading] = useState(true);
     const { currentUser } = useUser();
     let itemPerPage = 2;
     const totalPage = Math.ceil(data.length / itemPerPage);
@@ -25,7 +27,10 @@ const EnrolledClasses = () => {
 
     useEffect(() => {
         axiosSecure.get(`/enrolled-classes/${currentUser.email}`)
-            .then(res => setData(res.data))
+            .then(res => {
+                setData(res.data)
+                setLoading(false)
+            })
             .catch(err => console.log(err))
     }, [])
 
@@ -47,7 +52,9 @@ const EnrolledClasses = () => {
 
 
     const handleChange = (event, value) => setPage(value);
-
+    if (loading) { // [2
+        return <div className='h-full w-full flex justify-center items-center'><ScaleLoader color="#FF1949" /></div>;
+    }
     return (
         <div>
             <div className="text-center  my-10">
@@ -110,6 +117,9 @@ const EnrolledClasses = () => {
                     <Pagination onChange={handleChange} count={totalPage} color="primary" />
                 </div>
             </ThemeProvider>
+            <div className="">
+                <p className='text-center'>Showing result <span className='text-secondary font-bold'>{page} <span className='text-black font-medium'>of</span> {totalPage}</span></p>
+            </div>
         </div>
     );
 };

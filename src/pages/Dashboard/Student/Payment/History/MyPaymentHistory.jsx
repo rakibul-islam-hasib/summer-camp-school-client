@@ -5,11 +5,13 @@ import useAxiosFetch from '../../../../../hooks/useAxiosFetch';
 import moment from 'moment';
 import Pagination from '@mui/material/Pagination';
 import { ThemeProvider, createTheme } from '@mui/material';
+import { ScaleLoader } from 'react-spinners';
 const MyPaymentHistory = () => {
     const axiosFetch = useAxiosFetch();
     const axiosSecure = useAxiosSecure();
     const { currentUser } = useUser();
     const [payments, setPayments] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [paginatedPayments, setPaginatedPayments] = useState([]);
     const totalItem = payments.length;
     const [page, setPage] = useState(1);
@@ -23,13 +25,13 @@ const MyPaymentHistory = () => {
         const firstIndex = lastIndex - itemsPerPage;
         const currentItems = payments.slice(firstIndex, lastIndex);
         setPaginatedPayments(currentItems);
-    }, [page , payments])
+    }, [page, payments])
 
     useEffect(() => {
         axiosFetch.get(`/payment-history/${currentUser.email}`)
             .then(res => {
-                console.log(res.data, 'payment history')
                 setPayments(res.data)
+                setLoading(false)
             })
             .catch(err => console.log(err))
     }, [currentUser.email])
@@ -47,7 +49,11 @@ const MyPaymentHistory = () => {
     });
 
     const totalPaidAmount = payments.reduce((acc, curr) => acc + curr.amount, 0);
-
+    if (loading) {
+        return <div className='h-full w-full flex justify-center items-center'>
+            <ScaleLoader color="#FF1949" />
+        </div>;
+    }
     return (
         <div>
             <div className="text-center mt-6   mb-16">

@@ -9,10 +9,12 @@ import { FiDollarSign } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 import Swal from 'sweetalert2';
 import { Pagination, ThemeProvider, createTheme } from '@mui/material';
+import { ScaleLoader } from 'react-spinners';
 
 const SelectedClass = () => {
     useTitle('Selected Class | Sound Safari');
     const { currentUser } = useUser();
+    const [loading, setLoading] = useState(true);
     const [classes, setClasses] = useState([]);
     const [paginatedData, setPaginatedData] = useState([]);
     const [page, setPage] = useState(1);
@@ -37,9 +39,11 @@ const SelectedClass = () => {
         axiosSecure.get(`/cart/${currentUser?.email}`)
             .then((res) => {
                 setClasses(res.data)
+                setLoading(false)
             })
             .catch((err) => {
                 console.log(err)
+                setLoading(false)
             })
     }, [currentUser?.email])
 
@@ -92,7 +96,9 @@ const SelectedClass = () => {
         })
         // Handle the delete action here
     };
-
+    if (loading) { // [2
+        return <div className='h-full w-full flex justify-center items-center'><ScaleLoader color="#FF1949" /></div>;
+    }
     return (
         <div>
             <div className="my-6">

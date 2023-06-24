@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const useAxiosFetch = () => {
   const axiosInstance = axios.create({
-    baseURL: 'http://localhost:5000', // TODO : Replace with base URL
+    baseURL: 'https://sound-safari.vercel.app', // TODO : Replace with base URL
   });
 
   useEffect(() => {
