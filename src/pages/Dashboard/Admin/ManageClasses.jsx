@@ -5,17 +5,46 @@ import { FcDeleteDatabase } from 'react-icons/fc';
 import { GrUpdate } from 'react-icons/gr';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import { Pagination, ThemeProvider, createTheme } from '@mui/material';
 
 const ManageClasses = () => {
     const navigate = useNavigate();
     const axiosFetch = useAxiosFetch();
     const axiosSecure = useAxiosSecure();
-    const [classes, setClasses] = useState([])
+    const [classes, setClasses] = useState([]); 
+    const [page, setPage] = useState(1);
+    const [paginatedData, setPaginatedData] = useState([]);
+    const itemPerPage = 5;
+    const totalPage = Math.ceil(classes.length / 5);
+
+
     useEffect(() => {
         axiosFetch.get('/classes-manage')
             .then(res => setClasses(res.data))
             .catch(err => console.log(err))
     }, [])
+
+    useEffect(()=>{
+        let lastIndex = page * itemPerPage;
+        const firstIndex = lastIndex - itemPerPage;
+        if (lastIndex > classes.length) {
+            lastIndex = classes.length;
+        }
+        const currentData = classes.slice(firstIndex, lastIndex);
+        setPaginatedData(currentData);
+    },[page,totalPage])
+
+
+    const theme = createTheme({
+        palette: {
+            primary: {
+                main: '#ff0000', // Set the primary color
+            },
+            secondary: {
+                main: '#00ff00', // Set the secondary color
+            },
+        },
+    });
 
 
     const handleApprove = (id) => {
@@ -23,14 +52,6 @@ const ManageClasses = () => {
             .then(res => {
                 console.log(res.data)
                 setClasses(classes.map(cls => cls._id == id ? { ...cls, status: 'approved' } : cls))
-            })
-            .catch(err => console.log(err))
-    }
-    const handelPending = (id) => {
-        axiosSecure.put(`/change-status/${id}`, { status: 'pending' })
-            .then(res => {
-                console.log(res.data)
-                setClasses(classes.map(cls => cls._id == id ? { ...cls, status: 'pending' } : cls))
             })
             .catch(err => console.log(err))
     }
@@ -69,43 +90,7 @@ const ManageClasses = () => {
             }
         })
     }
-    const handelReaccept = (id) => {
-        Swal.fire({
-            title: 'Reason for reaccept',
-            input: 'text',
-            inputAttributes: {
-                autocapitalize: 'off'
-            },
-            showCancelButton: true,
-            confirmButtonText: 'Reject',
-            showLoaderOnConfirm: true,
-            preConfirm: async (text) => {
-                // console.log(text)
-                try {
-                    const res = await axiosSecure.put(`/change-status/${id}`, { status: 'pending', reason: text })
-                    console.log(res.data.modifiedCount > 0)
-                    if (res.data.modifiedCount > 0) {
-                        setClasses(classes.map(cls => cls._id == id ? { ...cls, status: 'pending' } : cls))
-                    }
-                    return res.data
-                } catch (error) {
-                    Swal.showValidationMessage(
-                        `Request failed: ${error}`
-                    )
-                }
-            },
-            allowOutsideClick: () => !Swal.isLoading()
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire(
-                    'Changed..!',
-                    'You reject this class.',
-                    'success'
-                )
-            }
-        })
-    }
-
+    const handleChange = (event, value) => setPage(value);
     return (
         <div>
             <h1 className='text-4xl text-secondary font-bold text-center my-10'>Manage <span className='text-black'>Classes</span></h1>
@@ -130,7 +115,7 @@ const ManageClasses = () => {
                                     <tbody>
                                         {
                                             classes.length == 0 ? <tr><td colSpan='6' className='text-center text-2xl font-bold'>No Classes Found</td></tr> :
-                                                classes.map((cls, idx) => <tr
+                                                paginatedData.map((cls, idx) => <tr
                                                     key={cls._id}
                                                     className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
                                                     <td className="whitespace-nowrap px-6 py-4">
@@ -145,7 +130,6 @@ const ManageClasses = () => {
                                                         <div className="flex gap-2">
                                                             {
                                                                 <button
-                                                                    disabled={cls.status === 'approved' || cls.status === 'rejected' || cls.status === 'checking'}
                                                                     onClick={() => handleApprove(cls._id)}
                                                                     className='text-[12px]  cursor-auto disabled:bg-green-700 bg-green-500 py-1 rounded-md px-2 text-white'>
                                                                     Approve
@@ -154,7 +138,7 @@ const ManageClasses = () => {
                                                             {
 
                                                                 <button
-                                                                    disabled={cls.status === 'rejected' || cls.status === 'checking' || cls.status === 'approved'}
+                                                                    disabled={cls.status === 'rejected' || cls.status === 'checking'}
                                                                     onClick={() => handelReject(cls._id)}
                                                                     className=' cursor-pointer disabled:bg-red-800 bg-red-600 py-1 rounded-md px-2 text-white'>
                                                                     Deny
@@ -183,6 +167,11 @@ const ManageClasses = () => {
                         </div>
                     </div>
                 </div>
+                <ThemeProvider theme={theme}>
+                    <div className="w-full h-full flex justify-center items-center my-10">
+                        <Pagination onChange={handleChange} count={totalPage} color="primary" />
+                    </div>
+                </ThemeProvider>
             </div>
         </div>
     );

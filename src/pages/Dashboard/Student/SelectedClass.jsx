@@ -122,7 +122,7 @@ const SelectedClass = () => {
                                     </thead>
                                     <tbody>
                                         {
-                                            classes.length === 0 ? <h1 className='whitespace-nowrap my-4'>You don't have any selected classes . Please select classes from <Link to='/classes' className='text-secondary '>Here</Link></h1> : // If there is no item in the cart
+                                            classes.length === 0 ? <tr><td colSpan='5' className='text-center text-2xl font-bold'>No Classes Found</td></tr> : // If there is no item in the cart
                                                 paginatedData.map((item, idx) => {
                                                     const letIdx = (page - 1) * itemPerPage + idx + 1;
                                                     return <tr key={item._id}>

@@ -24,7 +24,6 @@ const AsInstructor = () => {
         axiosFetch.post('/as-instructor', data).then((res) => {
             console.log(res.data);
         });
-        console.log(data);
     };
 
     useEffect(() => {
